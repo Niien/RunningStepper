@@ -74,6 +74,7 @@
 		AE6BF3FC1A6E3663004280AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6BF3F51A6E3663004280AF /* SystemConfiguration.framework */; };
 		AE6BF4001A6E3691004280AF /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6BF3FE1A6E3691004280AF /* Bolts.framework */; };
 		AE6BF4011A6E3691004280AF /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6BF3FF1A6E3691004280AF /* Parse.framework */; };
+		AE7A932F1A7FCA6C00C44EBC /* poke_frame(100).png in Resources */ = {isa = PBXBuildFile; fileRef = AE7A932E1A7FCA6C00C44EBC /* poke_frame(100).png */; };
 		AE90C54F1A77B89900BE2700 /* GG2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AE90C54E1A77B89900BE2700 /* GG2.jpg */; };
 		AE90C56E1A77BBF700BE2700 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = AE90C5501A77BBF600BE2700 /* 1.png */; };
 		AE90C56F1A77BBF700BE2700 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = AE90C5511A77BBF600BE2700 /* 2.png */; };
@@ -255,6 +256,7 @@
 		AE6BF3F51A6E3663004280AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AE6BF3FE1A6E3691004280AF /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		AE6BF3FF1A6E3691004280AF /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		AE7A932E1A7FCA6C00C44EBC /* poke_frame(100).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "poke_frame(100).png"; sourceTree = "<group>"; };
 		AE90C54E1A77B89900BE2700 /* GG2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = GG2.jpg; sourceTree = "<group>"; };
 		AE90C5501A77BBF600BE2700 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		AE90C5511A77BBF600BE2700 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 		A9F677961A6E3C1800E5F06E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AE7A932E1A7FCA6C00C44EBC /* poke_frame(100).png */,
 				A974CACA1A7D380900F08AA0 /* tabBar2.png */,
 				A99C70121A7A925500558EB2 /* woodBackground.jpeg */,
 				AE90C54E1A77B89900BE2700 /* GG2.jpg */,
@@ -805,6 +808,7 @@
 				AEB786CA1A790C8000181446 /* 24s.png in Resources */,
 				AEB786C01A790C8000181446 /* 14s.png in Resources */,
 				AE15B14F1A6E2A0500452FCB /* Main.storyboard in Resources */,
+				AE7A932F1A7FCA6C00C44EBC /* poke_frame(100).png in Resources */,
 				A913688A1A75362500BBB0CA /* setting_30.png in Resources */,
 				A99C70151A7A933000558EB2 /* power_100.png in Resources */,
 				AEB786B71A790C8000181446 /* 5s.png in Resources */,

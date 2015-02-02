@@ -55,12 +55,10 @@
 //    [self myParseSetting];
     
     _UserLVLabel.text = [NSString stringWithFormat:@"累積能量：%ld",(long)stepCounter.power] ;
-
     _UserPowerLabel.text = [NSString stringWithFormat:@"步數：%ld",(long)stepCounter.stepNB] ;//userPower;
-//    _UserAdwardLabel.text = useradward;
     NSLog(@"VC %ld",(long)stepCounter.stepNB);
     
-//    預設圖片 / 改變圖片
+//======    預設圖片 / 改變圖片
     [self ChangeImageBtn];
     
     //有暫存 就套用
@@ -75,9 +73,7 @@
         NSLog(@"無暫存");
         _UserImageView.image = [UIImage imageNamed:@"GG2.jpg"];
         _UserImageView.contentMode = UIViewContentModeScaleAspectFit;
-        
     }
-    
 //======    改變圖片結束
     
 
@@ -92,9 +88,11 @@
 -(void)viewWillAppear:(BOOL)animated{
     NSUserDefaults *usertmp = [NSUserDefaults standardUserDefaults];
     if ([usertmp objectForKey:@"username"] == nil) {
-        _UserNameLabel.text = @"Guest";
+        _UserNameLabel.text = @"訓練師：Guest";
+        _UserAdwardLabel.text = @"稱號：走走看看";
     }else{
-        _UserNameLabel.text = [NSString stringWithFormat:@"%@",[usertmp objectForKey:@"username"]];
+        _UserNameLabel.text = [NSString stringWithFormat:@"訓練師：%@",[usertmp objectForKey:@"username"]];
+        _UserAdwardLabel.text = [NSString stringWithFormat:@"稱號：%@",[usertmp objectForKey:@"useradward"]];
     }
 }
 

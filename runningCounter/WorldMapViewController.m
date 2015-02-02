@@ -58,6 +58,7 @@
     [locationManager startUpdatingLocation];
     
     _myMapView.userTrackingMode = MKUserTrackingModeFollow;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -318,8 +319,6 @@
     [_myMapView setRegion:region animated:YES];
     
 }
-
-
 
 
 /*

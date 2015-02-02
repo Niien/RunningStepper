@@ -163,8 +163,9 @@
     //把使用者資訊一併抓下來
     NSUserDefaults *usertmp = [NSUserDefaults standardUserDefaults];
     [usertmp setObject:user.username forKey:@"username"];
-
-    NSLog(@"username:%@,password:%@",[usertmp objectForKey:@"username"],[usertmp objectForKey:@"password"]);
+    [usertmp setObject:user[@"useradward"] forKey:@"useradward"];
+    NSLog(@"adward:%@",user[@"useradward"]);
+    NSLog(@"username:%@",[usertmp objectForKey:@"username"]);
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

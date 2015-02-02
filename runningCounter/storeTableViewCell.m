@@ -73,23 +73,16 @@
 
 
 - (void)showImage {
-    
-    if (![inputTitle containsString:@"補品"]) {
+//    iOS 8.0以上支援
+//    if (![inputTitle containsString:@"補品"]) {
+//        itemImage = [UIImage imageNamed:@"power_100.png"];
+//    }
+    NSString *substring = @"補品";
+    if ([inputTitle rangeOfString:substring].location == NSNotFound) {
         itemImage = [UIImage imageNamed:@"power_100.png"];
     }
-    
 }
 
-
-
-//cardTitle = [[UILabel alloc] initWithFrame:CGRectZero];
-//[[self contentView] addSubview:cardTitle];
-//[cardTitle setFrame:CGRectMake(10.0, 5.0, cardWidth - 20.0, 30.0)];
-//cardTitle.textAlignment = NSTextAlignmentLeft;
-//cardTitle.backgroundColor = [UIColor whiteColor];
-//[cardTitle setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
-//cardTitle.textColor = [UIColor blackColor];
-//[cardTitle setText:@"CARD TITLE"];
 
 
 @end

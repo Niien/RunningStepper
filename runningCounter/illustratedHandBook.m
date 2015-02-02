@@ -43,7 +43,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
     }
     
-    UINavigationBar *bar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    UINavigationBar *bar = [[UINavigationBar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 45)];
     [self.view addSubview:bar];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"backIcon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
@@ -118,8 +118,20 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Configure the cell
     
-    cell.illustrateImage.image = [UIImage imageNamed:[allPokemons objectAtIndex:indexPath.row]];
+//    cell.illustrateImage.image = [UIImage imageNamed:[allPokemons objectAtIndex:indexPath.row]];
     
+    UIImage *tmpImage = [UIImage imageNamed:[allPokemons objectAtIndex:indexPath.row]];
+    //開始加入邊框
+    UIImage *frameImage = [UIImage imageNamed:@"poke_frame(100).png"];
+    UIGraphicsBeginImageContext(tmpImage.size);
+    [tmpImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
+    [frameImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
+    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    //加入邊框結束
+    cell.illustrateImage.image = resultImage;
+    
+
     return cell;
 }
 
@@ -143,7 +155,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - collection view delegate flowlayout
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     
-    return UIEdgeInsetsMake(35.0, 0, 10.0, 0);
+    return UIEdgeInsetsMake(45.0, 0, 10.0, 0);
     
 }
 
