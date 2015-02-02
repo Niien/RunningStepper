@@ -66,12 +66,29 @@
     
     // Configure the cell...
     
-    cell.timeLabel.text = [NSString stringWithFormat:@"%d 秒",[[_notifyArray objectAtIndex:indexPath.row]timeCut] ];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%d 秒",[[_notifyArray objectAtIndex:indexPath.row]timeCut]];
+    cell.timeLabel.frame = CGRectMake(20, cell.frame.size.height/2-15, 70, 30);
+    
+    cell.backgroundColor = [UIColor blackColor];
+    
+    //cell中 加入邊框圖片
+    UIView * contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    UIImageView * cellImg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    [cellImg setImage:[UIImage imageNamed:@"poke_framegold.png"]];
+    [contentView addSubview:cellImg];
+    [contentView setBackgroundColor:[UIColor clearColor]];
+    [cell.contentView addSubview:contentView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //結束
     
 //    TimeMissionNotify *missionDelegate = [[[UserProfileSingleton shareUserProfile] notifydateArray]objectAtIndex:indexPath.row];
 //    missionDelegate.delegate = self;
     
     return cell;
+}
+// hide status bar
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +148,6 @@
 //        [self.tableView reloadData];
 //    }
 //}
-
 
 /*
 // Override to support conditional editing of the table view.

@@ -22,8 +22,10 @@
     // Do any additional setup after loading the view.
     
     //客制外觀
-    self.logInView.logInButton.frame = CGRectMake(100,30, 30, 200);
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"25.png"]];
+    self.view.backgroundColor = [UIColor lightGrayColor];
+    
+    self.logInView.logInButton.frame = CGRectMake(100, 30, 30, 200);
+    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LoginTitle.png"]];
     self.logInView.logo = logoView; // logo can be any UIView
 
 }

@@ -23,6 +23,7 @@
     int randomMonster;
     NSString *imageName;
     NSString *iconName;
+    NSDictionary *POKEMONDict;
     //Pokeimgmove
     NSTimer *timeCountDown;
     float changeFrameTime;
@@ -55,6 +56,14 @@
     [_BtnLabelleft setImage:[UIImage imageNamed:@"RedBtn2.png"] forState:UIControlStateHighlighted];
     [_BtnLabelright setImage:[UIImage imageNamed:@"RedBtn1.png"] forState:UIControlStateNormal];
     [_BtnLabelright setImage:[UIImage imageNamed:@"RedBtn2.png"] forState:UIControlStateHighlighted];
+    POKEMONDict =
+    @{@"1":@"喵蛙粽子",@"2":@"消火龍",@"3":@"傑尼菇",@"4":@"嗶嗶鳥",@"5":@"皮卡啾",
+      @"6":@"雷啾",@"7":@"六條",@"8":@"九條",@"9":@"胖弟",@"10":@"扣打鴨",
+      @"11":@"風速GO",@"12":@"聞香個頭",@"13":@"聞香哇",@"14":@"開心",@"15":@"喇叭Yeah",
+      @"16":@"大水母",@"17":@"消火馬",@"18":@"小河馬",@"19":@"貴斯",@"20":@"打岩蛇",
+      @"21":@"三點蛋",@"22":@"小蛋蛋",@"23":@"海星",@"24":@"飛飛螳螂",@"25":@"你魚want",
+      @"26":@"變變怪",@"27":@"一步",@"28":@"閃電步",@"29":@"胖子",@"30":@"蜜妮long",
+      };
     
     //刪除通知
     [[NSNotificationCenter defaultCenter]postNotificationName:@"notifyD" object:nil];
@@ -117,6 +126,7 @@
         if (myPressPoint >= goal) {
             //還有時間 且 已達標
             [timeCountDown invalidate];
+            myPressPoint = goal;
             [self SaveToPlist];
             //結束震動
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
@@ -179,7 +189,7 @@
 -(void)SaveToPlist{
     NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
     // save data to plist
-    NSDictionary *dict = @{@"name":imageName, @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
+    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
     NSLog(@"G1:%@",dict);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getLocation" object:nil userInfo:dict];
 
@@ -217,6 +227,9 @@
     
     if (pokeFrameX>=self.view.frame.size.width-100) {
         [pokeImgMove invalidate];
+        //固定
+        pokeImageView.frame = CGRectMake(self.view.frame.size.width-100, 20, 100, 100);
+        peopleImageView.frame = CGRectMake(0, self.view.frame.size.height/2-110, 100, 100);
         [_BtnLabelleft setEnabled:YES];
         [_BtnLabelright setEnabled:YES];
     }

@@ -50,7 +50,7 @@
 //    self.pokemonImage.image = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
     UIImage *tmpImage = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
     //開始加入邊框
-    UIImage *frameImage = [UIImage imageNamed:@"poke_frame(100).png"];
+    UIImage *frameImage = [UIImage imageNamed:@"poke_frame(500).png"];
     UIGraphicsBeginImageContext(tmpImage.size);
     [tmpImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
     [frameImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
@@ -59,7 +59,7 @@
     //加入邊框結束
     self.pokemonImage.image = resultImage;
     
-    self.NameLabel.text = [pokemonDict objectForKey:@"name"];
+    self.NameLabel.text = [pokemonDict objectForKey:@"POKEMON_NAME"];
     
     self.LvLabel.text = [NSString stringWithFormat:@"等級%@",[pokemonDict objectForKey:@"Lv"]];
     
@@ -165,7 +165,7 @@
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
-    NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*1000];
+    NSString *message = [NSString stringWithFormat:@"可回收%d精力",Lv*1000];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
     alert.tag = 2;

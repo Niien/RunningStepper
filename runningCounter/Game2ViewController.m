@@ -24,6 +24,7 @@
     int randomMonster;
     NSString *imageName;
     NSString *iconName;
+    NSDictionary *POKEMONDict;
     //Pokeimgmove
     NSTimer *pokeImgMove;
     float changeFrameTime;
@@ -47,7 +48,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+    POKEMONDict =
+    @{@"1":@"喵蛙粽子",@"2":@"消火龍",@"3":@"傑尼菇",@"4":@"嗶嗶鳥",@"5":@"皮卡啾",
+      @"6":@"雷啾",@"7":@"六條",@"8":@"九條",@"9":@"胖弟",@"10":@"扣打鴨",
+      @"11":@"風速GO",@"12":@"聞香個頭",@"13":@"聞香哇",@"14":@"開心",@"15":@"喇叭Yeah",
+      @"16":@"大水母",@"17":@"消火馬",@"18":@"小河馬",@"19":@"貴斯",@"20":@"打岩蛇",
+      @"21":@"三點蛋",@"22":@"小蛋蛋",@"23":@"海星",@"24":@"飛飛螳螂",@"25":@"你魚want",
+      @"26":@"變變怪",@"27":@"一步",@"28":@"閃電步",@"29":@"胖子",@"30":@"蜜妮long",
+      };
     //刪除通知
     [[NSNotificationCenter defaultCenter]postNotificationName:@"notifyD" object:nil];
 }
@@ -60,7 +68,7 @@
     NumberArray = [NSMutableArray new];     // 數字陣列
     showArrowArray = [NSMutableArray new];  // 箭頭陣列
     keyinArray = [NSMutableArray new];      // 比對陣列
-    X = 0;                                  //
+    X = 0;                                  // 比對陣列序數
     GameFinal = false;                      // 遊戲輸贏判斷
     [self getPokemonNo];               // 隨機取怪獸
     
@@ -70,7 +78,7 @@
     _showTextLabel.text = @"";
     //設一個倒數計時器 並在分數達標時停止並響鈴
     [self showRandom];
-    myCountdowntimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myCountDown:) userInfo:nil repeats:YES];
+    //計時器改在動畫結束後
     
     
 }
@@ -164,7 +172,6 @@
     switch (alertView.tag) {
         case 1:     // Successed Alert
             if (buttonIndex == 0) {
-                
                 [self dismissViewControllerAnimated:YES completion:^{
                     //成功動作
                 }];
@@ -184,6 +191,7 @@
 #pragma mark 畫面消失
 -(void)viewDidDisappear:(BOOL)animated{
     [myCountdowntimer invalidate];
+    [pokeImgMove invalidate];
 }
 
 
@@ -196,7 +204,7 @@
     iconName = [NSString stringWithFormat:@"%ds.png",randomMonster];
     NSLog(@"imageName:%@",imageName);
     NSLog(@"iconName:%@",iconName);
-    
+
     [self showPokemonImage];
 }
 
@@ -204,7 +212,7 @@
 -(void)SaveToPlist{
     NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
     // save data to plist
-    NSDictionary *dict = @{@"name":imageName, @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
+    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
     NSLog(@"G1:%@",dict);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getLocation" object:nil userInfo:dict];
 }
@@ -240,14 +248,16 @@
     peopleImageView.frame = CGRectMake(self.view.frame.size.width-100+peopleFrameX, self.view.frame.size.height/2-165, 100, 100);
     [self.view addSubview:peopleImageView];
     
-    if (pokeFrameX>=self.view.frame.size.width-100) {
+    if (pokeFrameX >= self.view.frame.size.width-100) {
         [pokeImgMove invalidate];
+        //固定在左右
+        pokeImageView.frame = CGRectMake(self.view.frame.size.width-100, 15, 100, 100);
+        peopleImageView.frame = CGRectMake(0, self.view.frame.size.height/2-165, 100, 100);
+
+        //遊戲開始倒數計時器
+        myCountdowntimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myCountDown:) userInfo:nil repeats:YES];
     }
-    
 }
-
-
-
 
 /*
 #pragma mark - Navigation

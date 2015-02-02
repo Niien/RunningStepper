@@ -11,7 +11,7 @@
 
 @interface GetPokemonAndStore : NSObject
 
-
+@property (strong,nonatomic) NSDictionary *POKEMONDict;
 @property (strong,nonatomic) NSString *imageName;
 @property (strong,nonatomic) NSString *iconName;
 

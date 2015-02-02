@@ -135,6 +135,13 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     _notify.applicationIconBadgeNumber = 0;
     [self ReOderBadgeNumber];
+    
+    first =[NSUserDefaults standardUserDefaults];
+    NSInteger power = [[StepCounter shareStepCounter]power];
+    [first setInteger:power forKey:@"Power"];
+    NSInteger step = [[StepCounter shareStepCounter]stepNB];
+    [first setInteger:step forKey:@"DaySteps"];
+    [first synchronize];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {//程序到前景時

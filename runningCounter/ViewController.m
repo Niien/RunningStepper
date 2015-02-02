@@ -49,14 +49,6 @@
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];
     
-    stepCounter = [StepCounter shareStepCounter];
-    [stepCounter startStepCounter];
-    
-//    [self myParseSetting];
-    
-    _UserLVLabel.text = [NSString stringWithFormat:@"累積能量：%ld",(long)stepCounter.power] ;
-    _UserPowerLabel.text = [NSString stringWithFormat:@"步數：%ld",(long)stepCounter.stepNB] ;//userPower;
-    NSLog(@"VC %ld",(long)stepCounter.stepNB);
     
 //======    預設圖片 / 改變圖片
     [self ChangeImageBtn];
@@ -76,15 +68,27 @@
     }
 //======    改變圖片結束
     
+    
+//======    個人素質Label
+    stepCounter = [StepCounter shareStepCounter];
+    [stepCounter startStepCounter];
+
+    _UserLVLabel.text = [NSString stringWithFormat:@"累積能量：%ld",(long)stepCounter.power] ;
+//    _UserPowerLabel.text = [NSString stringWithFormat:@"今天走了:%ld 步",(long)stepCounter.stepNB] ;//userPower;
+    NSLog(@"VC %ld",(long)stepCounter.stepNB);
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(powerLabel) name:@"StepCounter" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addAnnotation:) name:@"getLocation" object:nil];
+//======    個人素質完成
+    
+    
     //for test
 //    NSDictionary *dict = @{@"name":@"pikachu", @"image":@"5.png", @"iconName":@"5s.png", @"Lv":@"1", @"exp":@"0", @"lat":@"24.965235", @"lon":@"121.193882"};
 //    NSArray *arr = [[NSArray alloc]initWithObjects:dict, nil];
 //    [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:arr];
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     NSUserDefaults *usertmp = [NSUserDefaults standardUserDefaults];
     if ([usertmp objectForKey:@"username"] == nil) {
@@ -94,6 +98,8 @@
         _UserNameLabel.text = [NSString stringWithFormat:@"訓練師：%@",[usertmp objectForKey:@"username"]];
         _UserAdwardLabel.text = [NSString stringWithFormat:@"稱號：%@",[usertmp objectForKey:@"useradward"]];
     }
+    _UserLVLabel.text = [NSString stringWithFormat:@"累積能量：%ld",(long)stepCounter.power] ;
+    _UserPowerLabel.text = [NSString stringWithFormat:@"今天走了：%ld 步",(long)stepCounter.stepNB];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,23 +108,19 @@
 }
 
 #pragma mark 增加步數（精力）
--(void) powerLabel
-{
-    _UserPowerLabel.text = [NSString stringWithFormat:@"%ld",(long)stepCounter.stepNB];
+-(void) powerLabel{
+    _UserLVLabel.text = [NSString stringWithFormat:@"累積能量：%ld",(long)stepCounter.power];
+    _UserPowerLabel.text = [NSString stringWithFormat:@"今天走了：%ld 步",(long)stepCounter.stepNB];
     
 }
+
 #pragma mark Parse設定
 -(void)myParseSetting{
 //    ====== Parse
 //    初始化
         getInfo = [[PFQuery alloc]initWithClassName:@"BattleUser"];
-    
 //    Label 取值
-    
-        username = [[getInfo findObjects][0]valueForKey:@"UserName"];
-        userLV = [NSString stringWithFormat:@"%@",[[getInfo findObjects][0]valueForKey:@"UserLV"]];
-        _power = [NSString stringWithFormat:@"%@",[[getInfo findObjects][0]valueForKey:@"UserPower"]];
-        useradward = [[getInfo findObjects][0]valueForKey:@"UserAdward"];
+    //...
 }
 
 #pragma mark 變更照片
@@ -206,15 +208,12 @@
     return result;
 }
 
-
-
 #pragma mark - locationManager delegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     userLocation = [locations lastObject];
     
 }
-
 
 #pragma mark - addAnnotation
 - (void)addAnnotation:(NSDictionary *)sender {
@@ -236,4 +235,5 @@
     [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:array];
     
 }
+
 @end
