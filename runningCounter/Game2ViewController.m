@@ -91,7 +91,7 @@
     //↓←→↑AB
     BaseElementArray = @[@"↑",@"→",@"↓",@"←",@"A",@"B"];
     
-    randomNO = arc4random()%4+8;
+    randomNO = 2;//arc4random()%4+8;
     _RandomLabel.text = @"";
     //生成 箭頭陣列 與 數字陣列
     for (int i=0; i<randomNO; i++) {
@@ -196,6 +196,7 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [myCountdowntimer invalidate];
     [pokeImgMove invalidate];
+    //[[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
 }
 
 
@@ -219,6 +220,7 @@
     NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
     NSLog(@"G2:%@",dict);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getLocation" object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
 }
 
 #pragma mark 設置圖位置

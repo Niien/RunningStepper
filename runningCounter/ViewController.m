@@ -233,6 +233,7 @@
     NSLog(@"viewControllerArray:%@",array);
     
     [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:array];
+    [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]saveDataWithArray:array];
     
 }
 

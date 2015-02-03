@@ -71,7 +71,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     //隨機目標數
     time = 6.0;
-    goal = arc4random()%50+40;
+    goal = arc4random()%10;
     myPressPoint = 0;
     changeFrameTime = 1.5;
     [self getPokemonNo];
@@ -125,11 +125,12 @@
     if (time >= 0) {
         if (myPressPoint >= goal) {
             //還有時間 且 已達標
+            NSLog(@"win");
             [_BtnLabelleft setEnabled:NO];
             [_BtnLabelright setEnabled:NO];
             [timeCountDown invalidate];
             myPressPoint = goal;
-            [self SaveToPlist];
+//            [self SaveToPlist];
             //結束震動
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Succeed" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -153,7 +154,8 @@
             
         case 1:     // Successed Alert
             if (buttonIndex == 0) {
-                
+                [self SaveToPlist];
+                [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
                 [self dismissViewControllerAnimated:YES completion:^{
                 //成功動作
                 }];
@@ -174,6 +176,7 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [timeCountDown invalidate];
     [pokeImgMove invalidate];
+    //[[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
 }
 
 #pragma mark 隨機選取怪獸
@@ -196,6 +199,7 @@
     NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
     NSLog(@"G1:%@",dict);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getLocation" object:nil userInfo:dict];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
 
 }
 

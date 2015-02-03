@@ -28,14 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 
-@property (weak, nonatomic) IBOutlet UIButton *StoreButton;
-
-@property (strong, nonatomic) MKPointAnnotation *annotation;
-
-@property (strong, nonatomic) CLCircularRegion *circularRegion;
-
-@property (strong, nonatomic) MyCustomPin *annotationView;
-
 @end
 
 @implementation WorldMapViewController
@@ -186,12 +178,12 @@
         
         //NSLog(@"dict:%@",dict);
         
-        self.annotation = [MKPointAnnotation new];
+        MKPointAnnotation *annotation = [MKPointAnnotation new];
         
         // set annotation title
         if ([[dict objectForKey:@"types"] containsObject:@"convenience_store"]) {
             
-            self.annotation.title = @"convenience_store";
+            annotation.title = @"convenience_store";
         }
 //        else if ([[dict objectForKey:@"types"] containsObject:@"hospital"]) {
 //            
@@ -209,13 +201,13 @@
         CLLocationCoordinate2D annoationCoordinate = CLLocationCoordinate2DMake(lat, lon);
         
         // create a circularRegion
-        self.circularRegion = [[CLCircularRegion alloc]initWithCenter:annoationCoordinate radius:100 identifier:self.annotation.title];
+        CLCircularRegion *circularRegion = [[CLCircularRegion alloc]initWithCenter:annoationCoordinate radius:100 identifier:annotation.title];
         
         [self scheduleLocalNotification];
         
-        self.annotation.coordinate = annoationCoordinate;
+        annotation.coordinate = annoationCoordinate;
         
-        [_myMapView addAnnotation:self.annotation];
+        [_myMapView addAnnotation:annotation];
         
     }
 }
@@ -249,28 +241,28 @@
         return nil;
     }
     
-    self.annotationView = (MyCustomPin *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotation.title];
+    MyCustomPin *annotationView = (MyCustomPin *)[mapView dequeueReusableAnnotationViewWithIdentifier:annotation.title];
     
-    if (self.annotationView == nil) {
+    if (annotationView == nil) {
         
-        self.annotationView = [[MyCustomPin alloc]initWithAnnotation:annotation reuseIdentifier:annotation.title];
+        annotationView = [[MyCustomPin alloc]initWithAnnotation:annotation reuseIdentifier:annotation.title];
         
     }
     else {
         
-        self.annotationView.annotation = annotation;
+        annotationView.annotation = annotation;
     }
     
-    self.annotationView.canShowCallout = YES;
+    annotationView.canShowCallout = YES;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 
-    self.annotationView.rightCalloutAccessoryView = rightButton;
+    annotationView.rightCalloutAccessoryView = rightButton;
     
-    self.annotationView.rightCalloutAccessoryView.hidden = YES;
+    annotationView.rightCalloutAccessoryView.hidden = YES;
     
     
-    return self.annotationView;
+    return annotationView;
 }
 
 

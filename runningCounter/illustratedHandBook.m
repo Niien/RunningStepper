@@ -57,7 +57,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [super viewWillAppear:animated];
 
-    myPokemons = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"MyPokemon"]getDataFromPlist]];
+    myPokemons = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"hadGetPokemon"]getDataFromPlist]];
     
     for (NSDictionary *dict in myPokemons) {
         

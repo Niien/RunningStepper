@@ -24,7 +24,7 @@
 {
     self = [super init];
     _timeCut = 300;
-    timeGo = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeGoCut) userInfo:nil repeats:YES];
+    timeGo = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(timeGoCut) userInfo:nil repeats:YES];
     
     return self;
 }
@@ -32,7 +32,7 @@
 
 -(void) timeGoCut
 {
-    _timeCut--;
+    _timeCut -=60 ;
 //    [self.delegate dateNew];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DateNow" object:nil];
     if (_timeCut == 0) {

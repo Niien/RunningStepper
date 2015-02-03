@@ -69,7 +69,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    data = [[myPlist shareInstanceWithplistName:@"MyPokemon"]getDataFromPlist];
+    data = [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]getDataFromPlist];
     //NSLog(@"data:%@",data);
     
     
