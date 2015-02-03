@@ -17,4 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *illustrateImage;
 
+@property (weak, nonatomic) IBOutlet UILabel *illustrateLabel;
+
+
 @end

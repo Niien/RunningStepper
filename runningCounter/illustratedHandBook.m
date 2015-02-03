@@ -8,12 +8,16 @@
 
 #import "illustratedHandBook.h"
 
+
 @interface illustratedHandBook () <UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 {
     
     NSMutableArray *allPokemons;
     NSMutableArray *myPokemons;
     NSMutableArray *reOrderArray;
+    //
+    NSMutableArray *myPokemonsName;
+    
     
 }
 
@@ -36,10 +40,12 @@ static NSString * const reuseIdentifier = @"Cell";
     
     allPokemons = [NSMutableArray new];
     reOrderArray = [NSMutableArray new];
+    myPokemonsName = [NSMutableArray new];
     
-    for (int i = 1; i <= 30; i++) {
+    for (int i = 1; i <= ALL_POKEMON_COUNT; i++) {
         
         [allPokemons addObject:@"mystery.png"];
+        [myPokemonsName addObject:@"? ? ?"];
         
     }
     
@@ -63,8 +69,9 @@ static NSString * const reuseIdentifier = @"Cell";
         
         int i = [[dict objectForKey:@"id"]intValue];
         allPokemons [i-1] = [dict objectForKey:@"image"];
-        
+        myPokemonsName [i-1] = [dict objectForKey:@"name"];
     }
+    
     
     [self refresh];
 }
@@ -130,6 +137,8 @@ static NSString * const reuseIdentifier = @"Cell";
     UIGraphicsEndImageContext();
     //加入邊框結束
     cell.illustrateImage.image = resultImage;
+    
+    cell.illustrateLabel.text = [NSString stringWithFormat:@"%@",[myPokemonsName objectAtIndex:indexPath.row]];
     
 
     return cell;

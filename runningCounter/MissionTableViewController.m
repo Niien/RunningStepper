@@ -66,8 +66,8 @@
     
     // Configure the cell...
     
-    cell.timeLabel.text = [NSString stringWithFormat:@"%d 秒",[[_notifyArray objectAtIndex:indexPath.row]timeCut]];
-    cell.timeLabel.frame = CGRectMake(20, cell.frame.size.height/2-15, 70, 30);
+    cell.timeLabel.text = [NSString stringWithFormat:@"剩%d分",[[_notifyArray objectAtIndex:indexPath.row]timeCut]/60];
+    cell.timeLabel.frame = CGRectMake(50, cell.frame.size.height/2-15, 70, 30);
     
     cell.backgroundColor = [UIColor blackColor];
     
@@ -100,12 +100,12 @@
     int random = arc4random()%2;//隨機跳遊戲
     switch (random) {
         case 0:
-            [self presentViewController:vc2 animated:YES completion:^{
+            [self presentViewController:vc1 animated:YES completion:^{
                 //
             }];
             break;
         case 1:
-            [self presentViewController:vc2 animated:YES completion:^{
+            [self presentViewController:vc1 animated:YES completion:^{
                 //
             }];
         default:

@@ -9,9 +9,6 @@
 #import "Game2ViewController.h"
 @import AudioToolbox;
 
-//目前神奇寶貝總數
-#define NumOfPokeMon 30
-
 @interface Game2ViewController ()
 {
     int random,randomNO;        // 隨機取值
@@ -203,7 +200,7 @@
 #pragma mark 隨機選取怪獸
 - (void)getPokemonNo {
     
-    randomMonster = arc4random()%NumOfPokeMon+1;
+    randomMonster = arc4random()% ALL_POKEMON_COUNT +1;
     
     imageName = [NSString stringWithFormat:@"%d.png",randomMonster];
     iconName = [NSString stringWithFormat:@"%ds.png",randomMonster];

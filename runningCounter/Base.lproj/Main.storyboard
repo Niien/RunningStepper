@@ -1330,7 +1330,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.98431378602981567" green="0.85490202903747559" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0mt-hK-gPr">
-                            <size key="itemSize" width="150" height="150"/>
+                            <size key="itemSize" width="90" height="99"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1340,24 +1340,47 @@
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LpV-y5-gBM">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LpV-y5-gBM">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="70"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="? ? ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xrm-TN-tHI">
+                                            <rect key="frame" x="0.0" y="70" width="90" height="30"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="LpV-y5-gBM" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leading" id="2nE-T8-2vR"/>
+                                    <constraint firstItem="Xrm-TN-tHI" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leadingMargin" constant="-8" id="7br-1L-T5j"/>
                                     <constraint firstAttribute="bottom" secondItem="LpV-y5-gBM" secondAttribute="bottom" id="Efy-Ha-b4p"/>
                                     <constraint firstItem="LpV-y5-gBM" firstAttribute="top" secondItem="Ou4-T7-2Fa" secondAttribute="top" id="M8q-PR-xGk"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Xrm-TN-tHI" secondAttribute="trailing" constant="-8" id="U6x-Wv-SfK"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="LpV-y5-gBM" secondAttribute="trailing" constant="-8" id="fzZ-B1-Eu5"/>
+                                    <constraint firstItem="Xrm-TN-tHI" firstAttribute="top" secondItem="LpV-y5-gBM" secondAttribute="bottom" id="hL4-3U-35D"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Xrm-TN-tHI" secondAttribute="bottom" constant="-7" id="tul-7A-Kpt"/>
+                                    <constraint firstItem="LpV-y5-gBM" firstAttribute="top" secondItem="Ou4-T7-2Fa" secondAttribute="topMargin" constant="-8" id="vRS-iD-bbK"/>
+                                    <constraint firstItem="LpV-y5-gBM" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leadingMargin" constant="-8" id="wsS-P1-Ihk"/>
                                     <constraint firstAttribute="trailing" secondItem="LpV-y5-gBM" secondAttribute="trailing" id="xzq-cW-8EY"/>
                                 </constraints>
-                                <size key="customSize" width="150" height="150"/>
+                                <size key="customSize" width="90" height="99"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2nE-T8-2vR"/>
+                                        <exclude reference="Efy-Ha-b4p"/>
+                                        <exclude reference="M8q-PR-xGk"/>
+                                        <exclude reference="xzq-cW-8EY"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="illustrateImage" destination="LpV-y5-gBM" id="Jnk-xb-QNC"/>
+                                    <outlet property="illustrateLabel" destination="Xrm-TN-tHI" id="aVN-rA-2A0"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -1370,7 +1393,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iv2-aF-9Xh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2383.5" y="486.75"/>
+            <point key="canvasLocation" x="2383" y="486"/>
         </scene>
         <!--Pokemon Detail View Controller-->
         <scene sceneID="7dD-Lh-G3Z">

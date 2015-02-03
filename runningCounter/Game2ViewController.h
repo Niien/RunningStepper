@@ -7,6 +7,7 @@
 //
 #import "myPlist.h"
 #import <UIKit/UIKit.h>
+#import "illustratedHandBook.h"
 
 
 @interface Game2ViewController : UIViewController{

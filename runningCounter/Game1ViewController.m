@@ -11,7 +11,6 @@
 @import AudioToolbox;
 
 //目前神奇寶貝總數
-#define NumOfPokeMon 30
 
 @interface Game1ViewController (){
     
@@ -70,8 +69,8 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     //隨機目標數
-    time = 6.0;
-    goal = arc4random()%10;
+    time = 10.0;
+    goal = 5;//arc4random()%50+30;
     myPressPoint = 0;
     changeFrameTime = 1.5;
     [self getPokemonNo];
@@ -94,25 +93,26 @@
 
 - (IBAction)pressedBtnleft:(id)sender {
     myPressPoint++;
-    _myPoint.text = [NSString stringWithFormat:@"%ld",(long)myPressPoint];
+    _myPoint.text = [NSString stringWithFormat:@"%ld",(long)myPressPoint-1];
     //NSLog(@"%d",myPressPoint);
     
     //按了按鈕才開始
     if (myPressPoint == 1) {
         //設一個倒數計時器 並在分數達標時停止並響鈴
+        NSLog(@"timer1");
         timeCountDown = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myCountDown:) userInfo:nil repeats:YES];
     }
-    
 }
 
 - (IBAction)pressedBtnRight:(id)sender {
     myPressPoint++;
-    _myPoint.text = [NSString stringWithFormat:@"%ld",(long)myPressPoint];
+    _myPoint.text = [NSString stringWithFormat:@"%ld",(long)myPressPoint-1];
     //NSLog(@"%d",myPressPoint);
 
     //按了按鈕才開始
     if (myPressPoint == 1) {
         //設一個倒數計時器 並在分數達標時停止並響鈴
+        NSLog(@"timer2");
         timeCountDown = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myCountDown:) userInfo:nil repeats:YES];
     }
     
@@ -182,7 +182,7 @@
 #pragma mark 隨機選取怪獸
 - (void)getPokemonNo {
     
-    randomMonster = arc4random()%NumOfPokeMon+1;
+    randomMonster = arc4random()% ALL_POKEMON_COUNT +1;
     
     imageName = [NSString stringWithFormat:@"%d.png",randomMonster];
     iconName = [NSString stringWithFormat:@"%ds.png",randomMonster];
