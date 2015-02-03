@@ -59,9 +59,9 @@
     //加入邊框結束
     self.pokemonImage.image = resultImage;
     
-    self.NameLabel.text = [pokemonDict objectForKey:@"POKEMON_NAME"];
+    self.NameLabel.text = [pokemonDict objectForKey:@"name"];
     
-    self.LvLabel.text = [NSString stringWithFormat:@"等級%@",[pokemonDict objectForKey:@"Lv"]];
+    self.LvLabel.text = [NSString stringWithFormat:@"LV:%@",[pokemonDict objectForKey:@"Lv"]];
     
     exp = [[pokemonDict objectForKey:@"exp"]integerValue];
     
@@ -97,7 +97,6 @@
         //
         //                    Lv += (exp /2000);
         //                    exp = exp % 2000;
-        //
         //                }
         //            } else {
         //
