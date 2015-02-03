@@ -111,17 +111,18 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
     
     NSString *imageName = [NSString stringWithFormat:@"%@",[[data objectAtIndex:indexPath.row] objectForKey:@"image"]];
     
-//    UIImage *image = [UIImage imageNamed:imageName];
-    UIImage *tmpImage = [UIImage imageNamed:imageName];
-        //加上邊框之類的
-    UIImage *frameImage = [UIImage imageNamed:@"poke_frame(100).png"];
-    UIGraphicsBeginImageContext(tmpImage.size);
-    [tmpImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
-    [frameImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
-    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-    
-    cell.myImage.image = resultImage;
+    UIImage *image = [UIImage imageNamed:imageName];
+    cell.myImage.image = image;
+//    UIImage *tmpImage = [UIImage imageNamed:imageName];
+//        //加上邊框之類的
+//    UIImage *frameImage = [UIImage imageNamed:@"poke_frame(500).png"];
+//    UIGraphicsBeginImageContext(tmpImage.size);
+//    [tmpImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
+//    [frameImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
+//    UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//    
+//    cell.myImage.image = resultImage;
     
     cell.LvLabel.text = [NSString stringWithFormat:@"Lv:%@",[[data objectAtIndex:indexPath.row]objectForKey:@"Lv"]];
     

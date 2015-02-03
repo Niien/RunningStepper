@@ -169,7 +169,7 @@ static StepCounter *instance;
         _power ++;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"StepCounter" object:nil];
-        NSLog(@"step %ld",(long)_stepNB);
+//        NSLog(@"step %ld",(long)_stepNB);
         if (_stepNB %50==0)
         {
             [self notifyAndMission];

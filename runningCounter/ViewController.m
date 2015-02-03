@@ -226,7 +226,7 @@
     
     [dict setObject:lat forKey:@"lat"];
     [dict setObject:lon forKey:@"lon"];
-    NSLog(@"viewControllerDict:%@",dict);
+    //NSLog(@"viewControllerDict:%@",dict);
     
     NSArray *array = [[NSArray alloc]initWithObjects:dict, nil];
     

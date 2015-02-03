@@ -125,6 +125,8 @@
     if (time >= 0) {
         if (myPressPoint >= goal) {
             //還有時間 且 已達標
+            [_BtnLabelleft setEnabled:NO];
+            [_BtnLabelright setEnabled:NO];
             [timeCountDown invalidate];
             myPressPoint = goal;
             [self SaveToPlist];
@@ -135,6 +137,8 @@
             [alert show];
         }
     }else{
+        [_BtnLabelleft setEnabled:NO];
+        [_BtnLabelright setEnabled:NO];
         [timeCountDown invalidate];
         //結束震動
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);

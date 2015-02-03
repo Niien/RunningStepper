@@ -122,7 +122,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     UIImage *tmpImage = [UIImage imageNamed:[allPokemons objectAtIndex:indexPath.row]];
     //開始加入邊框
-    UIImage *frameImage = [UIImage imageNamed:@"poke_frame(100).png"];
+    UIImage *frameImage = [UIImage imageNamed:@"poke_frame(500).png"];
     UIGraphicsBeginImageContext(tmpImage.size);
     [tmpImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
     [frameImage drawInRect:CGRectMake(0, 0, tmpImage.size.width, tmpImage.size.height)];
@@ -155,7 +155,7 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark - collection view delegate flowlayout
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     
-    return UIEdgeInsetsMake(45.0, 0, 10.0, 0);
+    return UIEdgeInsetsMake(45.0, 5.0, 20.0, 5.0);
     
 }
 

@@ -70,7 +70,11 @@
     keyinArray = [NSMutableArray new];      // 比對陣列
     X = 0;                                  // 比對陣列序數
     GameFinal = false;                      // 遊戲輸贏判斷
-    [self getPokemonNo];               // 隨機取怪獸
+    [self getPokemonNo];                    // 隨機取怪獸
+    //enable buttons
+    for (int i=0; i<6; i++) {
+        [[_ButtonsLabel objectAtIndex:i]setEnabled:NO];
+    }
     
     
     //顯示目標 分數 時間
@@ -213,7 +217,7 @@
     NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
     // save data to plist
     NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
-    NSLog(@"G1:%@",dict);
+    NSLog(@"G2:%@",dict);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"getLocation" object:nil userInfo:dict];
 }
 
@@ -253,7 +257,10 @@
         //固定在左右
         pokeImageView.frame = CGRectMake(self.view.frame.size.width-100, 15, 100, 100);
         peopleImageView.frame = CGRectMake(0, self.view.frame.size.height/2-165, 100, 100);
-
+        //使按鈕可用
+        for (int i=0; i<6; i++) {
+            [[_ButtonsLabel objectAtIndex:i]setEnabled:YES];
+        }
         //遊戲開始倒數計時器
         myCountdowntimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myCountDown:) userInfo:nil repeats:YES];
     }

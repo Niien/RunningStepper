@@ -143,13 +143,12 @@
 
 
 #pragma mark - button Action
-
 - (IBAction)back:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
+#pragma mark 增加經驗值
 - (IBAction)expButton:(id)sender {
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"輸入給予的精力" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
@@ -160,7 +159,7 @@
     textfield = [alert textFieldAtIndex:0];
 }
 
-
+#pragma mark 賣出
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
@@ -172,6 +171,7 @@
     
 }
 
+#pragma mark 加入隊伍
 - (IBAction)addToTeam:(id)sender {
     
     NSMutableArray *TeamArray = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
@@ -181,16 +181,13 @@
         [TeamArray addObject:pokemonDict];
         
         [[myPlist shareInstanceWithplistName:@"team"]saveDataWithArray:TeamArray];
-        
     }
-    
 }
 
-
+#pragma mark 移出隊伍
 - (IBAction)removeTeam:(id)sender {
     
     NSMutableArray *TeamArray = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
-    
     [TeamArray removeObject:pokemonDict];
     
     [[myPlist shareInstanceWithplistName:@"team"]saveDataByOverRide:TeamArray];
