@@ -29,6 +29,9 @@
     NSTimer *timeCountDown;
     NSTimer *BallMove;
     NSTimer *fakePokeImgMoveTimer;
+    NSTimer *fakePokeImgMoveTimer2;
+    NSTimer *fakePokeImgMoveTimer3;
+    NSTimer *fakePokeImgMoveTimer4;
     float time;
     float changeFrameTime;
     int pokeFrameX;
@@ -37,6 +40,11 @@
     UIImageView *pokeImageView;
     UIImage *peopleImage;
     UIImageView *peopleImageView;
+    //
+    UISwipeGestureRecognizer *swipeRight;
+    UISwipeGestureRecognizer *swipeLeft;
+    UISwipeGestureRecognizer *swipeUp;
+    UISwipeGestureRecognizer *swipeDown;
     //改變frame的參數
     int ballmoveXY;
     int ChangeFakeImgParameterX;
@@ -115,10 +123,6 @@
     
     //持續改變FakePokeImage
     fakePokeImgMoveTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage) userInfo:nil repeats:YES];
-    //    upview.frame = CGRectMake(self.view.frame.size.width/2-30, 0, 60, 60);
-    //    leftview.frame = CGRectMake(0, self.view.frame.size.height/2-30, 60, 60);
-    //    downview.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height-60, 60, 60);
-    //    rightview.frame = CGRectMake(self.view.frame.size.width-60, self.view.frame.size.height/2-30, 60, 60);
 }
 
 #pragma mark 干擾怪物移動
@@ -126,21 +130,90 @@
     ChangeFakeImgParameterX += self.view.frame.size.width/10;
     ChangeFakeImgParameterY += self.view.frame.size.height/10;
     //左跟下記得減掉自己位置
-    upview.frame = CGRectMake(ChangeFakeImgParameterX, 0, 60, 60);
-    leftview.frame = CGRectMake(0, self.view.frame.size.height-ChangeFakeImgParameterY-60, 60, 60);
-    downview.frame = CGRectMake(self.view.frame.size.width-ChangeFakeImgParameterX-60, self.view.frame.size.height-60, 60, 60);
-    rightview.frame = CGRectMake(self.view.frame.size.width-60, ChangeFakeImgParameterY, 60, 60);
+    upview.frame = CGRectMake(self.view.frame.size.width/2-30+ChangeFakeImgParameterX, ChangeFakeImgParameterY, 60, 60);
+    leftview.frame = CGRectMake(ChangeFakeImgParameterX, self.view.frame.size.height/2-30-ChangeFakeImgParameterY, 60, 60);
+    downview.frame = CGRectMake(self.view.frame.size.width/2-30-ChangeFakeImgParameterX, self.view.frame.size.height-60-ChangeFakeImgParameterY, 60, 60);
+    rightview.frame = CGRectMake(self.view.frame.size.width-60-ChangeFakeImgParameterX, self.view.frame.size.height/2-30+ChangeFakeImgParameterY, 60, 60);
     //顯示
     [self.view addSubview:upview];
     [self.view addSubview:leftview];
     [self.view addSubview:downview];
     [self.view addSubview:rightview];
     
-    if (ChangeFakeImgParameterX >= self.view.frame.size.width) {
-        //
+    if (ChangeFakeImgParameterX >= self.view.frame.size.width/2-15) {
+        //STOP TIMER1
         [fakePokeImgMoveTimer invalidate];
-        ChangeFakeImgParameterX = 0;
-        ChangeFakeImgParameterY = 0;
+        ChangeFakeImgParameterX  = 0;
+        ChangeFakeImgParameterY  = 0;
+        //
+        fakePokeImgMoveTimer2 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage2) userInfo:nil repeats:YES];
+    }
+}
+-(void)ChangeFakePokeImage2{
+    ChangeFakeImgParameterX += self.view.frame.size.width/10;
+    ChangeFakeImgParameterY += self.view.frame.size.height/10;
+    //
+    upview.frame = CGRectMake(self.view.frame.size.width-60-ChangeFakeImgParameterX, self.view.frame.size.height/2-30+ChangeFakeImgParameterY, 60, 60);
+    leftview.frame = CGRectMake(self.view.frame.size.width/2-30+ChangeFakeImgParameterX, ChangeFakeImgParameterY, 60, 60);
+    downview.frame = CGRectMake(ChangeFakeImgParameterX, self.view.frame.size.height/2-30-ChangeFakeImgParameterY, 60, 60);
+    rightview.frame = CGRectMake(self.view.frame.size.width/2-30-ChangeFakeImgParameterX, self.view.frame.size.height-60-ChangeFakeImgParameterY, 60, 60);
+    //顯示
+    [self.view addSubview:upview];
+    [self.view addSubview:leftview];
+    [self.view addSubview:downview];
+    [self.view addSubview:rightview];
+
+    if (ChangeFakeImgParameterX >= self.view.frame.size.width/2-15) {
+        //STOP TIMER2
+        [fakePokeImgMoveTimer2 invalidate];
+        ChangeFakeImgParameterX  = 0;
+        ChangeFakeImgParameterY  = 0;
+        //
+        fakePokeImgMoveTimer3 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage3) userInfo:nil repeats:YES];
+    }
+}
+-(void)ChangeFakePokeImage3{
+    ChangeFakeImgParameterX += self.view.frame.size.width/10;
+    ChangeFakeImgParameterY += self.view.frame.size.height/10;
+    //
+    upview.frame = CGRectMake(self.view.frame.size.width/2-30-ChangeFakeImgParameterX, self.view.frame.size.height-60-ChangeFakeImgParameterY, 60, 60);
+    leftview.frame = CGRectMake(self.view.frame.size.width-60-ChangeFakeImgParameterX, self.view.frame.size.height/2-30+ChangeFakeImgParameterY, 60, 60);
+    downview.frame = CGRectMake(self.view.frame.size.width/2-30+ChangeFakeImgParameterX, ChangeFakeImgParameterY, 60, 60);
+    rightview.frame = CGRectMake(ChangeFakeImgParameterX, self.view.frame.size.height/2-30-ChangeFakeImgParameterY, 60, 60);
+    //顯示
+    [self.view addSubview:upview];
+    [self.view addSubview:leftview];
+    [self.view addSubview:downview];
+    [self.view addSubview:rightview];
+
+    if (ChangeFakeImgParameterX >= self.view.frame.size.width/2-15) {
+        //STOP TIMER1
+        [fakePokeImgMoveTimer3 invalidate];
+        ChangeFakeImgParameterX  = 0;
+        ChangeFakeImgParameterY  = 0;
+        //
+        fakePokeImgMoveTimer4 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage4) userInfo:nil repeats:YES];
+    }
+}
+-(void)ChangeFakePokeImage4{
+    ChangeFakeImgParameterX += self.view.frame.size.width/10;
+    ChangeFakeImgParameterY += self.view.frame.size.height/10;
+    //
+    upview.frame = CGRectMake(ChangeFakeImgParameterX, self.view.frame.size.height/2-30-ChangeFakeImgParameterY, 60, 60);
+    leftview.frame = CGRectMake(self.view.frame.size.width/2-30-ChangeFakeImgParameterX, self.view.frame.size.height-60-ChangeFakeImgParameterY, 60, 60);
+    downview.frame = CGRectMake(self.view.frame.size.width-60-ChangeFakeImgParameterX, self.view.frame.size.height/2-30+ChangeFakeImgParameterY, 60, 60);
+    rightview.frame = CGRectMake(self.view.frame.size.width/2-30+ChangeFakeImgParameterX, ChangeFakeImgParameterY, 60, 60);
+    //顯示
+    [self.view addSubview:upview];
+    [self.view addSubview:leftview];
+    [self.view addSubview:downview];
+    [self.view addSubview:rightview];
+
+    if (ChangeFakeImgParameterX >= self.view.frame.size.width/2+50) {
+        //STOP TIMER1
+        [fakePokeImgMoveTimer4 invalidate];
+        ChangeFakeImgParameterX  = 0;
+        ChangeFakeImgParameterY  = 0;
         [upview removeFromSuperview];
         [leftview removeFromSuperview];
         [downview removeFromSuperview];
@@ -153,30 +226,28 @@
         [self setSwipe:self.view];
     }
 }
-
 #pragma mark 新增手勢
 -(void)setSwipe:(UIView*)view{
-    UISwipeGestureRecognizer *swipRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
-    [swipRight setDirection:UISwipeGestureRecognizerDirectionRight];
+    swipeRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
     
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
+    swipeLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     
-    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
+    swipeUp = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
     [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
     
-    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
+    swipeDown = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
     [swipeDown setDirection:UISwipeGestureRecognizerDirectionDown];
     
-    [view addGestureRecognizer:swipRight];
+    [view addGestureRecognizer:swipeRight];
     [view addGestureRecognizer:swipeLeft];
     [view addGestureRecognizer:swipeUp];
     [view addGestureRecognizer:swipeDown];
 }
 
 #pragma mark 手勢後動作
--(void)handleGesture:(UISwipeGestureRecognizer*)recognizer
-{
+-(void)handleGesture:(UISwipeGestureRecognizer*)recognizer{
     switch (recognizer.direction) {
         case UISwipeGestureRecognizerDirectionUp:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveUp) userInfo:nil repeats:YES];
@@ -229,6 +300,10 @@
     if (ballmoveXY>=self.view.frame.size.height/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
+        [self.view removeGestureRecognizer:swipeUp];
+        [self.view removeGestureRecognizer:swipeLeft];
+        [self.view removeGestureRecognizer:swipeDown];
+        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
@@ -240,6 +315,10 @@
     if (ballmoveXY>=self.view.frame.size.width/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
+        [self.view removeGestureRecognizer:swipeUp];
+        [self.view removeGestureRecognizer:swipeLeft];
+        [self.view removeGestureRecognizer:swipeDown];
+        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
@@ -251,6 +330,10 @@
     if (ballmoveXY>=self.view.frame.size.height/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
+        [self.view removeGestureRecognizer:swipeUp];
+        [self.view removeGestureRecognizer:swipeLeft];
+        [self.view removeGestureRecognizer:swipeDown];
+        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
@@ -262,6 +345,10 @@
     if (ballmoveXY>=self.view.frame.size.width/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
+        [self.view removeGestureRecognizer:swipeUp];
+        [self.view removeGestureRecognizer:swipeLeft];
+        [self.view removeGestureRecognizer:swipeDown];
+        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
@@ -272,25 +359,37 @@
     if (WinTimes>=3) {
         //勝利震動
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        [upview removeFromSuperview];
+        [leftview removeFromSuperview];
+        [rightview removeFromSuperview];
+        [downview removeFromSuperview];
+        [BallView removeFromSuperview];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"好耶, 抓到了" message:nil delegate:self cancelButtonTitle:@"Keep poking" otherButtonTitles:nil];
         alert.tag = 1;  //要分辨多個 Alert 且加動作 就需設tag
         [alert show];
     }else if (LoseTimes>=2){
         //失敗震動
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        [upview removeFromSuperview];
+        [leftview removeFromSuperview];
+        [rightview removeFromSuperview];
+        [downview removeFromSuperview];
+        [BallView removeFromSuperview];
         UIAlertView *failalert = [[UIAlertView alloc]initWithTitle:@"糟糕, Poke跑掉了" message:nil delegate:self cancelButtonTitle:@"Keep Poking" otherButtonTitles:nil];
         failalert.tag = 2;  //要分辨多個 Alert 且加動作 就需設tag
         [failalert show];
     }
     else {
-        //還沒結束 再取亂數抓怪
-        [self getmorefake];
         //移除前一次的怪
         [upview removeFromSuperview];
         [leftview removeFromSuperview];
         [rightview removeFromSuperview];
         [downview removeFromSuperview];
-        //要先移除才能生怪
+        [BallView removeFromSuperview];
+        //也要移除手勢!?
+        //還沒結束 再取亂數抓怪
+        [self getmorefake];
+        //在生怪進畫面
         [self randonInputImage];
     }
 }
@@ -314,9 +413,11 @@
     [fakeMonArray addObject:imageName];
     //
     for (int fakeNO = 0; fakeNO<3; fakeNO++) {
-        int check = arc4random()% ALL_POKEMON_COUNT +1;
-        if (check == randomMonster) {   //如果相等就改變
+        int check = arc4random()% (ALL_POKEMON_COUNT+1);
+        if (check == randomMonster && check >= 2) {   //如果相等就改變
             check = (check+1)/2;
+        }else if (check < 2){   //0跟1是很神奇的Bug
+            check = check + (arc4random()%20)+5;
         }
         NSString *fakeimageName = [NSString stringWithFormat:@"%d.png",check];
         [fakeMonArray addObject:fakeimageName];
