@@ -161,11 +161,12 @@
         for (int i=0; i<6; i++) {
             [[_ButtonsLabel objectAtIndex:i]setEnabled:NO];
         }
-        //震動
+        //結束震動
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        UIAlertView *failalert = [[UIAlertView alloc]initWithTitle:@"Failed" message:nil delegate:self cancelButtonTitle:@"QQ" otherButtonTitles:nil];
-        failalert.tag = 2;
+        UIAlertView *failalert = [[UIAlertView alloc]initWithTitle:@"PokeMon Was Gone" message:nil delegate:self cancelButtonTitle:@"Keep Poking" otherButtonTitles:nil];
+        failalert.tag = 2;  //要分辨多個 Alert 且加動作 就需設tag
         [failalert show];
+
     }
 }
 
