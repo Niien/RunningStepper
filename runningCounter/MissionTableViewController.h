@@ -11,6 +11,7 @@
 #import "UserProfileSingleton.h"
 #import "Game1ViewController.h"
 #import "Game2ViewController.h"
+#import "Game3ViewController.h"
 #import "TimeMissionNotify.h"
 
 @interface MissionTableViewController : UITableViewController

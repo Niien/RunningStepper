@@ -66,8 +66,8 @@
     
     // Configure the cell...
     
-    cell.timeLabel.text = [NSString stringWithFormat:@"剩%d分",[[_notifyArray objectAtIndex:indexPath.row]timeCut]/60];
-    cell.timeLabel.frame = CGRectMake(50, cell.frame.size.height/2-15, 70, 30);
+    cell.timeLabel.text = [NSString stringWithFormat:@"剩餘 %d分",[[_notifyArray objectAtIndex:indexPath.row]timeCut]/60];
+    cell.timeLabel.frame = CGRectMake(40, cell.frame.size.height/2-15, 70, 30);
     
     cell.backgroundColor = [UIColor blackColor];
     
@@ -96,16 +96,17 @@
     _indexTimePath = indexPath;
     Game1ViewController *vc1 = [self.storyboard instantiateViewControllerWithIdentifier:@"Game1"];
     Game2ViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"Game2"];
+    Game3ViewController *vc3 = [self.storyboard instantiateViewControllerWithIdentifier:@"Game3"];
     //UIViewController *VC;
     int random = arc4random()%2;//隨機跳遊戲
     switch (random) {
         case 0:
-            [self presentViewController:vc1 animated:YES completion:^{
+            [self presentViewController:vc3 animated:YES completion:^{
                 //
             }];
             break;
         case 1:
-            [self presentViewController:vc1 animated:YES completion:^{
+            [self presentViewController:vc3 animated:YES completion:^{
                 //
             }];
         default:
