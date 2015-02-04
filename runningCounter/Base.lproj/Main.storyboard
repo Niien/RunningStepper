@@ -1358,6 +1358,9 @@
                     <connections>
                         <outlet property="Label01" destination="av8-hk-VZx" id="xZ4-ru-CpU"/>
                         <outlet property="Label02" destination="e3X-ff-Bvy" id="LKz-Es-cri"/>
+                        <outlet property="btnA" destination="Wuj-5P-r1S" id="7ho-3o-Xvr"/>
+                        <outlet property="btnB" destination="o4V-oD-sg9" id="WKz-fh-Gfa"/>
+                        <outlet property="btnC" destination="FMI-Mm-AXm" id="brk-zT-31R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6O-uV-Nrt" userLabel="First Responder" sceneMemberID="firstResponder"/>

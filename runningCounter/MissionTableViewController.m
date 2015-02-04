@@ -101,12 +101,12 @@
     int random = arc4random()%2;//隨機跳遊戲
     switch (random) {
         case 0:
-            [self presentViewController:vc3 animated:YES completion:^{
+            [self presentViewController:vc2 animated:YES completion:^{
                 //
             }];
             break;
         case 1:
-            [self presentViewController:vc3 animated:YES completion:^{
+            [self presentViewController:vc2 animated:YES completion:^{
                 //
             }];
         default:
