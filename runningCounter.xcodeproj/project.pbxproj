@@ -12,7 +12,8 @@
 		844143541A73DAA80002A079 /* MissionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143531A73DAA80002A079 /* MissionTableViewController.m */; };
 		844143581A73DB040002A079 /* MissionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143571A73DB040002A079 /* MissionTableViewCell.m */; };
 		84D13BB91A820FA3000FBAA5 /* MCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D13BB81A820FA3000FBAA5 /* MCManager.m */; };
-		84D13BBC1A821F3E000FBAA5 /* SessionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D13BBB1A821F3E000FBAA5 /* SessionHelper.m */; };
+		84D302AA1A82B8210021ECCD /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302A91A82B8210021ECCD /* BlueViewController.m */; };
+		84D302AD1A82BAC30021ECCD /* SessionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302AC1A82BAC30021ECCD /* SessionHelper.m */; };
 		84D66B461A76648A00A98984 /* TimeMissionNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D66B451A76648A00A98984 /* TimeMissionNotify.m */; };
 		A91368891A75362500BBB0CA /* home_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A91368871A75362500BBB0CA /* home_30.png */; };
 		A913688A1A75362500BBB0CA /* setting_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A91368881A75362500BBB0CA /* setting_30.png */; };
@@ -180,8 +181,10 @@
 		844143571A73DB040002A079 /* MissionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionTableViewCell.m; sourceTree = "<group>"; };
 		84D13BB71A820FA3000FBAA5 /* MCManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCManager.h; sourceTree = "<group>"; };
 		84D13BB81A820FA3000FBAA5 /* MCManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCManager.m; sourceTree = "<group>"; };
-		84D13BBA1A821F3E000FBAA5 /* SessionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionHelper.h; sourceTree = "<group>"; };
-		84D13BBB1A821F3E000FBAA5 /* SessionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionHelper.m; sourceTree = "<group>"; };
+		84D302A81A82B8210021ECCD /* BlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueViewController.h; sourceTree = "<group>"; };
+		84D302A91A82B8210021ECCD /* BlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
+		84D302AB1A82BAC30021ECCD /* SessionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionHelper.h; sourceTree = "<group>"; };
+		84D302AC1A82BAC30021ECCD /* SessionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionHelper.m; sourceTree = "<group>"; };
 		84D66B441A76648A00A98984 /* TimeMissionNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeMissionNotify.h; sourceTree = "<group>"; };
 		84D66B451A76648A00A98984 /* TimeMissionNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeMissionNotify.m; sourceTree = "<group>"; };
 		A91368871A75362500BBB0CA /* home_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_30.png; sourceTree = "<group>"; };
@@ -437,10 +440,19 @@
 			children = (
 				84D13BB71A820FA3000FBAA5 /* MCManager.h */,
 				84D13BB81A820FA3000FBAA5 /* MCManager.m */,
-				84D13BBA1A821F3E000FBAA5 /* SessionHelper.h */,
-				84D13BBB1A821F3E000FBAA5 /* SessionHelper.m */,
+				84D302AB1A82BAC30021ECCD /* SessionHelper.h */,
+				84D302AC1A82BAC30021ECCD /* SessionHelper.m */,
 			);
 			name = Session;
+			sourceTree = "<group>";
+		};
+		84D302A71A82B7DD0021ECCD /* crash */ = {
+			isa = PBXGroup;
+			children = (
+				AE3B165A1A821257007CBCF2 /* BlueToothViewController.h */,
+				AE3B165B1A821257007CBCF2 /* BlueToothViewController.m */,
+			);
+			name = crash;
 			sourceTree = "<group>";
 		};
 		84D66B471A76727700A98984 /* Mission */ = {
@@ -474,8 +486,8 @@
 				AEB786D81A7A0C7600181446 /* LoginVC.m */,
 				A9BFE8E21A7523EF00D2B2EA /* WorldMapViewController.h */,
 				A9BFE8E31A7523EF00D2B2EA /* WorldMapViewController.m */,
-				AE3B165A1A821257007CBCF2 /* BlueToothViewController.h */,
-				AE3B165B1A821257007CBCF2 /* BlueToothViewController.m */,
+				84D302A81A82B8210021ECCD /* BlueViewController.h */,
+				84D302A91A82B8210021ECCD /* BlueViewController.m */,
 				A91368BD1A76188700BBB0CA /* StoreViewController.h */,
 				A91368BE1A76188700BBB0CA /* StoreViewController.m */,
 				A974CAB91A7D12B300F08AA0 /* illustratedHandBook.h */,
@@ -624,6 +636,7 @@
 		A9F677871A6E35C300E5F06E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				84D302A71A82B7DD0021ECCD /* crash */,
 				AE15B14A1A6E2A0500452FCB /* ViewController.h */,
 				AE15B14B1A6E2A0500452FCB /* ViewController.m */,
 				84D66B471A76727700A98984 /* Mission */,
@@ -980,10 +993,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D302AD1A82BAC30021ECCD /* SessionHelper.m in Sources */,
 				A9B064D11A6EC5FC004554B6 /* MyCustomPin.m in Sources */,
 				A9F677901A6E368400E5F06E /* CollectionViewCell.m in Sources */,
 				AEB786D91A7A0C7600181446 /* LoginVC.m in Sources */,
 				A974CABB1A7D12B300F08AA0 /* illustratedHandBook.m in Sources */,
+				84D302AA1A82B8210021ECCD /* BlueViewController.m in Sources */,
 				A93E91FF1A7D67D3009440E3 /* pokemonDetailViewController.m in Sources */,
 				A9F6778D1A6E366400E5F06E /* BookViewController.m in Sources */,
 				A9B064E61A6F7D7A004554B6 /* FMDatabase.m in Sources */,
@@ -998,7 +1013,6 @@
 				844143541A73DAA80002A079 /* MissionTableViewController.m in Sources */,
 				A9B064EA1A6F7D7A004554B6 /* FMResultSet.m in Sources */,
 				84D13BB91A820FA3000FBAA5 /* MCManager.m in Sources */,
-				84D13BBC1A821F3E000FBAA5 /* SessionHelper.m in Sources */,
 				A91368BF1A76188700BBB0CA /* StoreViewController.m in Sources */,
 				A9B064E81A6F7D7A004554B6 /* FMDatabasePool.m in Sources */,
 				AEC279F01A7812E500F3836D /* GetPokemonAndStore.m in Sources */,

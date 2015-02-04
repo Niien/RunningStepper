@@ -1271,10 +1271,10 @@
             </objects>
             <point key="canvasLocation" x="163" y="-2461"/>
         </scene>
-        <!--Blue Tooth View Controller-->
+        <!--Blue View Controller-->
         <scene sceneID="mcs-8H-aPw">
             <objects>
-                <viewController storyboardIdentifier="BlueToothViewController" id="0hj-VZ-gmd" customClass="BlueToothViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BlueToothViewController" id="0hj-VZ-gmd" customClass="BlueViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="73a-pI-TtA"/>
                         <viewControllerLayoutGuide type="bottom" id="PPZ-uO-tyc"/>
@@ -1283,7 +1283,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4V-oD-sg9">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4V-oD-sg9">
                                 <rect key="frame" x="205" y="280" width="190" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1293,10 +1293,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BtnB:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="Rrt-uw-EWj"/>
+                                    <action selector="attackbtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="UGS-jM-nBu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wuj-5P-r1S">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wuj-5P-r1S">
                                 <rect key="frame" x="16" y="280" width="189" height="40"/>
                                 <color key="backgroundColor" red="1" green="0.47288110979999998" blue="0.75043245079999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1306,7 +1306,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BtnA:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="OYo-60-cN2"/>
+                                    <action selector="attackbtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="aDv-ts-q8y"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMI-Mm-AXm">
@@ -1319,7 +1319,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="BtnC:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="2zY-IF-Mi4"/>
+                                    <action selector="takeCbtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="31f-GE-8Bp"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My HP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av8-hk-VZx">
@@ -1389,11 +1389,11 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="Label01" destination="av8-hk-VZx" id="xZ4-ru-CpU"/>
-                        <outlet property="Label02" destination="e3X-ff-Bvy" id="LKz-Es-cri"/>
-                        <outlet property="btnA" destination="Wuj-5P-r1S" id="7ho-3o-Xvr"/>
-                        <outlet property="btnB" destination="o4V-oD-sg9" id="WKz-fh-Gfa"/>
-                        <outlet property="btnC" destination="FMI-Mm-AXm" id="brk-zT-31R"/>
+                        <outlet property="btnA" destination="Wuj-5P-r1S" id="lOB-8N-qE2"/>
+                        <outlet property="btnB" destination="o4V-oD-sg9" id="xMJ-QP-uuW"/>
+                        <outlet property="btnC" destination="FMI-Mm-AXm" id="1oy-Wa-Cd7"/>
+                        <outlet property="enemyHPLabel" destination="e3X-ff-Bvy" id="7vy-pR-bno"/>
+                        <outlet property="myHPLabel" destination="av8-hk-VZx" id="hu1-L7-1xF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6O-uV-Nrt" userLabel="First Responder" sceneMemberID="firstResponder"/>

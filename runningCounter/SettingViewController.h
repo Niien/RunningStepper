@@ -11,6 +11,6 @@
 #import "PersonalIDViewController.h"
 #import "illustratedHandBook.h"
 
-@interface SettingViewController : UITableViewController<MCBrowserViewControllerDelegate>
+@interface SettingViewController : UITableViewController
 
 @end

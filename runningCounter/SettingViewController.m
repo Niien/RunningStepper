@@ -7,8 +7,8 @@
 //
 
 #import "SettingViewController.h"
-#import "AppDelegate.h"
-#import "BlueToothViewController.h"
+#import "BlueViewController.h"
+
 
 
 
@@ -41,11 +41,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     content = [[NSMutableArray alloc]initWithObjects:@"個人資料",@"世界地圖",@"連線對戰",@"藍芽對戰",@"圖鑑", nil];
-    self.appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    [self.appDelegate.mcManager setupPeerAndSessionWithDisplayName:[[UIDevice currentDevice] name]];
-    
-    [self.appDelegate.mcManager advertiseSelf];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -139,13 +135,10 @@
 }
 
 - (void)openRoom {
-    
-    [self.appDelegate.mcManager setupMCBrowser];
-    [[self.appDelegate.mcManager browser] setDelegate:self];
-    [self presentViewController:self.appDelegate.mcManager.browser
-                       animated:YES
-                     completion:nil];
-    
+    BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueToothViewController"];
+    [self presentViewController:bvc animated:YES completion:^{
+        //
+    }];
 }
 
 - (void)toIllustratedHandBook {
@@ -188,28 +181,6 @@
     
 }
 
-#pragma mark Browser
-// Notifies the delegate, when the user taps the done button
-- (void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
-    [self.appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:^{
-        BlueToothViewController *Bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueToothViewController"];
-        [self presentViewController:Bvc animated:YES completion:nil];
-    }];
-    
-}
-
-// Notifies delegate that the user taps the cancel button.
-- (void)browserViewControllerWasCancelled:(MCBrowserViewController *)browserViewController{
-    [self.appDelegate.mcManager.browser dismissViewControllerAnimated:YES completion:^{
-        //
-    }];
-}
-
-//@optional
-// Notifies delegate that a peer was found; discoveryInfo can be used to determine whether the peer should be presented to the user, and the delegate should return a YES if the peer should be presented; this method is optional, if not implemented every nearby peer will be presented to the user.
-- (BOOL)browserViewController:(MCBrowserViewController *)browserViewController shouldPresentNearbyPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info{
-    return YES;
-}
 
 /*
 // Override to support conditional editing of the table view.

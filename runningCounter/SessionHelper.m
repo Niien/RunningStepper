@@ -8,7 +8,7 @@
 
 #import "SessionHelper.h"
 
-static NSString * const ServiceType = @"cm-p2ptest";
+static NSString * const ServiceType = @"Blue";
 
 @interface SessionHelper () <MCSessionDelegate>
 
@@ -39,8 +39,8 @@ static NSString * const ServiceType = @"cm-p2ptest";
     if (self) {
         self.connectedPeerIDs = [NSMutableArray new];
         
-        MCPeerID *peerID = [[MCPeerID alloc] initWithDisplayName:displayName];
-        _session = [[MCSession alloc] initWithPeer:peerID];
+        _peerID = [[MCPeerID alloc] initWithDisplayName:displayName];
+        _session = [[MCSession alloc] initWithPeer:_peerID];
         _session.delegate = self;
         
         self.advertiserAssistant = [[MCAdvertiserAssistant alloc] initWithServiceType:self.serviceType
@@ -89,7 +89,7 @@ static NSString * const ServiceType = @"cm-p2ptest";
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
-    NSMutableArray *dataArray = [NSMutableArray new];
+    NSArray *dataArray = [NSArray new];
     
     dataArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
@@ -162,7 +162,7 @@ didReceiveStream:(NSInputStream *)stream
     }
     
     
-    [self.delegate sessionHelperDidSendData:data];
+//    [self.delegate sessionHelperDidSendData:data];
     
 }
 

@@ -29,6 +29,7 @@
 @property (nonatomic, readonly) NSString *serviceType;
 @property (nonatomic, readonly) NSUInteger connectedPeersCount;
 @property (nonatomic, weak) id <SessionHelperDelegate> delegate;
+@property (nonatomic, readonly) MCPeerID *peerID;
 
 - (instancetype)initWithDisplayName:(NSString *)displayName;
 
