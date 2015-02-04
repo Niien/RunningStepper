@@ -9,7 +9,7 @@
 #import "BlueViewController.h"
 #import "myPlist.h"
 
-@interface BlueViewController ()<MCBrowserViewControllerDelegate,SessionHelperDelegate,UIAlertViewDelegate>
+@interface BlueViewController ()
 {
     MCPeerID *enemyPeerID,*myPeerID;
     NSString *displayName;
@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view.
     first = NO;
     myPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
-    [self performSelector:@selector(openBrowser) withObject:nil afterDelay:0.243];
+    [self performSelector:@selector(openBrowser) withObject:nil afterDelay:0.3];
     
 }
 

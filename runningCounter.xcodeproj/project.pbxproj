@@ -11,7 +11,6 @@
 		844143511A73CAF60002A079 /* StepCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143501A73CAF60002A079 /* StepCounter.m */; };
 		844143541A73DAA80002A079 /* MissionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143531A73DAA80002A079 /* MissionTableViewController.m */; };
 		844143581A73DB040002A079 /* MissionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143571A73DB040002A079 /* MissionTableViewCell.m */; };
-		84D13BB91A820FA3000FBAA5 /* MCManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D13BB81A820FA3000FBAA5 /* MCManager.m */; };
 		84D302AA1A82B8210021ECCD /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302A91A82B8210021ECCD /* BlueViewController.m */; };
 		84D302AD1A82BAC30021ECCD /* SessionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302AC1A82BAC30021ECCD /* SessionHelper.m */; };
 		84D66B461A76648A00A98984 /* TimeMissionNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D66B451A76648A00A98984 /* TimeMissionNotify.m */; };
@@ -60,7 +59,6 @@
 		AE15B1541A6E2A0500452FCB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE15B1521A6E2A0500452FCB /* LaunchScreen.xib */; };
 		AE15B1601A6E2A0500452FCB /* runningCounterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE15B15F1A6E2A0500452FCB /* runningCounterTests.m */; };
 		AE3B16591A82000B007CBCF2 /* Ball(500).png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B16581A82000B007CBCF2 /* Ball(500).png */; };
-		AE3B165C1A821257007CBCF2 /* BlueToothViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B165B1A821257007CBCF2 /* BlueToothViewController.m */; };
 		AE3B167C1A82968B007CBCF2 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B16721A82968B007CBCF2 /* Icon-29.png */; };
 		AE3B167D1A82968B007CBCF2 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B16731A82968B007CBCF2 /* Icon-29@2x.png */; };
 		AE3B167E1A82968B007CBCF2 /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B16741A82968B007CBCF2 /* Icon-29@3x.png */; };
@@ -179,8 +177,6 @@
 		844143531A73DAA80002A079 /* MissionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionTableViewController.m; sourceTree = "<group>"; };
 		844143561A73DB040002A079 /* MissionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionTableViewCell.h; sourceTree = "<group>"; };
 		844143571A73DB040002A079 /* MissionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionTableViewCell.m; sourceTree = "<group>"; };
-		84D13BB71A820FA3000FBAA5 /* MCManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCManager.h; sourceTree = "<group>"; };
-		84D13BB81A820FA3000FBAA5 /* MCManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCManager.m; sourceTree = "<group>"; };
 		84D302A81A82B8210021ECCD /* BlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueViewController.h; sourceTree = "<group>"; };
 		84D302A91A82B8210021ECCD /* BlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
 		84D302AB1A82BAC30021ECCD /* SessionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionHelper.h; sourceTree = "<group>"; };
@@ -261,8 +257,6 @@
 		AE15B15E1A6E2A0500452FCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE15B15F1A6E2A0500452FCB /* runningCounterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = runningCounterTests.m; sourceTree = "<group>"; };
 		AE3B16581A82000B007CBCF2 /* Ball(500).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ball(500).png"; sourceTree = "<group>"; };
-		AE3B165A1A821257007CBCF2 /* BlueToothViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueToothViewController.h; sourceTree = "<group>"; };
-		AE3B165B1A821257007CBCF2 /* BlueToothViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueToothViewController.m; sourceTree = "<group>"; };
 		AE3B16721A82968B007CBCF2 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		AE3B16731A82968B007CBCF2 /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@2x.png"; sourceTree = "<group>"; };
 		AE3B16741A82968B007CBCF2 /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@3x.png"; sourceTree = "<group>"; };
@@ -438,21 +432,10 @@
 		84D13BB61A820F8A000FBAA5 /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				84D13BB71A820FA3000FBAA5 /* MCManager.h */,
-				84D13BB81A820FA3000FBAA5 /* MCManager.m */,
 				84D302AB1A82BAC30021ECCD /* SessionHelper.h */,
 				84D302AC1A82BAC30021ECCD /* SessionHelper.m */,
 			);
 			name = Session;
-			sourceTree = "<group>";
-		};
-		84D302A71A82B7DD0021ECCD /* crash */ = {
-			isa = PBXGroup;
-			children = (
-				AE3B165A1A821257007CBCF2 /* BlueToothViewController.h */,
-				AE3B165B1A821257007CBCF2 /* BlueToothViewController.m */,
-			);
-			name = crash;
 			sourceTree = "<group>";
 		};
 		84D66B471A76727700A98984 /* Mission */ = {
@@ -636,7 +619,6 @@
 		A9F677871A6E35C300E5F06E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				84D302A71A82B7DD0021ECCD /* crash */,
 				AE15B14A1A6E2A0500452FCB /* ViewController.h */,
 				AE15B14B1A6E2A0500452FCB /* ViewController.m */,
 				84D66B471A76727700A98984 /* Mission */,
@@ -1012,12 +994,10 @@
 				A9BFE8EA1A75245E00D2B2EA /* Game2ViewController.m in Sources */,
 				844143541A73DAA80002A079 /* MissionTableViewController.m in Sources */,
 				A9B064EA1A6F7D7A004554B6 /* FMResultSet.m in Sources */,
-				84D13BB91A820FA3000FBAA5 /* MCManager.m in Sources */,
 				A91368BF1A76188700BBB0CA /* StoreViewController.m in Sources */,
 				A9B064E81A6F7D7A004554B6 /* FMDatabasePool.m in Sources */,
 				AEC279F01A7812E500F3836D /* GetPokemonAndStore.m in Sources */,
 				A9BFE8E41A7523EF00D2B2EA /* WorldMapViewController.m in Sources */,
-				AE3B165C1A821257007CBCF2 /* BlueToothViewController.m in Sources */,
 				A91368C71A7629D300BBB0CA /* PersonalIDViewController.m in Sources */,
 				AE15B1491A6E2A0500452FCB /* AppDelegate.m in Sources */,
 				AE15B1461A6E2A0500452FCB /* main.m in Sources */,

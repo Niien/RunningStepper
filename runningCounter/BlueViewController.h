@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SessionHelper.h"
 
-@interface BlueViewController : UIViewController
+@interface BlueViewController : UIViewController<MCBrowserViewControllerDelegate,SessionHelperDelegate,UIAlertViewDelegate>
 
 
 

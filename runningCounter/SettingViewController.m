@@ -7,7 +7,6 @@
 //
 
 #import "SettingViewController.h"
-#import "BlueViewController.h"
 
 
 
@@ -135,8 +134,8 @@
 }
 
 - (void)openRoom {
-    BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueToothViewController"];
-    [self presentViewController:bvc animated:YES completion:^{
+    BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueView"];
+    [self presentViewController:bvc animated:NO completion:^{
         //
     }];
 }

@@ -164,7 +164,7 @@
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
-    NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*1000];
+    NSString *message = [NSString stringWithFormat:@"可回收%d精力",Lv*1000];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
     alert.tag = 2;

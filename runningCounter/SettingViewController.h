@@ -10,6 +10,7 @@
 #import "WorldMapViewController.h"
 #import "PersonalIDViewController.h"
 #import "illustratedHandBook.h"
+#import "BlueViewController.h"
 
 @interface SettingViewController : UITableViewController
 
