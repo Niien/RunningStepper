@@ -8,11 +8,14 @@
 
 #import "StepCounter.h"
 #import <UIKit/UIKit.h>
+#import "MCManager.h"
 @import Parse;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property MCManager *mcManager;
 
 @property (weak, nonatomic) UILocalNotification *notify;
 -(void)ReOderBadgeNumber;

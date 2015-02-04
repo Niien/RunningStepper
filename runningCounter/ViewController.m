@@ -83,7 +83,7 @@
     
     
     //for test
-//    NSDictionary *dict = @{@"name":@"pikachu", @"image":@"5.png", @"iconName":@"5s.png", @"Lv":@"1", @"exp":@"0", @"lat":@"24.965235", @"lon":@"121.193882"};
+//    NSDictionary *dict = @{@"name":@"pikachu", @"image":@"5.png", @"iconName":@"5s.png", @"Lv":@"1", @"exp":@"0", @"id":@"5",@"attack":@"100",@"lat":@"24.965235", @"lon":@"121.193882"};
 //    NSArray *arr = [[NSArray alloc]initWithObjects:dict, nil];
 //    [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:arr];
     

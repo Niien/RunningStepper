@@ -46,6 +46,7 @@
     
     // 取出目前顯示的那筆資料
     pokemonDict = [data objectAtIndex:self.numberOfIndex];
+    NSLog(@"pokemonDict:%@",pokemonDict);
     
 //    self.pokemonImage.image = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
     UIImage *tmpImage = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
@@ -163,7 +164,7 @@
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
-    NSString *message = [NSString stringWithFormat:@"可回收%d精力",Lv*1000];
+    NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*1000];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
     alert.tag = 2;
@@ -174,23 +175,36 @@
 #pragma mark 加入隊伍
 - (IBAction)addToTeam:(id)sender {
     
-    NSMutableArray *TeamArray = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
+    NSMutableArray *TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
     
-    if ([TeamArray count]<=5) {
-        
+    //NSLog(@"teamArray:%@",TeamArray);
+    
+    if ([TeamArray count]<=5 || TeamArray == nil) {
+    
         [TeamArray addObject:pokemonDict];
         
         [[myPlist shareInstanceWithplistName:@"team"]saveDataWithArray:TeamArray];
+        
     }
+    
+    NSMutableArray *arr = [[NSMutableArray alloc]initWithArray: [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
+    NSLog(@"arr:%@",arr);
+    
 }
 
 #pragma mark 移出隊伍
 - (IBAction)removeTeam:(id)sender {
     
-    NSMutableArray *TeamArray = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
+    NSMutableArray *TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
+    
+    NSLog(@"teamArray:%@",TeamArray);
+    
     [TeamArray removeObject:pokemonDict];
     
     [[myPlist shareInstanceWithplistName:@"team"]saveDataByOverRide:TeamArray];
+    
+    NSMutableArray *arr = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
+    NSLog(@"arr:%@",arr);
     
 }
 

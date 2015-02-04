@@ -14,7 +14,7 @@
 
 @interface Game1ViewController (){
     
-    NSTimer *pokeImgMove;
+
     //
     int goal,myPressPoint;
     float time;
@@ -24,6 +24,7 @@
     NSString *iconName;
     NSDictionary *POKEMONDict;
     //Pokeimgmove
+    NSTimer *pokeImgMove;
     NSTimer *timeCountDown;
     float changeFrameTime;
     int pokeFrameX;
@@ -133,7 +134,7 @@
 //            [self SaveToPlist];
             //結束震動
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Succeed" message:nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Captured" message:nil delegate:self cancelButtonTitle:@"Keep poking" otherButtonTitles:nil];
             alert.tag = 1;  //要分辨多個 Alert 且加動作 就需設tag
             [alert show];
         }
@@ -143,7 +144,7 @@
         [timeCountDown invalidate];
         //結束震動
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        UIAlertView *failalert = [[UIAlertView alloc]initWithTitle:@"Failed" message:nil delegate:self cancelButtonTitle:@"QQ" otherButtonTitles:nil];
+        UIAlertView *failalert = [[UIAlertView alloc]initWithTitle:@"PokeMon Was Gone" message:nil delegate:self cancelButtonTitle:@"Keep Poking" otherButtonTitles:nil];
         failalert.tag = 2;  //要分辨多個 Alert 且加動作 就需設tag
         [failalert show];
     }
@@ -194,11 +195,13 @@
 #pragma mark 存入Plist
 -(void)SaveToPlist{
     // save data to plist
+
     NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
     NSString *lat = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.latitude];
     NSString *lon = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.longitude];
     
-    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id, @"lat":lat, @"lon":lon};
+    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id,@"attack":@"100", @"lat":lat, @"lon":lon};
+
     NSLog(@"G1:%@",dict);
     
     NSArray *array = [[NSArray alloc]initWithObjects:dict, nil];

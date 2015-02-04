@@ -111,7 +111,7 @@
         
     }
    
-    
+    self.mcManager = [[MCManager alloc] init];
 
     
     
