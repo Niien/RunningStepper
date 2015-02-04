@@ -98,17 +98,23 @@
     Game2ViewController *vc2 = [self.storyboard instantiateViewControllerWithIdentifier:@"Game2"];
     Game3ViewController *vc3 = [self.storyboard instantiateViewControllerWithIdentifier:@"Game3"];
     //UIViewController *VC;
-    int random = arc4random()%2;//隨機跳遊戲
+    int random = arc4random()%3;//隨機跳遊戲
     switch (random) {
         case 0:
-            [self presentViewController:vc2 animated:YES completion:^{
+            [self presentViewController:vc3 animated:YES completion:^{
                 //
             }];
             break;
         case 1:
-            [self presentViewController:vc2 animated:YES completion:^{
+            [self presentViewController:vc3 animated:YES completion:^{
                 //
             }];
+            break;
+        case 2:
+            [self presentViewController:vc3 animated:YES completion:^{
+                //
+            }];
+            break;
         default:
             break;
     }

@@ -5,7 +5,7 @@
 //  Created by chiawei on 2015/1/25.
 //  Copyright (c) 2015年 Longfatown. All rights reserved.
 //
-
+#import "location.h"
 #import "ViewController.h"
 @import AudioToolbox;
 #import "Game3ViewController.h"
@@ -28,6 +28,7 @@
     NSTimer *pokeImgMove;
     NSTimer *timeCountDown;
     NSTimer *BallMove;
+    NSTimer *fakePokeImgMoveTimer;
     float time;
     float changeFrameTime;
     int pokeFrameX;
@@ -36,6 +37,10 @@
     UIImageView *pokeImageView;
     UIImage *peopleImage;
     UIImageView *peopleImageView;
+    //改變frame的參數
+    int ballmoveXY;
+    int ChangeFakeImgParameterX;
+    int ChangeFakeImgParameterY;
     //
     NSMutableArray *tmpArray;           //暫存陣列
     NSMutableArray *targetArray;        //比對暫存陣列
@@ -80,6 +85,9 @@
     GameFinal = NO;
     WinTimes = 0;
     LoseTimes = 0;
+    ballmoveXY = 0;
+    ChangeFakeImgParameterX = 0;
+    ChangeFakeImgParameterY = 0;
 }
 
 #pragma mark 隨機放圖
@@ -105,27 +113,49 @@
     downview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[targetArray objectAtIndex:2]]];
     rightview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[targetArray objectAtIndex:3]]];
     
-    upview.frame = CGRectMake(self.view.frame.size.width/2-30, 0, 60, 60);
-    leftview.frame = CGRectMake(0, self.view.frame.size.height/2-30, 60, 60);
-    downview.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height-60, 60, 60);
-    rightview.frame = CGRectMake(self.view.frame.size.width-60, self.view.frame.size.height/2-30, 60, 60);
+    //持續改變FakePokeImage
+    fakePokeImgMoveTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage) userInfo:nil repeats:YES];
+    //    upview.frame = CGRectMake(self.view.frame.size.width/2-30, 0, 60, 60);
+    //    leftview.frame = CGRectMake(0, self.view.frame.size.height/2-30, 60, 60);
+    //    downview.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height-60, 60, 60);
+    //    rightview.frame = CGRectMake(self.view.frame.size.width-60, self.view.frame.size.height/2-30, 60, 60);
+}
+
+#pragma mark 干擾怪物移動
+-(void)ChangeFakePokeImage{
+    ChangeFakeImgParameterX += self.view.frame.size.width/10;
+    ChangeFakeImgParameterY += self.view.frame.size.height/10;
+    //左跟下記得減掉自己位置
+    upview.frame = CGRectMake(ChangeFakeImgParameterX, 0, 60, 60);
+    leftview.frame = CGRectMake(0, self.view.frame.size.height-ChangeFakeImgParameterY-60, 60, 60);
+    downview.frame = CGRectMake(self.view.frame.size.width-ChangeFakeImgParameterX-60, self.view.frame.size.height-60, 60, 60);
+    rightview.frame = CGRectMake(self.view.frame.size.width-60, ChangeFakeImgParameterY, 60, 60);
     //顯示
     [self.view addSubview:upview];
     [self.view addSubview:leftview];
     [self.view addSubview:downview];
     [self.view addSubview:rightview];
     
-    //Ball
-    UIImage *Ball = [UIImage imageNamed:@"Ball(500).png"];
-    BallView = [[UIImageView alloc]initWithImage:Ball];
-    BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30, 60 , 60);
-    [self.view addSubview:BallView];
-    [self setSwipe:self.view];
-    
+    if (ChangeFakeImgParameterX >= self.view.frame.size.width) {
+        //
+        [fakePokeImgMoveTimer invalidate];
+        ChangeFakeImgParameterX = 0;
+        ChangeFakeImgParameterY = 0;
+        [upview removeFromSuperview];
+        [leftview removeFromSuperview];
+        [downview removeFromSuperview];
+        [rightview removeFromSuperview];
+        //Ball
+        UIImage *Ball = [UIImage imageNamed:@"Ball(500).png"];
+        BallView = [[UIImageView alloc]initWithImage:Ball];
+        BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30, 60 , 60);
+        [self.view addSubview:BallView];
+        [self setSwipe:self.view];
+    }
 }
+
 #pragma mark 新增手勢
--(void)setSwipe:(UIView*)view
-{
+-(void)setSwipe:(UIView*)view{
     UISwipeGestureRecognizer *swipRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
     [swipRight setDirection:UISwipeGestureRecognizerDirectionRight];
     
@@ -143,6 +173,7 @@
     [view addGestureRecognizer:swipeUp];
     [view addGestureRecognizer:swipeDown];
 }
+
 #pragma mark 手勢後動作
 -(void)handleGesture:(UISwipeGestureRecognizer*)recognizer
 {
@@ -190,6 +221,53 @@
     }
 }
 
+#pragma mark 球移動
+-(void)BallImageMoveUp{
+    ballmoveXY += self.view.frame.size.height/10;
+    BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30-ballmoveXY, 60, 60);
+    [self.view addSubview:BallView];
+    if (ballmoveXY>=self.view.frame.size.height/2-30) {
+        [BallMove invalidate];
+        [BallView removeFromSuperview];
+        [self WinOrNot];
+        ballmoveXY = 0;     //重置球增加參數位置
+    }
+}
+-(void)BallImageMoveLeft{
+    ballmoveXY += self.view.frame.size.width/10;
+    BallView.frame = CGRectMake(self.view.frame.size.width/2-30-ballmoveXY, self.view.frame.size.height/2-30, 60, 60);
+    [self.view addSubview:BallView];
+    if (ballmoveXY>=self.view.frame.size.width/2-30) {
+        [BallMove invalidate];
+        [BallView removeFromSuperview];
+        [self WinOrNot];
+        ballmoveXY = 0;     //重置球增加參數位置
+    }
+}
+-(void)BallImageMoveDown{
+    ballmoveXY += self.view.frame.size.height/10;
+    BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30+ballmoveXY, 60, 60);
+    [self.view addSubview:BallView];
+    if (ballmoveXY>=self.view.frame.size.height/2-30) {
+        [BallMove invalidate];
+        [BallView removeFromSuperview];
+        [self WinOrNot];
+        ballmoveXY = 0;     //重置球增加參數位置
+    }
+}
+-(void)BallImageMoveRight{
+    ballmoveXY += self.view.frame.size.width/10;
+    BallView.frame = CGRectMake(self.view.frame.size.width/2-30+ballmoveXY, self.view.frame.size.height/2-30, 60, 60);
+    [self.view addSubview:BallView];
+    if (ballmoveXY>=self.view.frame.size.width/2-30) {
+        [BallMove invalidate];
+        [BallView removeFromSuperview];
+        [self WinOrNot];
+        ballmoveXY = 0;     //重置球增加參數位置
+    }
+}
+
+#pragma mark 勝負判斷
 -(void)WinOrNot{
     if (WinTimes>=3) {
         //勝利震動
@@ -205,59 +283,20 @@
         [failalert show];
     }
     else {
+        //還沒結束 再取亂數抓怪
         [self getmorefake];
+        //移除前一次的怪
         [upview removeFromSuperview];
         [leftview removeFromSuperview];
         [rightview removeFromSuperview];
         [downview removeFromSuperview];
+        //要先移除才能生怪
         [self randonInputImage];
     }
 }
 
--(void)BallImageMoveUp{
-    int ballmoveXY;
-    ballmoveXY += self.view.frame.size.height/10;
-    BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30-ballmoveXY, 60 , 60);
-    [self.view addSubview:BallView];
-    if (BallView.frame.origin.y<0) {
-        [BallMove invalidate];
-        [self WinOrNot];
-    }
-}
--(void)BallImageMoveLeft{
-    int ballmoveXY;
-    ballmoveXY += self.view.frame.size.width/10;
-    BallView.frame = CGRectMake(self.view.frame.size.width/2-30-ballmoveXY, self.view.frame.size.height/2-30, 60 , 60);
-    [self.view addSubview:BallView];
-    if (BallView.frame.origin.x<0) {
-        [BallMove invalidate];
-        [self WinOrNot];
-    }
-}
--(void)BallImageMoveDown{
-    int ballmoveXY;
-    ballmoveXY += self.view.frame.size.height/10;
-    BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30+ballmoveXY, 60 , 60);
-    [self.view addSubview:BallView];
-    if (BallView.frame.origin.y>self.view.frame.size.height) {
-        [BallMove invalidate];
-        [self WinOrNot];
-    }
-}
--(void)BallImageMoveRight{
-    int ballmoveXY;
-    ballmoveXY += self.view.frame.size.width/10;
-    BallView.frame = CGRectMake(self.view.frame.size.width/2-30+ballmoveXY, self.view.frame.size.height/2-30, 60 , 60);
-    [self.view addSubview:BallView];
-    if (BallView.frame.origin.x>self.view.frame.size.width) {
-        [BallMove invalidate];
-        [self WinOrNot];
-    }
-}
-
-
 #pragma mark 隨機選取怪獸
-- (void)getPokemonNo {
+-(void)getPokemonNo {
     
     randomMonster = arc4random()% ALL_POKEMON_COUNT +1;
     
@@ -288,11 +327,17 @@
 #pragma mark 存入Plist
 -(void)SaveToPlist{
     NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
-    // save data to plist
-    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
+    NSString *lat = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.latitude];
+    NSString *lon = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.longitude];
+    
+    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id,@"attack":@"100", @"lat":lat, @"lon":lon};
+    
     NSLog(@"G1:%@",dict);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getLocation" object:nil userInfo:dict];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
+    
+    NSArray *array = [[NSArray alloc]initWithObjects:dict, nil];
+    
+    [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:array];
+    [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]saveDataWithArray:array];
     
 }
 
@@ -374,6 +419,14 @@
     [pokeImgMove invalidate];
     [timeCountDown invalidate];
     [BallMove invalidate];
+    //
+    [upview removeFromSuperview];
+    [leftview removeFromSuperview];
+    [downview removeFromSuperview];
+    [rightview removeFromSuperview];
+    [BallView removeFromSuperview];
+    [peopleImageView removeFromSuperview];
+    [pokeImageView removeFromSuperview];
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -381,13 +434,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nZ3-wE-YF3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nZ3-wE-YF3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -1283,7 +1283,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4V-oD-sg9">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o4V-oD-sg9">
                                 <rect key="frame" x="205" y="280" width="190" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1487,16 +1487,17 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="LpV-y5-gBM" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leading" id="2nE-T8-2vR"/>
-                                    <constraint firstItem="Xrm-TN-tHI" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leadingMargin" constant="-8" id="7br-1L-T5j"/>
+                                    <constraint firstItem="LpV-y5-gBM" firstAttribute="top" secondItem="Ou4-T7-2Fa" secondAttribute="topMargin" constant="-8" id="571-p4-4JM"/>
                                     <constraint firstAttribute="bottom" secondItem="LpV-y5-gBM" secondAttribute="bottom" id="Efy-Ha-b4p"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Xrm-TN-tHI" secondAttribute="bottom" id="Gpc-Sw-3PX"/>
                                     <constraint firstItem="LpV-y5-gBM" firstAttribute="top" secondItem="Ou4-T7-2Fa" secondAttribute="top" id="M8q-PR-xGk"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="Xrm-TN-tHI" secondAttribute="trailing" constant="-8" id="U6x-Wv-SfK"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="LpV-y5-gBM" secondAttribute="trailing" constant="-8" id="fzZ-B1-Eu5"/>
-                                    <constraint firstItem="Xrm-TN-tHI" firstAttribute="top" secondItem="LpV-y5-gBM" secondAttribute="bottom" id="hL4-3U-35D"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="Xrm-TN-tHI" secondAttribute="bottom" constant="-7" id="tul-7A-Kpt"/>
-                                    <constraint firstItem="LpV-y5-gBM" firstAttribute="top" secondItem="Ou4-T7-2Fa" secondAttribute="topMargin" constant="-8" id="vRS-iD-bbK"/>
-                                    <constraint firstItem="LpV-y5-gBM" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leadingMargin" constant="-8" id="wsS-P1-Ihk"/>
+                                    <constraint firstItem="Xrm-TN-tHI" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leadingMargin" constant="-8" id="atg-XB-3z4"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Xrm-TN-tHI" secondAttribute="trailing" constant="-8" id="cex-od-phA"/>
+                                    <constraint firstItem="LpV-y5-gBM" firstAttribute="leading" secondItem="Ou4-T7-2Fa" secondAttribute="leadingMargin" constant="-8" id="qCB-z9-4UE"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="LpV-y5-gBM" secondAttribute="trailing" constant="-8" id="sXL-Fi-tEL"/>
+                                    <constraint firstItem="Xrm-TN-tHI" firstAttribute="top" secondItem="LpV-y5-gBM" secondAttribute="bottom" constant="1" id="t6H-4l-Cgr"/>
                                     <constraint firstAttribute="trailing" secondItem="LpV-y5-gBM" secondAttribute="trailing" id="xzq-cW-8EY"/>
+                                    <constraint firstItem="Xrm-TN-tHI" firstAttribute="top" secondItem="LpV-y5-gBM" secondAttribute="bottom" id="z75-l1-fpC"/>
                                 </constraints>
                                 <size key="customSize" width="90" height="99"/>
                                 <variation key="default">
@@ -1505,6 +1506,7 @@
                                         <exclude reference="Efy-Ha-b4p"/>
                                         <exclude reference="M8q-PR-xGk"/>
                                         <exclude reference="xzq-cW-8EY"/>
+                                        <exclude reference="t6H-4l-Cgr"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1636,7 +1638,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Lv" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRz-JZ-Qm4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lv" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRz-JZ-Qm4">
                                 <rect key="frame" x="283" y="134" width="146" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="HgN-Te-vlj"/>
@@ -1656,7 +1658,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxy-m0-Ls2">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxy-m0-Ls2">
                                 <rect key="frame" x="439" y="198" width="146" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Sale">
@@ -1669,7 +1671,7 @@
                                     <action selector="SaleButton:" destination="5Hf-dk-OiW" eventType="touchUpInside" id="IyS-ck-9bL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B53-3u-d4o">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B53-3u-d4o">
                                 <rect key="frame" x="283" y="198" width="146" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" image="exp_30*60.png">
@@ -1682,7 +1684,7 @@
                                     <action selector="expButton:" destination="5Hf-dk-OiW" eventType="touchUpInside" id="yLd-fg-9rt"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="戰力" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xn9-ZY-oNH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="戰力" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xn9-ZY-oNH">
                                 <rect key="frame" x="439" y="134" width="146" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3Q7-99-ScK"/>
@@ -1702,7 +1704,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCx-MQ-zvC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCx-MQ-zvC">
                                 <rect key="frame" x="439" y="263" width="146" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="移出隊伍">
@@ -2040,16 +2042,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujJ-mn-fHs">
                                 <rect key="frame" x="16" y="0.0" width="107" height="199"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iOd-iq-rLp">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iOd-iq-rLp">
                                 <rect key="frame" x="123" y="0.0" width="108" height="199"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Uh-jZ-cl3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Uh-jZ-cl3">
                                 <rect key="frame" x="231" y="0.0" width="107" height="199"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d9f-h2-GOP">
                                 <rect key="frame" x="445" y="0.0" width="107" height="199"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pB3-D6-stS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pB3-D6-stS">
                                 <rect key="frame" x="338" y="0.0" width="108" height="199"/>
                             </imageView>
                         </subviews>

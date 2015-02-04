@@ -35,7 +35,7 @@
     // add view
     //[myView addSubview:myImageView];
     //[self.view addSubview:myView];
-
+    
 }
 
 -(void)StoreinPlist{
@@ -56,13 +56,48 @@
 -(void)creatPokeMonDic{
     _POKEMONDict = [NSDictionary new];
     _POKEMONDict =
-  @{@"1":@"喵蛙粽子",@"2":@"消火龍",@"3":@"傑尼菇",@"4":@"嗶嗶鳥",@"5":@"皮卡啾",
-    @"6":@"雷啾",@"7":@"六條",@"8":@"九條",@"9":@"胖弟",@"10":@"扣打鴨",
-    @"11":@"風速GO",@"12":@"聞香個頭",@"13":@"聞香哇",@"14":@"開心",@"15":@"喇叭Yeah",
-    @"16":@"大水母",@"17":@"消火馬",@"18":@"小河馬",@"19":@"貴斯",@"20":@"打岩蛇",
-    @"21":@"三點蛋",@"22":@"小蛋蛋",@"23":@"海星",@"24":@"飛飛螳螂",@"25":@"你魚want",
-    @"26":@"變變怪",@"27":@"一步",@"28":@"閃電步",@"29":@"胖子",@"30":@"蜜妮long",
-    };
-
+    @{@"1":@"喵蛙粽子",@"2":@"消火龍",@"3":@"傑尼菇",@"4":@"嗶嗶鳥",@"5":@"皮卡啾",
+      @"6":@"雷啾",@"7":@"六條",@"8":@"九條",@"9":@"胖弟",@"10":@"扣打鴨",
+      @"11":@"風速GO",@"12":@"聞香個頭",@"13":@"聞香哇",@"14":@"開心",@"15":@"喇叭Yeah",
+      @"16":@"大水母",@"17":@"消火馬",@"18":@"小河馬",@"19":@"貴斯",@"20":@"打岩蛇",
+      @"21":@"三點蛋",@"22":@"小蛋蛋",@"23":@"海星",@"24":@"飛飛螳螂",@"25":@"你魚want",
+      @"26":@"變變怪",@"27":@"一步",@"28":@"閃電步",@"29":@"胖子",@"30":@"蜜妮long",
+      };
 }
+
+/*
+//由左到右消失的動畫
+-(void)ChangeFakePokeImage{
+    ChangeFakeImgParameterX += self.view.frame.size.width/10;
+    ChangeFakeImgParameterY += self.view.frame.size.height/10;
+    //左跟下記得減掉自己位置
+    upview.frame = CGRectMake(ChangeFakeImgParameterX, 0, 60, 60);
+    leftview.frame = CGRectMake(0, self.view.frame.size.height-ChangeFakeImgParameterY-60, 60, 60);
+    downview.frame = CGRectMake(self.view.frame.size.width-ChangeFakeImgParameterX-60, self.view.frame.size.height-60, 60, 60);
+    rightview.frame = CGRectMake(self.view.frame.size.width-60, ChangeFakeImgParameterY, 60, 60);
+    //顯示
+    [self.view addSubview:upview];
+    [self.view addSubview:leftview];
+    [self.view addSubview:downview];
+    [self.view addSubview:rightview];
+    
+    if (ChangeFakeImgParameterX >= self.view.frame.size.width) {
+        //
+        [fakePokeImgMoveTimer invalidate];
+        ChangeFakeImgParameterX = 0;
+        ChangeFakeImgParameterY = 0;
+        [upview removeFromSuperview];
+        [leftview removeFromSuperview];
+        [downview removeFromSuperview];
+        [rightview removeFromSuperview];
+        //Ball
+        UIImage *Ball = [UIImage imageNamed:@"Ball(500).png"];
+        BallView = [[UIImageView alloc]initWithImage:Ball];
+        BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30, 60 , 60);
+        [self.view addSubview:BallView];
+        [self setSwipe:self.view];
+    }
+}
+*/
+
 @end
