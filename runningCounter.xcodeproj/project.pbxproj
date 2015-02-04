@@ -22,7 +22,6 @@
 		A974CABB1A7D12B300F08AA0 /* illustratedHandBook.m in Sources */ = {isa = PBXBuildFile; fileRef = A974CABA1A7D12B300F08AA0 /* illustratedHandBook.m */; };
 		A974CABF1A7D33CE00F08AA0 /* mission_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A974CABE1A7D33CE00F08AA0 /* mission_30.png */; };
 		A974CACB1A7D380900F08AA0 /* tabBar2.png in Resources */ = {isa = PBXBuildFile; fileRef = A974CACA1A7D380900F08AA0 /* tabBar2.png */; };
-		A9846B3E1A78AF7F0036D904 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = A9846B3D1A78AF7F0036D904 /* test.m */; };
 		A99C70111A7A612200558EB2 /* storeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A99C70101A7A612200558EB2 /* storeTableViewCell.m */; };
 		A99C70131A7A925500558EB2 /* woodBackground.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A99C70121A7A925500558EB2 /* woodBackground.jpeg */; };
 		A99C70151A7A933000558EB2 /* power_100.png in Resources */ = {isa = PBXBuildFile; fileRef = A99C70141A7A933000558EB2 /* power_100.png */; };
@@ -45,6 +44,7 @@
 		A9BFE8ED1A75246D00D2B2EA /* Game3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BFE8EC1A75246D00D2B2EA /* Game3ViewController.m */; };
 		A9BFE8F21A75264B00D2B2EA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BFE8F11A75264B00D2B2EA /* SettingViewController.m */; };
 		A9BFE8F81A752C7E00D2B2EA /* book_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A9BFE8F71A752C7E00D2B2EA /* book_30.png */; };
+		A9CABC031A827F690040E229 /* location.m in Sources */ = {isa = PBXBuildFile; fileRef = A9CABC021A827F690040E229 /* location.m */; };
 		A9F677811A6E34F200E5F06E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F677801A6E34F200E5F06E /* MapKit.framework */; };
 		A9F677861A6E35B700E5F06E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F677851A6E35B700E5F06E /* MapViewController.m */; };
 		A9F6778D1A6E366400E5F06E /* BookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F6778C1A6E366400E5F06E /* BookViewController.m */; };
@@ -180,8 +180,6 @@
 		A974CABA1A7D12B300F08AA0 /* illustratedHandBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = illustratedHandBook.m; sourceTree = "<group>"; };
 		A974CABE1A7D33CE00F08AA0 /* mission_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mission_30.png; sourceTree = "<group>"; };
 		A974CACA1A7D380900F08AA0 /* tabBar2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabBar2.png; sourceTree = "<group>"; };
-		A9846B3C1A78AF7F0036D904 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		A9846B3D1A78AF7F0036D904 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		A99C700F1A7A612200558EB2 /* storeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = storeTableViewCell.h; sourceTree = "<group>"; };
 		A99C70101A7A612200558EB2 /* storeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = storeTableViewCell.m; sourceTree = "<group>"; };
 		A99C70121A7A925500558EB2 /* woodBackground.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woodBackground.jpeg; sourceTree = "<group>"; };
@@ -219,6 +217,8 @@
 		A9BFE8F01A75264B00D2B2EA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		A9BFE8F11A75264B00D2B2EA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		A9BFE8F71A752C7E00D2B2EA /* book_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book_30.png; sourceTree = "<group>"; };
+		A9CABC011A827F690040E229 /* location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = location.h; sourceTree = "<group>"; };
+		A9CABC021A827F690040E229 /* location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = location.m; sourceTree = "<group>"; };
 		A9F677801A6E34F200E5F06E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A9F677841A6E35B700E5F06E /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		A9F677851A6E35B700E5F06E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
@@ -373,8 +373,8 @@
 				8441434C1A73C94A0002A079 /* UserProfileSingleton.m */,
 				84D66B441A76648A00A98984 /* TimeMissionNotify.h */,
 				84D66B451A76648A00A98984 /* TimeMissionNotify.m */,
-				A9846B3C1A78AF7F0036D904 /* test.h */,
-				A9846B3D1A78AF7F0036D904 /* test.m */,
+				A9CABC011A827F690040E229 /* location.h */,
+				A9CABC021A827F690040E229 /* location.m */,
 			);
 			name = Singleton;
 			sourceTree = "<group>";
@@ -932,9 +932,9 @@
 				A9F677861A6E35B700E5F06E /* MapViewController.m in Sources */,
 				84D66B461A76648A00A98984 /* TimeMissionNotify.m in Sources */,
 				844143511A73CAF60002A079 /* StepCounter.m in Sources */,
-				A9846B3E1A78AF7F0036D904 /* test.m in Sources */,
 				A9B064D71A6F5848004554B6 /* HousePlaceMark.m in Sources */,
 				A9B064E71A6F7D7A004554B6 /* FMDatabaseAdditions.m in Sources */,
+				A9CABC031A827F690040E229 /* location.m in Sources */,
 				AE4F3A2E1A6FE756000CEE1C /* Game1ViewController.m in Sources */,
 				A9BFE8F21A75264B00D2B2EA /* SettingViewController.m in Sources */,
 				A99C70111A7A612200558EB2 /* storeTableViewCell.m in Sources */,

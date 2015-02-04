@@ -14,7 +14,7 @@
 #import "StepCounter.h"
 #import "MyCustomPin.h"
 #import "myPlist.h"
-#import "test.h"
+//#import "test.h"
 
 
 @interface MapViewController : ViewController

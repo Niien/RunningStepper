@@ -7,7 +7,7 @@
 //
 
 
-
+#import "location.h"
 #import "MapViewController.h"
 
 
@@ -41,22 +41,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    locationManager = [CLLocationManager new];
-    
-    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        
-        [locationManager requestAlwaysAuthorization];
-    }
-    
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.delegate = self;
-    [locationManager startUpdatingLocation];
+//    locationManager = [CLLocationManager new];
+//    
+//    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+//        
+//        [locationManager requestAlwaysAuthorization];
+//    }
+//    
+//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//    locationManager.delegate = self;
+//    [locationManager startUpdatingLocation];
     
     //================
     
-    _myMapView.userTrackingMode = MKUserTrackingModeFollow;
-    
     pokemonDict = [NSMutableDictionary new];
+    
+    NSLog(@"viewDidLoad");
     
 }
 
@@ -71,6 +71,20 @@
     
     data = [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]getDataFromPlist];
     //NSLog(@"data:%@",data);
+    
+    userLocation = [[location share]userLocation];
+    
+    _myMapView.userTrackingMode = MKUserTrackingModeFollow;
+    
+    MKCoordinateRegion region = _myMapView.region;
+    
+    region.center = userLocation.coordinate;
+    
+    // 縮放比例
+    region.span.latitudeDelta = 0.01;
+    region.span.longitudeDelta = 0.01;
+    
+    [_myMapView setRegion:region animated:YES];
     
     
     [self addAnnotation];
@@ -115,31 +129,20 @@
 
 
 
-#pragma mark - locattionManager Delegate
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    
-    userLocation = [locations lastObject];
-    
-    if (isfirstLocation == NO) {
-        
-        MKCoordinateRegion region = _myMapView.region;
-        
-        region.center = userLocation.coordinate;
-        
-        
-        // 縮放比例
-        region.span.latitudeDelta = 0.01;
-        region.span.longitudeDelta = 0.01;
-        
-        [_myMapView setRegion:region animated:YES];
-        
-        isfirstLocation = YES;
-        
-    }
-    
-    
-}
+//#pragma mark - locattionManager Delegate
+//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+//    
+//    userLocation = [locations lastObject];
+//    
+//    if (isfirstLocation == NO) {
+//        
+//        
+//        
+//        isfirstLocation = YES;
+//        
+//    }
+//    
+//}
 
 
 

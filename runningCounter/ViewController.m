@@ -5,7 +5,7 @@
 //  Created by Longfatown on 1/20/15.
 //  Copyright (c) 2015 Longfatown. All rights reserved.
 //
-#import "test.h"
+#import "location.h"
 #import "ViewController.h"
 #import "StepCounter.h"
 @import AssetsLibrary;  //  儲存照片用
@@ -78,7 +78,7 @@
     NSLog(@"VC %ld",(long)stepCounter.stepNB);
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(powerLabel) name:@"StepCounter" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(addAnnotation:) name:@"getLocation" object:nil];
+    
 //======    個人素質完成
     
     
@@ -211,30 +211,11 @@
 #pragma mark - locationManager delegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
+    [[location share]setUserLocation:[locations lastObject]];
     userLocation = [locations lastObject];
+    NSLog(@"%f,%f",userLocation.coordinate.latitude,userLocation.coordinate.longitude);
     
 }
 
-#pragma mark - addAnnotation
-- (void)addAnnotation:(NSDictionary *)sender {
-    
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithDictionary:[sender valueForKey:@"userInfo"]];
-    NSLog(@"viewControllerDictNoCoordinate:%@",dict);
-    NSString *lat = [NSString stringWithFormat:@"%f",userLocation.coordinate.latitude];
-    NSString *lon = [NSString stringWithFormat:@"%f",userLocation.coordinate.longitude];
-
-    
-    [dict setObject:lat forKey:@"lat"];
-    [dict setObject:lon forKey:@"lon"];
-    //NSLog(@"viewControllerDict:%@",dict);
-    
-    NSArray *array = [[NSArray alloc]initWithObjects:dict, nil];
-    
-    NSLog(@"viewControllerArray:%@",array);
-    
-    [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:array];
-    [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]saveDataWithArray:array];
-    
-}
 
 @end

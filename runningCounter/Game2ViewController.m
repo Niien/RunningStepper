@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 Longfatown. All rights reserved.
 //
 
+#import "location.h"
 #import "Game2ViewController.h"
 @import AudioToolbox;
 
@@ -193,7 +194,6 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [myCountdowntimer invalidate];
     [pokeImgMove invalidate];
-    //[[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
 }
 
 
@@ -212,12 +212,19 @@
 
 #pragma mark 存入Plist
 -(void)SaveToPlist{
-    NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
     // save data to plist
-    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id};
+    NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
+    NSString *lat = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.latitude];
+    NSString *lon = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.longitude];
+    
+    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id, @"lat":lat, @"lon":lon};
     NSLog(@"G2:%@",dict);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getLocation" object:nil userInfo:dict];
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"getLocation" object:nil];
+    
+    NSArray *array = [[NSArray alloc]initWithObjects:dict, nil];
+    
+    [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:array];
+    [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]saveDataWithArray:array];
+    
 }
 
 #pragma mark 設置圖位置

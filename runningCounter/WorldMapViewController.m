@@ -6,7 +6,6 @@
 //  Copyright (c) 2015年 Longfatown. All rights reserved.
 //
 
-
 #import "WorldMapViewController.h"
 
 
@@ -38,10 +37,10 @@
     
     locationManager = [CLLocationManager new];
     
-    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        
-        [locationManager requestAlwaysAuthorization];
-    }
+//    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+//        
+//        [locationManager requestAlwaysAuthorization];
+//    }
     
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
@@ -50,18 +49,17 @@
     [locationManager startUpdatingLocation];
     
     _myMapView.userTrackingMode = MKUserTrackingModeFollow;
-
+    
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    
 
-}
 
 // hide status bar
 - (BOOL)prefersStatusBarHidden {
@@ -201,7 +199,7 @@
         CLLocationCoordinate2D annoationCoordinate = CLLocationCoordinate2DMake(lat, lon);
         
         // create a circularRegion
-        CLCircularRegion *circularRegion = [[CLCircularRegion alloc]initWithCenter:annoationCoordinate radius:100 identifier:annotation.title];
+        //CLCircularRegion *circularRegion = [[CLCircularRegion alloc]initWithCenter:annoationCoordinate radius:100 identifier:annotation.title];
         
         [self scheduleLocalNotification];
         
