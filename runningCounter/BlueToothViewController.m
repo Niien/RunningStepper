@@ -125,14 +125,14 @@
                 _btnA.enabled = YES;
                 _btnB.enabled = YES;
                 NSLog(@"Win %@ < %@",str,str2);
-                _Label02.text = [NSString stringWithFormat:@"Enymy HP : %d",enHP - [[dict objectForKey:@"attack"] intValue]];
+                _Label02.text = [NSString stringWithFormat:@"Enemy HP : %d",enHP - [[dict objectForKey:@"attack"] intValue]];
             }
             else
             {
                 _btnA.enabled=YES;
                 _btnB.enabled = YES;
                 NSLog(@"lost %@ , %@",str,str2);
-                _Label01.text = [NSString stringWithFormat:@"HP : %d",hp-[[endict objectForKey:@"attack"] intValue]];
+                _Label01.text = [NSString stringWithFormat:@"My HP : %d",hp-[[endict objectForKey:@"attack"] intValue]];
             }
         }
         else
@@ -140,14 +140,14 @@
             if ([str integerValue]>[str2 integerValue]) {
                 _btnA.enabled = YES;
                 _btnB.enabled = YES;
-                NSLog(@"woo win %@ , %@",str,str2);
+                NSLog(@"I win %@ , %@",str,str2);
                 _Label02.text = [NSString stringWithFormat:@"Enymy HP : %d",enHP - [[dict objectForKey:@"attack"] intValue]];
             }
             else
             {
                 _btnA.enabled=YES;
                 _btnB.enabled = YES;
-                NSLog(@"woo lost %@ , %@",str,str2);
+                NSLog(@"I lost %@ , %@",str,str2);
                 _Label01.text = [NSString stringWithFormat:@"HP : %d",hp-[[endict objectForKey:@"attack"] intValue]];
             }
         }
