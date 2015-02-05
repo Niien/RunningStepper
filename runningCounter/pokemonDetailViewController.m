@@ -18,6 +18,12 @@
     
     NSInteger exp;
     
+    NSMutableArray *TeamArray;
+    UIImageView *TeamImageView1;
+    UIImageView *TeamImageView2;
+    UIImageView *TeamImageView3;
+    UIImageView *TeamImageView4;
+    UIImageView *TeamImageView5;
     
 }
 
@@ -66,6 +72,7 @@
     
     exp = [[pokemonDict objectForKey:@"exp"]integerValue];
     
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,7 +93,7 @@
     NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
     
     if (alertView.tag == 1) {
-        
+        if (buttonIndex == 1) {
         NSInteger inputNumber = [textfield.text integerValue];
         
         //            if (inputNumber <= [StepCounter shareStepCounter].power) {
@@ -95,7 +102,6 @@
         //                exp += inputNumber;
         //
         //                if (exp > 2000) {
-        //
         //                    Lv += (exp /2000);
         //                    exp = exp % 2000;
         //                }
@@ -109,7 +115,6 @@
         exp += inputNumber;
         
         if (exp >= 2000) {
-            
             Lv += (exp /2000);
             exp = exp % 2000;
         }
@@ -123,9 +128,9 @@
         [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
         
         self.LvLabel.text = [NSString stringWithFormat:@"等級%@",LvStr];
+        }
     }
     else if (alertView.tag == 2) {
-        
         if (buttonIndex == 1) {
             
             [data removeObject:pokemonDict];
@@ -136,23 +141,18 @@
             
             [self dismissViewControllerAnimated:YES completion:nil];
         }
-        
     }
-    
 }
-
-
 
 #pragma mark - button Action
 - (IBAction)back:(id)sender {
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark 增加經驗值
 - (IBAction)expButton:(id)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"輸入給予的精力" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"輸入給予的精力" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     alert.tag = 1;
     [alert show];
@@ -164,7 +164,7 @@
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
-    NSString *message = [NSString stringWithFormat:@"可回收%d精力",Lv*1000];
+    NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*1000];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
     alert.tag = 2;
@@ -174,11 +174,18 @@
 
 #pragma mark 加入隊伍
 - (IBAction)addToTeam:(id)sender {
-    
-    NSMutableArray *TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
-    
+    NSDictionary *empty01 = [NSDictionary new];
+    empty01 = @{@"image":@""};
+    TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
     //NSLog(@"teamArray:%@",TeamArray);
-    
+    //
+//    int CountBeforeAdd = [TeamArray count];
+//    if ([TeamArray count]<=5 || TeamArray == nil) {
+//        for (int i=0; i<(5-[TeamArray count]); i++) {
+//            [TeamArray addObject:empty01];
+//        }
+//        [TeamArray removeObjectAtIndex:(5-CountBeforeAdd)];
+//    }
     if ([TeamArray count]<=5 || TeamArray == nil) {
     
         [TeamArray addObject:pokemonDict];
@@ -195,7 +202,7 @@
 #pragma mark 移出隊伍
 - (IBAction)removeTeam:(id)sender {
     
-    NSMutableArray *TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
+    TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
     
     NSLog(@"teamArray:%@",TeamArray);
     

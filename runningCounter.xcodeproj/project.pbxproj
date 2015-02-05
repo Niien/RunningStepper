@@ -69,6 +69,7 @@
 		AE3B16831A82968B007CBCF2 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B16791A82968B007CBCF2 /* Icon-60@3x.png */; };
 		AE3B16841A82968B007CBCF2 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B167A1A82968B007CBCF2 /* Icon-76.png */; };
 		AE3B16851A82968B007CBCF2 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE3B167B1A82968B007CBCF2 /* Icon-76@2x.png */; };
+		AE3B16891A834D21007CBCF2 /* TeamVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3B16881A834D21007CBCF2 /* TeamVC.m */; };
 		AE4F3A2E1A6FE756000CEE1C /* Game1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4F3A2D1A6FE756000CEE1C /* Game1ViewController.m */; };
 		AE4F3A331A6FED4D000CEE1C /* battle01-1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AE4F3A2F1A6FED4D000CEE1C /* battle01-1.jpeg */; };
 		AE4F3A341A6FED4D000CEE1C /* RedBtn1.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4F3A301A6FED4D000CEE1C /* RedBtn1.png */; };
@@ -267,6 +268,8 @@
 		AE3B16791A82968B007CBCF2 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
 		AE3B167A1A82968B007CBCF2 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
 		AE3B167B1A82968B007CBCF2 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		AE3B16871A834D21007CBCF2 /* TeamVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamVC.h; sourceTree = "<group>"; };
+		AE3B16881A834D21007CBCF2 /* TeamVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamVC.m; sourceTree = "<group>"; };
 		AE4F3A2C1A6FE756000CEE1C /* Game1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game1ViewController.h; sourceTree = "<group>"; };
 		AE4F3A2D1A6FE756000CEE1C /* Game1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game1ViewController.m; sourceTree = "<group>"; };
 		AE4F3A2F1A6FED4D000CEE1C /* battle01-1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "battle01-1.jpeg"; sourceTree = "<group>"; };
@@ -684,6 +687,8 @@
 			isa = PBXGroup;
 			children = (
 				AE15B14D1A6E2A0500452FCB /* Main.storyboard */,
+				AE3B16871A834D21007CBCF2 /* TeamVC.h */,
+				AE3B16881A834D21007CBCF2 /* TeamVC.m */,
 				AE15B1471A6E2A0500452FCB /* AppDelegate.h */,
 				AE15B1481A6E2A0500452FCB /* AppDelegate.m */,
 				A9F677911A6E382800E5F06E /* module */,
@@ -978,6 +983,7 @@
 				84D302AD1A82BAC30021ECCD /* SessionHelper.m in Sources */,
 				A9B064D11A6EC5FC004554B6 /* MyCustomPin.m in Sources */,
 				A9F677901A6E368400E5F06E /* CollectionViewCell.m in Sources */,
+				AE3B16891A834D21007CBCF2 /* TeamVC.m in Sources */,
 				AEB786D91A7A0C7600181446 /* LoginVC.m in Sources */,
 				A974CABB1A7D12B300F08AA0 /* illustratedHandBook.m in Sources */,
 				84D302AA1A82B8210021ECCD /* BlueViewController.m in Sources */,

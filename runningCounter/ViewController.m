@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "StepCounter.h"
 @import AssetsLibrary;  //  儲存照片用
+#import "myPlist.h"     // 顯示隊伍照片用
 
 @interface ViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>
 {
@@ -29,6 +30,14 @@
     CLLocationManager *locationManager;
     CLLocation *userLocation;
     NSArray *getData;
+    //
+    UIImageView *TeamImageView1;
+    UIImageView *TeamImageView2;
+    UIImageView *TeamImageView3;
+    UIImageView *TeamImageView4;
+    UIImageView *TeamImageView5;
+    
+    NSArray *TeamArray;
 }
 
 @end
@@ -48,6 +57,7 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.delegate = self;
     [locationManager startUpdatingLocation];
+    
     
     
 //======    預設圖片 / 改變圖片
@@ -100,6 +110,9 @@
     }
     _UserLVLabel.text = [NSString stringWithFormat:@"累積能量：%ld",(long)stepCounter.power] ;
     _UserPowerLabel.text = [NSString stringWithFormat:@"今天走了：%ld 步",(long)stepCounter.stepNB];
+    
+    //
+    
 }
 
 - (void)didReceiveMemoryWarning {

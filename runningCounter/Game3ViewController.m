@@ -528,6 +528,12 @@
     [BallView removeFromSuperview];
     [peopleImageView removeFromSuperview];
     [pokeImageView removeFromSuperview];
+    //
+    [self.view removeGestureRecognizer:swipeUp];
+    [self.view removeGestureRecognizer:swipeLeft];
+    [self.view removeGestureRecognizer:swipeDown];
+    [self.view removeGestureRecognizer:swipeRight];
+
 }
 
 - (BOOL)prefersStatusBarHidden {
