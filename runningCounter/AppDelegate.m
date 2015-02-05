@@ -70,6 +70,7 @@
     
     
     NSString *dateString = [[NSUserDefaults standardUserDefaults]objectForKey:@"LastDate"];
+    NSLog(@"%@",dateString);
     if (dateString == nil) {
         
         NSString *dateString = [dateFormat stringFromDate:date];
@@ -105,17 +106,12 @@
             [[StepCounter shareStepCounter]setPower:[first integerForKey:@"Power"]];
             
             [[StepCounter shareStepCounter]setStepNB:0];
+
             [first setObject:nowDateString forKey:@"LastDate"];
             [first synchronize];
+            NSLog(@"Third");
         }
-        
-        
     }
-   
-
-
-    
-    
     return YES;
 }
 
@@ -143,6 +139,7 @@
     NSInteger step = [[StepCounter shareStepCounter]stepNB];
     [first setInteger:step forKey:@"DaySteps"];
     [first synchronize];
+    NSLog(@"background %ld",(long)step);
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {//程序到前景時

@@ -51,13 +51,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     data = [[myPlist shareInstanceWithplistName:@"MyPokemon"]getDataFromPlist];
-//    
-//    // 取出目前顯示的那筆資料
-
-    
+    //
+    TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
+    // 取出目前顯示的那筆資料
     //data = [[LocalDBManager sharedInstance]queryCatchedPokemon];
     pokemonDict = [data objectAtIndex:self.numberOfIndex];
     NSLog(@"pokemonDict:%@",pokemonDict);
+    
+    if ([TeamArray containsObject:pokemonDict]) {
+        
+        self.addTeamButton.hidden = YES;
+        
+    }
     
 //    self.pokemonImage.image = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
     UIImage *tmpImage = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
