@@ -1296,17 +1296,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="attackbtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="nQs-Ju-yDS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wuj-5P-r1S">
-                                <rect key="frame" x="16" y="402" width="281" height="84"/>
-                                <color key="backgroundColor" red="1" green="0.47288110979999998" blue="0.75043245079999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="A">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="attackbtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="X2J-wt-5dx"/>
+                                    <action selector="attackAllBtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="iBa-F9-erk"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My HP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av8-hk-VZx">
@@ -1403,7 +1393,7 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TX8-pp-q2f">
                                 <rect key="frame" x="16" y="70" width="281" height="3"/>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILk-hS-jQG">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILk-hS-jQG">
                                 <rect key="frame" x="396" y="402" width="188" height="188"/>
                                 <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1412,6 +1402,19 @@
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="attackAllBtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="16V-N0-Loe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wuj-5P-r1S">
+                                <rect key="frame" x="16" y="402" width="281" height="84"/>
+                                <color key="backgroundColor" red="1" green="0.47288110979999998" blue="0.75043245079999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="A">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="attackAllBtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="VIi-OE-28K"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1488,10 +1491,15 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="btnA" destination="Wuj-5P-r1S" id="Vm0-TZ-43b"/>
-                        <outlet property="btnB" destination="o4V-oD-sg9" id="b7B-vs-8U1"/>
-                        <outlet property="enemyHPLabel" destination="e3X-ff-Bvy" id="yec-oq-0cz"/>
-                        <outlet property="myHPLabel" destination="av8-hk-VZx" id="Kgs-nY-TY7"/>
+                        <outlet property="commondBtn" destination="ILk-hS-jQG" id="5Wf-qg-LVh"/>
+                        <outlet property="enemyHP" destination="e3X-ff-Bvy" id="XvV-u0-K0k"/>
+                        <outlet property="enemyHPProgress" destination="TX8-pp-q2f" id="a9O-df-2hL"/>
+                        <outlet property="enemyName" destination="4sr-Ax-BI2" id="Dmg-tr-b5N"/>
+                        <outlet property="myHP" destination="av8-hk-VZx" id="mCF-k1-1ak"/>
+                        <outlet property="myHPProgress" destination="A0q-LY-NWa" id="egd-Gm-Dao"/>
+                        <outlet property="myName" destination="2dn-Lt-XMk" id="eIc-a5-J31"/>
+                        <outlet property="skill1Btn" destination="Wuj-5P-r1S" id="XZO-uw-RwG"/>
+                        <outlet property="skill2Btn" destination="o4V-oD-sg9" id="JIL-ig-kYi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f6O-uV-Nrt" userLabel="First Responder" sceneMemberID="firstResponder"/>

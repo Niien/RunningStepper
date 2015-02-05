@@ -11,19 +11,32 @@
 
 @interface BlueViewController ()
 {
-    MCPeerID *enemyPeerID,*myPeerID;
     NSString *displayName;
+    
+    MCPeerID *enemyPeerID,*myPeerID;
     NSDictionary *myDict,*enemyDict;
-    int myHP,enemyHP;
+    int myHP,enemyHP,myAttack;
+    NSString *myPokeName,*enemyPokeName;
+    
+    //是否第一次拿資料
     BOOL first;
-    NSArray *array;
+    
+    NSArray *checkArray;
+    // 招數次數
+    int skillOne,skillTwo;
 }
-@property (weak, nonatomic) IBOutlet UIButton *btnA;
-@property (weak, nonatomic) IBOutlet UIButton *btnB;
-@property (weak, nonatomic) IBOutlet UIButton *btnC;
+@property (weak, nonatomic) IBOutlet UILabel *enemyName;
+@property (weak, nonatomic) IBOutlet UIProgressView *enemyHPProgress;
+@property (weak, nonatomic) IBOutlet UILabel *enemyHP;
 
-@property (weak, nonatomic) IBOutlet UILabel *myHPLabel;
-@property (weak, nonatomic) IBOutlet UILabel *enemyHPLabel;
+@property (weak, nonatomic) IBOutlet UILabel *myName;
+@property (weak, nonatomic) IBOutlet UIProgressView *myHPProgress;
+@property (weak, nonatomic) IBOutlet UILabel *myHP;
+
+@property (weak, nonatomic) IBOutlet UIButton *skill1Btn;
+@property (weak, nonatomic) IBOutlet UIButton *skill2Btn;
+@property (weak, nonatomic) IBOutlet UIButton *commondBtn;
+
 
 @property SessionHelper *sessionHelper;
 @end
@@ -34,10 +47,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     first = NO;
+    skillOne = 1;
+    skillTwo = 2;
+    // 設定peerID名字 & 延遲觸發
     myPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
     [self performSelector:@selector(openBrowser) withObject:nil afterDelay:0.3];
-    _btnC.hidden = YES;
     
+    _commondBtn.layer.cornerRadius = self.commondBtn.frame.size.width/2;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,29 +61,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)attackbtn:(UIButton *)sender {
-    enemyPeerID = [self.sessionHelper connectedPeerIDAtIndex:0];
-    NSLog(@"send to peerID:%@",enemyPeerID.displayName);
-    
+- (IBAction)attackAllBtn:(UIButton *)sender {
     NSString *buttonValue = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-    NSArray *attackarray = [[NSArray alloc]initWithObjects:buttonValue, nil];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:attackarray];
-    _btnA.hidden = YES;
-    _btnB.hidden = YES;
+    NSString *attack = [NSString new];
+    if ([buttonValue intValue] == 1) {
+        attack = [NSString stringWithFormat:@"%d",myAttack+arc4random()%5+1];
+        skillOne--;
+        if (skillOne == 0) {
+            _skill1Btn.backgroundColor = [UIColor grayColor];
+            _skill1Btn.enabled = NO;
+        }
+    }
+    else if ([buttonValue intValue] == 2)
+    {
+        attack = [NSString stringWithFormat:@"%d",myAttack+arc4random()%7+1];
+        skillTwo--;
+        if (skillTwo == 0) {
+            _skill2Btn.backgroundColor = [UIColor grayColor];
+            _skill2Btn.enabled = NO;
+        }
+    }
+    else if ([buttonValue intValue] == 3)
+    {
+        attack = [NSString stringWithFormat:@"%d",myAttack];
+    }
+    
+    NSArray *attackArray = [[NSArray alloc]initWithObjects:attack, nil];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:attackArray];
+    
     [self.sessionHelper sendData:data peerID:enemyPeerID];
-
-    [self checkBigOrSmall:attackarray whoPeerID:myPeerID];
     
+    [self checkBigOrSmall:attackArray whoPeerID:myPeerID];
+
 }
 
-- (IBAction)takeCbtn:(id)sender {
+- (void)checkBigOrSmall:(NSArray *)nsArray whoPeerID:(MCPeerID *)peerID{
     
-}
-
-- (void)checkBigOrSmall:(NSArray *)NSArray whoPeerID:(MCPeerID *)peerID{
-    
-    if (array == nil) {
-        array = NSArray;
+    if (checkArray == nil) {
+        checkArray = nsArray;
         if (peerID == myPeerID) {
             
         }
@@ -79,81 +110,52 @@
     else
     {
     
-        NSString *str = [array objectAtIndex:0];
-        NSString *str2 = [NSArray objectAtIndex:0];
+        NSString *str = [checkArray objectAtIndex:0];
+        NSString *str2 = [nsArray objectAtIndex:0];
     
-        if (peerID == myPeerID) {
-            if ([str integerValue]<[str2 integerValue]) {
-                _btnA.hidden = NO;
-                _btnB.hidden = NO;
-                NSLog(@"Win");
-                enemyHP -= [[myDict objectForKey:@"attack"] intValue];
-                _enemyHPLabel.text = [NSString stringWithFormat:@"Enemy HP : %d",enemyHP];
-                NSLog(@"I : %d E : %d",myHP,enemyHP);
-            }
-            else if ([str integerValue]==[str2 integerValue])
-            {
-                _btnA.hidden = NO;
-                _btnB.hidden = NO;
-                NSLog(@"peace");
-                enemyHP += [[myDict objectForKey:@"attack"] intValue];
-                myHP += [[enemyDict objectForKey:@"attack"] intValue];
-                _enemyHPLabel.text = [NSString stringWithFormat:@"Enemy HP : %d",enemyHP];
-                _myHPLabel.text = [NSString stringWithFormat:@"My HP : %d",myHP];
-                NSLog(@"I : %d E : %d",myHP,enemyHP);
-            }
-            else
-            {
-                _btnA.hidden=NO;
-                _btnB.hidden = NO;
-                NSLog(@"lost");
-                myHP -= [[enemyDict objectForKey:@"attack"] intValue];
-                _myHPLabel.text = [NSString stringWithFormat:@"My HP : %d",myHP];
-                NSLog(@"I : %d E : %d",myHP,enemyHP);
-            }
-        }
-        else // 與自己本身peerID不相等時
+        if (peerID == myPeerID)
         {
-            if ([str integerValue]>[str2 integerValue]) {
-                _btnA.hidden = NO;
-                _btnB.hidden = NO;
-                NSLog(@"I win");
-                enemyHP -= [[myDict objectForKey:@"attack"] intValue];
-                _enemyHPLabel.text = [NSString stringWithFormat:@"Enemy HP : %d",enemyHP];
-                NSLog(@"I : %d E : %d",myHP,enemyHP);
-            }
-            else if ([str integerValue]==[str2 integerValue])
-            {
-                _btnA.hidden = NO;
-                _btnB.hidden = NO;
-                NSLog(@"peace");
-                enemyHP += [[myDict objectForKey:@"attack"] intValue];
-                myHP += [[enemyDict objectForKey:@"attack"] intValue];
-                _enemyHPLabel.text = [NSString stringWithFormat:@"Enemy HP : %d",enemyHP];
-                _myHPLabel.text = [NSString stringWithFormat:@"My HP : %d",myHP];
-                NSLog(@"I : %d E : %d",myHP,enemyHP);
-            }
-            else
-            {
-                _btnA.hidden=NO;
-                _btnB.hidden = NO;
-                NSLog(@"I lost");
-                myHP -= [[enemyDict objectForKey:@"attack"] intValue];
-                _myHPLabel.text = [NSString stringWithFormat:@"My HP : %d",myHP];
-                NSLog(@"I : %d E : %d",myHP,enemyHP);
-            }
+            myHP -= [str intValue];
+            enemyHP -= [str2 intValue];
+            _myHP.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
+            _enemyHP.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+            NSLog(@"peerID like %@,%@",str,str2);
         }
-        array = nil;
-        if (myHP <=0) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"lose" message:@"you bad" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            alert.delegate = self;
-            [alert show];
-        }else if (enemyHP <= 0)
+        else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Win" message:@"you good"delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            alert.delegate = self;
-            [alert show];
+            myHP -= [str2 intValue];
+            enemyHP -= [str intValue];
+            _myHP.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
+            _enemyHP.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+            NSLog(@"peerID NO %@,%@",str,str2);
         }
+    }
+    [self alertWhoHPisZero];
+    
+}
+
+-(void) attackSpecially
+{
+//    UIView *view
+}
+
+#pragma mark AlertView Who Win
+-(void) alertWhoHPisZero
+{
+    if (myHP <= 0 & enemyHP >0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bad News" message:@"You Lose" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        alert.delegate = self;
+        
+        [alert show];
+    }
+    else if (enemyHP <= 0 & myHP > 0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Good News" message:@"You Win" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        alert.delegate = self;
+        
+        [alert show];
     }
 }
 
@@ -178,14 +180,23 @@
 }
 
 #pragma mark Browser
-// Notifies the delegate, when the user taps the done button
+// Notifies the delegate, when the user taps the done button  送出隊伍資料
 - (void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
     [browserViewController dismissViewControllerAnimated:YES completion:^{
         enemyPeerID = [self.sessionHelper connectedPeerIDAtIndex:0];
         NSArray *teamarray = [[myPlist shareInstanceWithplistName:@"team"] getDataFromPlist];
         myDict = [teamarray objectAtIndex:0];
-        myHP = [[myDict objectForKey:@"attack"] intValue]*2;
-        _myHPLabel.text = [NSString stringWithFormat:@"HP : %d",myHP];
+        myHP = [[myDict objectForKey:@"hp"] intValue];
+        myAttack = [[myDict objectForKey:@"attack"]intValue];
+        myPokeName = [myDict objectForKey:@"name"];
+        _myHP.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
+        
+        _myName.text = [NSString stringWithFormat:@"%@",myPeerID.displayName];
+        _skill1Btn.titleLabel.text = [NSString stringWithFormat:@"%@ %d次",
+                                      [myDict objectForKey:@"skill1"],skillOne];
+        _skill2Btn.titleLabel.text = [NSString stringWithFormat:@"%@ %d次",
+                                      [myDict objectForKey:@"skill2"],skillTwo];
+        _commondBtn.titleLabel.text = [NSString stringWithFormat:@"Attack"];
         
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:teamarray];
         [self.sessionHelper sendData:data peerID:enemyPeerID];
@@ -218,14 +229,16 @@
 //    
 //}
 
-
+//對手資料
 - (void)sessionHelperDidRecieveArray:(NSArray *)Array peer:(MCPeerID *)peerID {
     
     //NSLog(@"receive array:%@",Array);
     if (first == NO) {
+        enemyPeerID = peerID;
         enemyDict = [Array objectAtIndex:0];
-        enemyHP = [[enemyDict objectForKey:@"attack"] intValue]*2;
-        _enemyHPLabel.text = [NSString stringWithFormat:@"enemy HP : %d",enemyHP];
+        enemyHP = [[enemyDict objectForKey:@"hp"] intValue];
+        enemyPokeName = [enemyDict objectForKey:@"name"];
+        _enemyHP.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
         first = YES;
     }
     else

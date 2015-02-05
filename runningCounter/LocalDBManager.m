@@ -114,6 +114,8 @@ static LocalDBManager *sharedInstance;
         NSString *pokemon_name = [queryRS stringForColumn:@"pokemon_name"];
         int hp = [queryRS intForColumn:@"pokemon_hp"];
         NSString *pokemon_hp = [NSString stringWithFormat:@"%d",hp];
+        NSString *pokemon_skill1 = [queryRS stringForColumn:@"pokemon_skill1"];
+        NSString *pokemon_skill2 = [queryRS stringForColumn:@"pokemon_skill2"];
         
         NSDictionary *dict = @{@"LV":pokemon_LV,
                                @"attack":pokemon_attack,
@@ -121,7 +123,9 @@ static LocalDBManager *sharedInstance;
                                @"iconname":pokemon_iconname,
                                @"image":pokemon_image,
                                @"name":pokemon_name,
-                               @"hp":pokemon_hp};
+                               @"hp":pokemon_hp,
+                               @"skill1":pokemon_skill1,
+                               @"skill2":pokemon_skill2};
         [catchArray addObject:dict];
         
     }
