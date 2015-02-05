@@ -11,7 +11,7 @@
 #import "CollectionViewCell.h"
 #import "MapViewController.h"
 
-#define ALL_POKEMON_COUNT 50
+#define ALL_POKEMON_COUNT 30
 
 @interface illustratedHandBook : UICollectionViewController
 
