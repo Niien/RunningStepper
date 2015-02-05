@@ -64,14 +64,13 @@
     // set tabBar item image
     [self changeTabBarItemImage];
     
-    NSTimeZone *zone = [NSTimeZone defaultTimeZone];//獲得當前應用程序的時區
-    NSInteger interval = [zone secondsFromGMTForDate:[NSDate date]];//以秒為單位返回當前應用程序與世界標準時間（格林威尼時間）的時差
-    NSDate *date = [[NSDate date] dateByAddingTimeInterval:interval];
+    NSDate *date = [NSDate date];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     
     
     NSString *dateString = [[NSUserDefaults standardUserDefaults]objectForKey:@"LastDate"];
+    NSLog(@"%@",dateString);
     if (dateString == nil) {
         
         NSString *dateString = [dateFormat stringFromDate:date];
@@ -98,6 +97,8 @@
             
             [[StepCounter shareStepCounter]setStepNB:[first integerForKey:@"DaySteps"]];
             
+            [first setObject:nowDateString forKey:@"LastDate"];
+            [first synchronize];
             NSLog(@"Second");
         } else {
             first =[NSUserDefaults standardUserDefaults];
@@ -106,6 +107,9 @@
             
             [[StepCounter shareStepCounter]setStepNB:0];
             
+            [first setObject:nowDateString forKey:@"LastDate"];
+            [first synchronize];
+            NSLog(@"Three");
         }
         
         
@@ -142,6 +146,7 @@
     NSInteger step = [[StepCounter shareStepCounter]stepNB];
     [first setInteger:step forKey:@"DaySteps"];
     [first synchronize];
+    NSLog(@"background %ld",(long)step);
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {//程序到前景時
