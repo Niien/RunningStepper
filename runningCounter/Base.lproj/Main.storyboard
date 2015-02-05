@@ -1957,6 +1957,7 @@
                     <connections>
                         <outlet property="LvLabel" destination="oRz-JZ-Qm4" id="XSd-ua-L4Y"/>
                         <outlet property="NameLabel" destination="tqY-wB-kN6" id="xUH-fI-vHL"/>
+                        <outlet property="addTeamButton" destination="Lc3-KH-a4H" id="ZiY-w1-OIg"/>
                         <outlet property="pokemonImage" destination="Zoa-3o-XvY" id="Fpv-hc-Ioa"/>
                     </connections>
                 </viewController>
@@ -2130,6 +2131,11 @@
                         <outlet property="TeamView3" destination="3Uh-jZ-cl3" id="uGk-uC-71I"/>
                         <outlet property="TeamView4" destination="pB3-D6-stS" id="aBU-XO-Uua"/>
                         <outlet property="TeamView5" destination="d9f-h2-GOP" id="Jmn-Zy-aFW"/>
+                        <outletCollection property="MyTeamView" destination="ujJ-mn-fHs" id="sxN-Es-oL7"/>
+                        <outletCollection property="MyTeamView" destination="iOd-iq-rLp" id="aez-fg-pk2"/>
+                        <outletCollection property="MyTeamView" destination="3Uh-jZ-cl3" id="wED-qn-5uV"/>
+                        <outletCollection property="MyTeamView" destination="pB3-D6-stS" id="ecz-8P-wTK"/>
+                        <outletCollection property="MyTeamView" destination="d9f-h2-GOP" id="7ab-bL-Nyu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g83-6V-ph0" userLabel="First Responder" sceneMemberID="firstResponder"/>

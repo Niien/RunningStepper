@@ -25,5 +25,5 @@
 
 
 -(id) init;
-
+-(void) timestop;
 @end

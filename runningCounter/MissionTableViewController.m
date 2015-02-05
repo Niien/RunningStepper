@@ -101,17 +101,17 @@
     int random = arc4random()%3;//隨機跳遊戲
     switch (random) {
         case 0:
-            [self presentViewController:vc3 animated:YES completion:^{
+            [self presentViewController:vc1 animated:YES completion:^{
                 //
             }];
             break;
         case 1:
-            [self presentViewController:vc3 animated:YES completion:^{
+            [self presentViewController:vc1 animated:YES completion:^{
                 //
             }];
             break;
         case 2:
-            [self presentViewController:vc3 animated:YES completion:^{
+            [self presentViewController:vc1 animated:YES completion:^{
                 //
             }];
             break;
@@ -142,6 +142,7 @@
 
 -(void) notifyDelete
 {
+    [[_notifyArray objectAtIndex:_indexTimePath.row] timestop];
     [_notifyArray removeObjectAtIndex:_indexTimePath.row];
     [[UserProfileSingleton shareUserProfile] setNotifydateArray:_notifyArray];
     [self.tableView reloadData];

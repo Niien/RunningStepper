@@ -183,9 +183,7 @@ static StepCounter *instance;
 // 現在時間
 -(void) nowTime
 {
-    NSTimeZone *zone = [NSTimeZone defaultTimeZone];//獲得當前應用程序的時區
-    NSInteger interval = [zone secondsFromGMTForDate:[NSDate date]];//以秒為單位返回當前應用程序與世界標準時間（格林威尼時間）的時差
-    nowDate = [[NSDate date] dateByAddingTimeInterval:interval];
+    nowDate = [NSDate date];
 }
 
 

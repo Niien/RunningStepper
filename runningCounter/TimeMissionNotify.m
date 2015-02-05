@@ -29,19 +29,23 @@
     return self;
 }
 
-
 -(void) timeGoCut
 {
-    _timeCut -=60 ;
+    _timeCut -= 60;
 //    [self.delegate dateNew];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DateNow" object:nil];
     if (_timeCut == 0) {
-        [timeGo invalidate];
         
+        [self timestop];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"Delete" object:nil];
     }
 //    NSLog(@"%d",_timeCut);
     
+}
+
+-(void) timestop
+{
+    [timeGo invalidate];
 }
 
 //-(void) timeCu

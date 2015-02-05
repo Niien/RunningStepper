@@ -33,6 +33,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *LvLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *addTeamButton;
+
 @end
 
 @implementation pokemonDetailViewController
@@ -49,8 +51,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     data = [[myPlist shareInstanceWithplistName:@"MyPokemon"]getDataFromPlist];
+//    
+//    // 取出目前顯示的那筆資料
+
     
-    // 取出目前顯示的那筆資料
+    //data = [[LocalDBManager sharedInstance]queryCatchedPokemon];
     pokemonDict = [data objectAtIndex:self.numberOfIndex];
     NSLog(@"pokemonDict:%@",pokemonDict);
     
@@ -68,7 +73,7 @@
     
     self.NameLabel.text = [pokemonDict objectForKey:@"name"];
     
-    self.LvLabel.text = [NSString stringWithFormat:@"LV:%@",[pokemonDict objectForKey:@"Lv"]];
+    self.LvLabel.text = [NSString stringWithFormat:@"LV:%@",[pokemonDict objectForKey:@"LV"]];
     
     exp = [[pokemonDict objectForKey:@"exp"]integerValue];
     
@@ -90,7 +95,7 @@
 #pragma mark - alert view delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
+    NSInteger Lv = [[pokemonDict objectForKey:@"LV"] integerValue];
     
     if (alertView.tag == 1) {
         if (buttonIndex == 1) {
@@ -123,9 +128,9 @@
         NSString *LvStr = [NSString stringWithFormat:@"%ld",(long)Lv];
         
         [pokemonDict setObject:EXP forKey:@"exp"];
-        [pokemonDict setObject:LvStr forKey:@"Lv"];
+        [pokemonDict setObject:LvStr forKey:@"LV"];
         
-        [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
+        //[[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
         
         self.LvLabel.text = [NSString stringWithFormat:@"等級%@",LvStr];
         }
@@ -163,7 +168,7 @@
 #pragma mark 賣出
 - (IBAction)SaleButton:(id)sender {
     
-    NSInteger Lv = [[pokemonDict objectForKey:@"Lv"] integerValue];
+    NSInteger Lv = [[pokemonDict objectForKey:@"LV"] integerValue];
     NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*1000];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
@@ -174,24 +179,23 @@
 
 #pragma mark 加入隊伍
 - (IBAction)addToTeam:(id)sender {
-    NSDictionary *empty01 = [NSDictionary new];
-    empty01 = @{@"image":@""};
+    
     TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
-    //NSLog(@"teamArray:%@",TeamArray);
-    //
-//    int CountBeforeAdd = [TeamArray count];
-//    if ([TeamArray count]<=5 || TeamArray == nil) {
-//        for (int i=0; i<(5-[TeamArray count]); i++) {
-//            [TeamArray addObject:empty01];
-//        }
-//        [TeamArray removeObjectAtIndex:(5-CountBeforeAdd)];
-//    }
-    if ([TeamArray count]<=5 || TeamArray == nil) {
+    NSLog(@"teamArray:%@",TeamArray);
+
+    if ([TeamArray count]<5) {
     
         [TeamArray addObject:pokemonDict];
         
-        [[myPlist shareInstanceWithplistName:@"team"]saveDataWithArray:TeamArray];
+        [[myPlist shareInstanceWithplistName:@"team"]saveDataByOverRide:TeamArray];
         
+        self.addTeamButton.hidden = YES;
+        
+    } else if ([TeamArray count] >= 5) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"已經很多隻寶貝了" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
     
     NSMutableArray *arr = [[NSMutableArray alloc]initWithArray: [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
@@ -209,6 +213,8 @@
     [TeamArray removeObject:pokemonDict];
     
     [[myPlist shareInstanceWithplistName:@"team"]saveDataByOverRide:TeamArray];
+    
+    self.addTeamButton.hidden = NO;
     
     NSMutableArray *arr = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
     NSLog(@"arr:%@",arr);

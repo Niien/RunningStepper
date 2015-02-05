@@ -226,7 +226,7 @@
     
     [[location share]setUserLocation:[locations lastObject]];
     userLocation = [locations lastObject];
-    NSLog(@"%f,%f",userLocation.coordinate.latitude,userLocation.coordinate.longitude);
+//    NSLog(@"%f,%f",userLocation.coordinate.latitude,userLocation.coordinate.longitude);
     
 }
 

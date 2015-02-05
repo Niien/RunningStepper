@@ -70,17 +70,10 @@ static NSString * const reuseIdentifier = @"Cell";
         int i = [[dict objectForKey:@"id"]intValue];
         allPokemons [i-1] = [dict objectForKey:@"image"];
         myPokemonsName [i-1] = [dict objectForKey:@"name"];
+        
     }
     
-    
-    [self refresh];
-}
-
-
-- (void)refresh {
-    
     [self.collectionView reloadData];
-    
 }
 
 

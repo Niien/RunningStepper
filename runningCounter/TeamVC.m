@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *TeamView3;
 @property (weak, nonatomic) IBOutlet UIImageView *TeamView4;
 @property (weak, nonatomic) IBOutlet UIImageView *TeamView5;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *MyTeamView;
 
 @end
 
@@ -42,7 +43,37 @@
 -(void)viewWillAppear:(BOOL)animated{
     //秀出隊伍圖片
     TeamArray = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
-    NSLog(@"%@",TeamArray);
+    NSLog(@"teamVC:%@",TeamArray);
+    
+    for (int i=0; i<5; i++) {
+        
+        UIImageView *imageView = (UIImageView *)self.MyTeamView[i];
+        
+        imageView.image = nil;
+    }
+
+    
+    if ([TeamArray count] && [TeamArray count] <= 5) {
+        
+        for (int i=0; i<[TeamArray count]; i++) {
+            
+            UIImageView *imageView = (UIImageView *)self.MyTeamView[i];
+            
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:i]valueForKey:@"image"]]];
+        }
+
+        /*
+        _TeamView1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:0]valueForKey:@"image"]]];
+        */
+    }
+
+    
+    
+
+    
+    
+    
+
 
 //    for (NSDictionary *Dict in TeamArray) {
 //        int i = 0;
@@ -52,7 +83,7 @@
     
     
 //    if ([TeamArray objectAtIndex:0]){
-        _TeamView1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:0]valueForKey:@"image"]]];
+//        _TeamView1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:0]valueForKey:@"image"]]];
 //    }
 //    if ([TeamArray objectAtIndex:1]) {
 //        _TeamView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:1]valueForKey:@"image"]]];

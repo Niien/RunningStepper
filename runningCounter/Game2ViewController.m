@@ -7,6 +7,7 @@
 //
 
 #import "location.h"
+#import "LocalDBManager.h"
 #import "Game2ViewController.h"
 @import AudioToolbox;
 
@@ -214,18 +215,30 @@
 #pragma mark 存入Plist
 -(void)SaveToPlist{
     // save data to plist
+    NSMutableArray *array = [NSMutableArray new];
     NSString *id = [NSString stringWithFormat:@"%d",randomMonster];
     NSString *lat = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.latitude];
     NSString *lon = [NSString stringWithFormat:@"%f",[[location share]userLocation].coordinate.longitude];
     
-    NSDictionary *dict = @{@"name":[POKEMONDict objectForKey:id], @"image":imageName, @"iconName":iconName, @"Lv":@"1", @"exp":@"0", @"id":id,@"attack":@"100", @"lat":lat, @"lon":lon};
-    NSLog(@"G2:%@",dict);
-    
-    NSArray *array = [[NSArray alloc]initWithObjects:dict, nil];
-    
-    [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:array];
-    [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]saveDataWithArray:array];
-    
+    if ([[LocalDBManager sharedInstance]queryCatchedPokemon:@(randomMonster)]) {
+        
+        NSLog(@"Catch Pokemon!!!!!!!!!");
+        array = [[LocalDBManager sharedInstance]queryCatchedPokemon:@(randomMonster)];
+        NSLog(@"array:%@",array);
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc]initWithDictionary:(NSDictionary *)[array objectAtIndex:0]];
+        NSLog(@"dict:%@",dict);
+        [dict setObject:lat forKey:@"lat"];
+        [dict setObject:lon forKey:@"lon"];
+        [dict setObject:id forKey:@"id"];
+        NSLog(@"dict:%@",dict);
+        
+        array = [[NSMutableArray alloc]initWithObjects:dict, nil];
+        NSLog(@"array:%@",array);
+        
+        [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataWithArray:array];
+        [[myPlist shareInstanceWithplistName:@"hadGetPokemon"]saveDataWithArray:array];
+        
+    }
 }
 
 #pragma mark 設置圖位置

@@ -8,11 +8,13 @@
 
 
 #import "BookViewController.h"
+#import "LocalDBManager.h"
 
 @interface BookViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
 {
     
     NSArray *data;
+    NSMutableArray *catchedPokemons;
 
 }
 
@@ -26,6 +28,8 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    catchedPokemons = [NSMutableArray new];
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -56,23 +60,11 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
     
     //NSLog(@"BookView:%@",data);
     
-    [self refresh];
-    
-}
-
-
-- (void)refresh {
+    //catchedPokemons = [[LocalDBManager sharedInstance] queryCatchedPokemon];
     
     [self.collectionView reloadData];
     
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 // hide status bar
 - (BOOL)prefersStatusBarHidden {
@@ -101,6 +93,7 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 
+    //return [catchedPokemons count];
     return [data count];
 }
 
@@ -108,6 +101,8 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
+    
+    //NSString *imageName = [NSString stringWithFormat:@"%@",[[catchedPokemons objectAtIndex:indexPath.row] objectForKey:@"image"]];
     
     NSString *imageName = [NSString stringWithFormat:@"%@",[[data objectAtIndex:indexPath.row] objectForKey:@"image"]];
     
@@ -124,8 +119,7 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
 //    
 //    cell.myImage.image = resultImage;
     
-    cell.LvLabel.text = [NSString stringWithFormat:@"Lv:%@",[[data objectAtIndex:indexPath.row]objectForKey:@"Lv"]];
-    
+    cell.LvLabel.text = [NSString stringWithFormat:@"Lv:%@",[[data objectAtIndex:indexPath.row]objectForKey:@"LV"]];
     
     return cell;
     
