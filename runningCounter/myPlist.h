@@ -19,7 +19,6 @@
 
 - (NSMutableArray *)getDataFromPlist;
 
-//- (NSArray *)getDataWithPokemonName:(NSString *)key;
 
 
 @end

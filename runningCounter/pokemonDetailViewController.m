@@ -35,6 +35,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *addTeamButton;
 
+@property (weak, nonatomic) IBOutlet UIProgressView *expProgress;
+
+
 @end
 
 @implementation pokemonDetailViewController
@@ -45,16 +48,18 @@
     
     pokemonDict = [NSMutableDictionary new];
     
+    self.expProgress.trackTintColor = [UIColor yellowColor];
+    
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     
     data = [[myPlist shareInstanceWithplistName:@"MyPokemon"]getDataFromPlist];
-    //
+
     TeamArray = [[NSMutableArray alloc]initWithArray:[[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist]];
+    
     // 取出目前顯示的那筆資料
-    //data = [[LocalDBManager sharedInstance]queryCatchedPokemon];
     pokemonDict = [data objectAtIndex:self.numberOfIndex];
     NSLog(@"pokemonDict:%@",pokemonDict);
     
@@ -64,7 +69,7 @@
         
     }
     
-//    self.pokemonImage.image = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
+    
     UIImage *tmpImage = [UIImage imageNamed:[pokemonDict objectForKey:@"image"]];
     //開始加入邊框
     UIImage *frameImage = [UIImage imageNamed:@"poke_frame(500).png"];
@@ -81,6 +86,8 @@
     self.LvLabel.text = [NSString stringWithFormat:@"LV:%@",[pokemonDict objectForKey:@"LV"]];
     
     exp = [[pokemonDict objectForKey:@"exp"]integerValue];
+    
+    [self.expProgress setProgress:(float)exp/2000];
     
     
 }
@@ -106,38 +113,46 @@
         if (buttonIndex == 1) {
         NSInteger inputNumber = [textfield.text integerValue];
         
-        //            if (inputNumber <= [StepCounter shareStepCounter].power) {
-        //
-        //                [StepCounter shareStepCounter].power -= inputNumber;
-        //                exp += inputNumber;
-        //
-        //                if (exp > 2000) {
-        //                    Lv += (exp /2000);
-        //                    exp = exp % 2000;
-        //                }
-        //            } else {
-        //
-        //                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"精力不夠" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
-        //                [alert show];
-        //
-        //            }
+                if (inputNumber <= [StepCounter shareStepCounter].power) {
         
-        exp += inputNumber;
+                    [StepCounter shareStepCounter].power -= inputNumber;
+                    exp += inputNumber;
         
-        if (exp >= 2000) {
-            Lv += (exp /2000);
-            exp = exp % 2000;
-        }
+                    if (exp > 2000) {
+                        Lv += (exp /2000);
+                        exp = exp % 2000;
+                    }
+                } else {
         
-        NSString *EXP = [NSString stringWithFormat:@"%ld",(long)exp];
-        NSString *LvStr = [NSString stringWithFormat:@"%ld",(long)Lv];
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"精力不夠" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
+                    [alert show];
         
-        [pokemonDict setObject:EXP forKey:@"exp"];
-        [pokemonDict setObject:LvStr forKey:@"LV"];
+                }
         
-        //[[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
+//        exp += inputNumber;
+//        
+//        if (exp >= 2000) {
+//            Lv += (exp /2000);
+//            exp = exp % 2000;
+//        }
         
-        self.LvLabel.text = [NSString stringWithFormat:@"等級%@",LvStr];
+            NSString *EXP = [NSString stringWithFormat:@"%ld",(long)exp];
+            NSString *LvStr = [NSString stringWithFormat:@"%ld",(long)Lv];
+        
+            [pokemonDict setObject:EXP forKey:@"exp"];
+            [pokemonDict setObject:LvStr forKey:@"LV"];
+            
+            data[self.numberOfIndex] = pokemonDict;
+            NSLog(@"data:%@",data);
+            
+            [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
+        
+            self.LvLabel.text = [NSString stringWithFormat:@"等級%@",LvStr];
+
+            [self.expProgress setProgress:(float)exp/2000];
+            
+            
+            
         }
     }
     else if (alertView.tag == 2) {
@@ -145,11 +160,12 @@
             
             [data removeObject:pokemonDict];
             
-            [StepCounter shareStepCounter].power += (Lv*1000);
+            [StepCounter shareStepCounter].power += (Lv*500);
             
             [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
             
             [self dismissViewControllerAnimated:YES completion:nil];
+            
         }
     }
 }
@@ -174,7 +190,7 @@
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"LV"] integerValue];
-    NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*1000];
+    NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*500];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
     alert.tag = 2;

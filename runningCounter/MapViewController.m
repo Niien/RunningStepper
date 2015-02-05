@@ -41,22 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    locationManager = [CLLocationManager new];
-//    
-//    if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-//        
-//        [locationManager requestAlwaysAuthorization];
-//    }
-//    
-//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//    locationManager.delegate = self;
-//    [locationManager startUpdatingLocation];
-    
-    //================
-    
     pokemonDict = [NSMutableDictionary new];
-    
-    NSLog(@"viewDidLoad");
     
 }
 
@@ -81,8 +66,8 @@
     region.center = userLocation.coordinate;
     
     // 縮放比例
-    region.span.latitudeDelta = 0.01;
-    region.span.longitudeDelta = 0.01;
+    region.span.latitudeDelta = 0.005;
+    region.span.longitudeDelta = 0.005;
     
     [_myMapView setRegion:region animated:YES];
     
@@ -119,7 +104,7 @@
             
             [self.myMapView addAnnotation:annotation];
             
-            iconName = [dict objectForKey:@"iconName"];
+            iconName = [dict objectForKey:@"iconname"];
             
         }
         

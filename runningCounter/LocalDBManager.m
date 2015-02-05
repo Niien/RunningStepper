@@ -111,8 +111,6 @@ static LocalDBManager *sharedInstance;
         NSString *pokemon_exp = [NSString stringWithFormat:@"%d",exp];
         NSString *pokemon_iconname = [queryRS stringForColumn:@"pokemon_iconname"];
         NSString *pokemon_image = [queryRS stringForColumn:@"pokemon_image"];
-        //NSString *catch_lat = [queryRS stringForColumn:@"catch_lat"];
-        //NSString *catch_lon = [queryRS stringForColumn:@"catch_lon"];
         NSString *pokemon_name = [queryRS stringForColumn:@"pokemon_name"];
         int hp = [queryRS intForColumn:@"pokemon_hp"];
         NSString *pokemon_hp = [NSString stringWithFormat:@"%d",hp];
@@ -122,8 +120,6 @@ static LocalDBManager *sharedInstance;
                                @"exp":pokemon_exp,
                                @"iconname":pokemon_iconname,
                                @"image":pokemon_image,
-                              // @"lat":catch_lat,
-                              // @"lon":catch_lon,
                                @"name":pokemon_name,
                                @"hp":pokemon_hp};
         [catchArray addObject:dict];
