@@ -16,6 +16,7 @@
     MCPeerID *enemyPeerID,*myPeerID;
     NSDictionary *myDict,*enemyDict;
     int myHP,enemyHP,myAttack;
+    int myFixedHP,enemyFixedHP;// 固定的血
     NSString *myPokeName,*enemyPokeName;
     
     //是否第一次拿資料
@@ -27,11 +28,11 @@
 }
 @property (weak, nonatomic) IBOutlet UILabel *enemyName;
 @property (weak, nonatomic) IBOutlet UIProgressView *enemyHPProgress;
-@property (weak, nonatomic) IBOutlet UILabel *enemyHP;
+@property (weak, nonatomic) IBOutlet UILabel *enemyHPLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *myName;
 @property (weak, nonatomic) IBOutlet UIProgressView *myHPProgress;
-@property (weak, nonatomic) IBOutlet UILabel *myHP;
+@property (weak, nonatomic) IBOutlet UILabel *myHPLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *skill1Btn;
 @property (weak, nonatomic) IBOutlet UIButton *skill2Btn;
@@ -47,7 +48,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     first = NO;
-    skillOne = 1;
+    skillOne = 2;
     skillTwo = 2;
     // 設定peerID名字 & 延遲觸發
     myPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
@@ -62,30 +63,40 @@
 }
 
 - (IBAction)attackAllBtn:(UIButton *)sender {
-    NSString *buttonValue = [NSString stringWithFormat:@"%ld",(long)sender.tag];
-    NSString *attack = [NSString new];
-    if ([buttonValue intValue] == 1) {
+    
+    NSString *attack ;
+    if (sender.tag == 1) {
+        
         attack = [NSString stringWithFormat:@"%d",myAttack+arc4random()%5+1];
         skillOne--;
+        NSString *myskill1 = [myDict objectForKey:@"skill1"];
+        NSString *btnTitle = [NSString stringWithFormat:@"%@ %d次",myskill1,skillOne];
+        [_skill1Btn setTitle:btnTitle forState:UIControlStateNormal];
+
         if (skillOne == 0) {
             _skill1Btn.backgroundColor = [UIColor grayColor];
-            _skill1Btn.enabled = NO;
         }
     }
-    else if ([buttonValue intValue] == 2)
+    else if (sender.tag == 2)
     {
         attack = [NSString stringWithFormat:@"%d",myAttack+arc4random()%7+1];
         skillTwo--;
+        NSString *myskill2 = [myDict objectForKey:@"skill2"];
+        NSString *btnTitle = [NSString stringWithFormat:@"%@ %d次",myskill2,skillTwo];
+        [_skill2Btn setTitle:btnTitle forState:UIControlStateNormal];
+        
         if (skillTwo == 0) {
             _skill2Btn.backgroundColor = [UIColor grayColor];
-            _skill2Btn.enabled = NO;
         }
     }
-    else if ([buttonValue intValue] == 3)
+    else if (sender.tag == 3)
     {
         attack = [NSString stringWithFormat:@"%d",myAttack];
     }
     
+    _skill1Btn.enabled = NO;
+    _skill2Btn.enabled = NO;
+    _commondBtn.enabled = NO;
     NSArray *attackArray = [[NSArray alloc]initWithObjects:attack, nil];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:attackArray];
     
@@ -117,26 +128,43 @@
         {
             myHP -= [str intValue];
             enemyHP -= [str2 intValue];
-            _myHP.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
-            _enemyHP.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+            _myHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
+            _enemyHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+            [self.myHPProgress setProgress:(float)myHP/myFixedHP];
+            [self.enemyHPProgress setProgress:(float)enemyHP/enemyFixedHP];
             NSLog(@"peerID like %@,%@",str,str2);
         }
         else
         {
             myHP -= [str2 intValue];
             enemyHP -= [str intValue];
-            _myHP.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
-            _enemyHP.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+            _myHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
+            _enemyHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+            [self.myHPProgress setProgress:(float)myHP/myFixedHP];
+            [self.enemyHPProgress setProgress:(float)enemyHP/enemyFixedHP];
             NSLog(@"peerID NO %@,%@",str,str2);
         }
+        checkArray = nil;
+        _skill1Btn.enabled = YES;
+        _skill2Btn.enabled = YES;
+        _commondBtn.enabled = YES;
     }
+    
     [self alertWhoHPisZero];
     
 }
 
 -(void) attackSpecially
 {
-//    UIView *view
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
+    view.backgroundColor = [UIColor redColor];
+    view.alpha = 0.1;
+    
+    UIImage *mypoke = [UIImage imageNamed:[myDict objectForKey:@"image"]];
+    UIImage *enemypoke = [UIImage imageNamed:[enemyDict objectForKey:@"image"]];
+    
+    
+    
 }
 
 #pragma mark AlertView Who Win
@@ -152,6 +180,14 @@
     else if (enemyHP <= 0 & myHP > 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Good News" message:@"You Win" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        alert.delegate = self;
+        
+        [alert show];
+    }
+    else if (enemyHP <= 0 & myHP <=0)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Peace" message:@"Nobody Win" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         alert.delegate = self;
         
@@ -187,9 +223,10 @@
         NSArray *teamarray = [[myPlist shareInstanceWithplistName:@"team"] getDataFromPlist];
         myDict = [teamarray objectAtIndex:0];
         myHP = [[myDict objectForKey:@"hp"] intValue];
+        myFixedHP = myHP;
         myAttack = [[myDict objectForKey:@"attack"]intValue];
         myPokeName = [myDict objectForKey:@"name"];
-        _myHP.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
+        _myHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
         
         _myName.text = [NSString stringWithFormat:@"%@",myPeerID.displayName];
         _skill1Btn.titleLabel.text = [NSString stringWithFormat:@"%@ %d次",
@@ -197,6 +234,7 @@
         _skill2Btn.titleLabel.text = [NSString stringWithFormat:@"%@ %d次",
                                       [myDict objectForKey:@"skill2"],skillTwo];
         _commondBtn.titleLabel.text = [NSString stringWithFormat:@"Attack"];
+        [self.myHPProgress setProgress:(float)myHP/myFixedHP];
         
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:teamarray];
         [self.sessionHelper sendData:data peerID:enemyPeerID];
@@ -234,23 +272,26 @@
     
     //NSLog(@"receive array:%@",Array);
     if (first == NO) {
+        NSLog(@"first receive");
         enemyPeerID = peerID;
         enemyDict = [Array objectAtIndex:0];
         enemyHP = [[enemyDict objectForKey:@"hp"] intValue];
+        enemyFixedHP = enemyHP;
         enemyPokeName = [enemyDict objectForKey:@"name"];
-        _enemyHP.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+        _enemyHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
+        _enemyName.text = [NSString stringWithFormat:@"%@",peerID.displayName];
+        
+        [self.enemyHPProgress setProgress:(float)enemyHP/enemyFixedHP];
         first = YES;
     }
     else
     {
-        
         [self checkBigOrSmall:Array whoPeerID:peerID];
+        NSLog(@"receive success");
     }
     
-    
-    
-    
 }
+
 
 
 /*
