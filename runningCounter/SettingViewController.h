@@ -11,6 +11,7 @@
 #import "PersonalIDViewController.h"
 #import "illustratedHandBook.h"
 #import "BlueViewController.h"
+#import "OnlineFightViewController.h"
 
 @interface SettingViewController : UITableViewController
 

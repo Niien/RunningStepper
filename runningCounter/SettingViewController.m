@@ -93,6 +93,7 @@
             
         case 2:  // 連線對戰
             //
+            [self OnlineFight];
             break;
             
         case 3:  // 藍芽對戰
@@ -131,6 +132,12 @@
     
     [self presentViewController:wmvc animated:YES completion:nil];
     
+}
+
+- (void)OnlineFight {
+    
+    OnlineFightViewController *online = [self.storyboard instantiateViewControllerWithIdentifier:@"OnlineVC"];
+    [self presentViewController:online animated:YES completion:nil];
 }
 
 - (void)openRoom {

@@ -1074,6 +1074,24 @@
             </objects>
             <point key="canvasLocation" x="179" y="-3155"/>
         </scene>
+        <!--Online Fight View Controller-->
+        <scene sceneID="Uaj-XA-xy2">
+            <objects>
+                <viewController storyboardIdentifier="OnlineVC" id="8ss-Hm-E1O" customClass="OnlineFightViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hH4-Tz-CfZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="XC6-TQ-lV7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OT8-Oh-b4l">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KZM-vh-IBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-611" y="-1815"/>
+        </scene>
         <!--Setting-->
         <scene sceneID="BwE-tf-Zx7">
             <objects>

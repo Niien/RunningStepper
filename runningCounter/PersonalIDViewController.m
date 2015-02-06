@@ -38,10 +38,8 @@
     // Do any additional setup after loading the view.
 
     //跟Parse溝通 (猶豫是否放這兒)
-    [Parse setApplicationId:@"37sMr08M1ovb6en1nQ7mm6wMa0wZS9w8EBrb8203"
-                  clientKey:@"VPIfQhgqixZKALeTzbhIurFTwYOrLZZPqRYS9oRn"];
-    
-    //
+//    [Parse setApplicationId:@"37sMr08M1ovb6en1nQ7mm6wMa0wZS9w8EBrb8203"
+//                  clientKey:@"VPIfQhgqixZKALeTzbhIurFTwYOrLZZPqRYS9oRn"];
     
     personalData = [[myPlist shareInstanceWithplistName:@"MyPersonalProfile"]getDataFromPlist];
 
@@ -54,11 +52,10 @@
         self.weightTextField.text = [[personalData objectAtIndex:0]objectForKey:@"weight"];
         
         self.ageTextField.text = [[personalData objectAtIndex:0]objectForKey:@"age"];
-        
     }
     
-    
 }
+
 //進畫面即判斷 是否登入
 -(void)viewDidAppear:(BOOL)animated{
     //
@@ -169,23 +166,11 @@
     NSLog(@"team:%@",user[@"TeamArray"]);
     NSLog(@"LoginUsername:%@",[usertmp objectForKey:@"username"]);
     
-
+    //同時也新增一份列表到FightUser
     PFObject *fight = [[PFObject alloc]initWithClassName:@"FightUser"];
-    
     fight[@"username"] = user.username;
     fight[@"Team"] = user[@"TeamArray"];
     [fight saveInBackground];
-    
-    PFQuery *getID = [[PFQuery alloc]initWithClassName:@"FightUser"];
-    [getID whereKey:@"username" equalTo:user.username];
-//    NSLog(@"getID:%@",[[getID findObjects][0]objectForKey:@"Team"]);
-    
-    [getID findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        int i = arc4random()%objects.count;
-        [objects[i]valueForKey:@"Team"];
-    }];
-    
-    
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
