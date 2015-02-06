@@ -48,7 +48,7 @@
     
     pokemonDict = [NSMutableDictionary new];
     
-    self.expProgress.trackTintColor = [UIColor yellowColor];
+    self.expProgress.trackTintColor = [UIColor greenColor];
     
 }
 
@@ -123,8 +123,8 @@
                         exp = exp % 2000;
                     }
                 } else {
-        
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"精力不夠" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
+
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"能量不足" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
                     [alert show];
         
                 }
@@ -178,7 +178,8 @@
 #pragma mark 增加經驗值
 - (IBAction)expButton:(id)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"輸入給予的精力" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
+    NSString *remainingSTEP = [NSString stringWithFormat:@"還可以使用的能量：%d",[StepCounter shareStepCounter].power];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"輸入想轉移的能量" message:remainingSTEP delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     alert.tag = 1;
     [alert show];
@@ -190,7 +191,7 @@
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"LV"] integerValue];
-    NSString *message = [NSString stringWithFormat:@"可回收%ld精力",Lv*500];
+    NSString *message = [NSString stringWithFormat:@"可回收%d能量",Lv*500];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
     alert.tag = 2;
@@ -215,7 +216,7 @@
     } else if ([TeamArray count] >= 5) {
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"已經很多隻寶貝了" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                            message:@"隊伍已經滿了" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
     

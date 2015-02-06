@@ -25,6 +25,11 @@
     NSArray *checkArray;
     // 招數次數
     int skillOne,skillTwo;
+    // 進畫面移動
+    NSTimer *pokeImgMove;
+    NSTimer *EnemyPokeImgMove;
+    int myPokeFrameX,enemyPokeFrameX;
+    UIImageView *myPokeImage,*enemyPoekImage;
 }
 @property (weak, nonatomic) IBOutlet UILabel *enemyName;
 @property (weak, nonatomic) IBOutlet UIProgressView *enemyHPProgress;
@@ -50,11 +55,22 @@
     first = NO;
     skillOne = 2;
     skillTwo = 2;
+    enemyPokeFrameX = 0;
+    myPokeFrameX = 0;
     // 設定peerID名字 & 延遲觸發
     myPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
     [self performSelector:@selector(openBrowser) withObject:nil afterDelay:0.3];
     
-    _commondBtn.layer.cornerRadius = self.commondBtn.frame.size.width/2;
+    //好屌好屌
+    [self.commondBtn setNeedsLayout];
+    [self.commondBtn layoutIfNeeded];
+    
+    self.commondBtn.layer.cornerRadius = self.commondBtn.frame.size.width/2;
+
+
+
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gosetting) name:@"GoSetting" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,21 +82,22 @@
     
     NSString *attack ;
     if (sender.tag == 1) {
-        
-        attack = [NSString stringWithFormat:@"%d",myAttack+arc4random()%5+1];
         skillOne--;
+        attack = [NSString stringWithFormat:@"%d",myAttack+arc4random()%5+1];
+        
         NSString *myskill1 = [myDict objectForKey:@"skill1"];
         NSString *btnTitle = [NSString stringWithFormat:@"%@ %d次",myskill1,skillOne];
         [_skill1Btn setTitle:btnTitle forState:UIControlStateNormal];
-
+        
         if (skillOne == 0) {
             _skill1Btn.backgroundColor = [UIColor grayColor];
         }
     }
     else if (sender.tag == 2)
     {
+        skillTwo --;
         attack = [NSString stringWithFormat:@"%d",myAttack+arc4random()%7+1];
-        skillTwo--;
+
         NSString *myskill2 = [myDict objectForKey:@"skill2"];
         NSString *btnTitle = [NSString stringWithFormat:@"%@ %d次",myskill2,skillTwo];
         [_skill2Btn setTitle:btnTitle forState:UIControlStateNormal];
@@ -94,9 +111,9 @@
         attack = [NSString stringWithFormat:@"%d",myAttack];
     }
     
-    _skill1Btn.enabled = NO;
-    _skill2Btn.enabled = NO;
-    _commondBtn.enabled = NO;
+    _skill1Btn.userInteractionEnabled = NO;
+    _skill2Btn.userInteractionEnabled = NO;
+    _commondBtn.userInteractionEnabled = NO;
     NSArray *attackArray = [[NSArray alloc]initWithObjects:attack, nil];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:attackArray];
     
@@ -106,8 +123,8 @@
 
 }
 
-- (void)checkBigOrSmall:(NSArray *)nsArray whoPeerID:(MCPeerID *)peerID{
-    
+- (void)checkBigOrSmall:(NSArray *)nsArray whoPeerID:(MCPeerID *)peerID
+{
     if (checkArray == nil) {
         checkArray = nsArray;
         if (peerID == myPeerID) {
@@ -120,14 +137,17 @@
     }
     else
     {
-    
         NSString *str = [checkArray objectAtIndex:0];
         NSString *str2 = [nsArray objectAtIndex:0];
-    
         if (peerID == myPeerID)
         {
             myHP -= [str intValue];
             enemyHP -= [str2 intValue];
+            if (myHP<=0) {
+                myHP = 0;
+            }else if (enemyHP<=0){
+                enemyHP = 0;
+            }
             _myHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
             _enemyHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
             [self.myHPProgress setProgress:(float)myHP/myFixedHP];
@@ -138,22 +158,39 @@
         {
             myHP -= [str2 intValue];
             enemyHP -= [str intValue];
+            if (myHP<=0) {
+                myHP = 0;
+            }else if (enemyHP<=0){
+                enemyHP = 0;
+            }
             _myHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
             _enemyHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",enemyPokeName,enemyHP];
             [self.myHPProgress setProgress:(float)myHP/myFixedHP];
             [self.enemyHPProgress setProgress:(float)enemyHP/enemyFixedHP];
             NSLog(@"peerID NO %@,%@",str,str2);
         }
+        if (skillOne > 0 & skillTwo > 0) {
+            _skill1Btn.userInteractionEnabled = YES;
+            _skill2Btn.userInteractionEnabled = YES;
+            _commondBtn.userInteractionEnabled = YES;
+        }else if (skillOne == 0 & skillTwo > 0)
+        {
+            _skill2Btn.userInteractionEnabled = YES;
+            _commondBtn.userInteractionEnabled = YES;
+        }else if (skillTwo == 0 & skillOne>0){
+            _skill1Btn.userInteractionEnabled = YES;
+            _commondBtn.userInteractionEnabled = YES;
+        }
+        else if (skillOne == 0 & skillTwo == 0){
+            _commondBtn.userInteractionEnabled = YES;
+        }
         checkArray = nil;
-        _skill1Btn.enabled = YES;
-        _skill2Btn.enabled = YES;
-        _commondBtn.enabled = YES;
     }
-    
     [self alertWhoHPisZero];
     
 }
 
+#pragma mark 攻擊效果
 -(void) attackSpecially
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
@@ -161,9 +198,17 @@
     view.alpha = 0.1;
     
     UIImage *mypoke = [UIImage imageNamed:[myDict objectForKey:@"image"]];
+    UIImageView *myPokeImage = [[UIImageView alloc]initWithImage:mypoke];
+    myPokeImage.frame = CGRectMake(0, 15, 100, 100);
+    [self.view addSubview:myPokeImage];
+    
     UIImage *enemypoke = [UIImage imageNamed:[enemyDict objectForKey:@"image"]];
+    UIImageView *enemyPoekImage = [[UIImageView alloc]initWithImage:enemypoke];
+    enemyPoekImage.frame = CGRectMake(self.view.frame.size.width-100, self.view.frame.size.height/2-165, 100, 100);
+    [self.view addSubview:enemyPoekImage];
     
-    
+    //time
+    pokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changePokeImage) userInfo:nil repeats:YES];
     
 }
 
@@ -187,7 +232,7 @@
     }
     else if (enemyHP <= 0 & myHP <=0)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Peace" message:@"Nobody Win" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"馬麻滴~平手了" message:@"Nobody Win" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         alert.delegate = self;
         
@@ -229,21 +274,31 @@
         _myHPLabel.text = [NSString stringWithFormat:@"%@HP : %d",myPokeName,myHP];
         
         _myName.text = [NSString stringWithFormat:@"%@",myPeerID.displayName];
-        _skill1Btn.titleLabel.text = [NSString stringWithFormat:@"%@ %d次",
-                                      [myDict objectForKey:@"skill1"],skillOne];
-        _skill2Btn.titleLabel.text = [NSString stringWithFormat:@"%@ %d次",
-                                      [myDict objectForKey:@"skill2"],skillTwo];
-        _commondBtn.titleLabel.text = [NSString stringWithFormat:@"Attack"];
+        
+        NSString *myskill1 = [myDict objectForKey:@"skill1"];
+        NSString *btnTitle = [NSString stringWithFormat:@"%@ %d次",myskill1,skillOne];
+        [_skill1Btn setTitle:btnTitle forState:UIControlStateNormal];
+       
+        NSString *myskill2 = [myDict objectForKey:@"skill2"];
+        NSString *btn2Title = [NSString stringWithFormat:@"%@ %d次",myskill2,skillTwo];
+        [_skill2Btn setTitle:btn2Title forState:UIControlStateNormal];
+        
+        [_commondBtn setTitle:@"Attack" forState:UIControlStateNormal];
         [self.myHPProgress setProgress:(float)myHP/myFixedHP];
         
+        //秀出自己圖片
+        [self showPokemonImage];
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:teamarray];
         [self.sessionHelper sendData:data peerID:enemyPeerID];
+        
     }];
 }
 
 // Notifies delegate that the user taps the cancel button.
 - (void)browserViewControllerWasCancelled:(MCBrowserViewController *)browserViewController{
-    [browserViewController dismissViewControllerAnimated:YES completion:nil];
+    [browserViewController dismissViewControllerAnimated:YES completion:^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"GoSetting" object:nil];
+    }];
 }
 
 #pragma mark - SessionHelper delegate
@@ -282,6 +337,7 @@
         _enemyName.text = [NSString stringWithFormat:@"%@",peerID.displayName];
         
         [self.enemyHPProgress setProgress:(float)enemyHP/enemyFixedHP];
+        [self showEnemyPokeImage];
         first = YES;
     }
     else
@@ -292,7 +348,69 @@
     
 }
 
+// 回到 Setting
+-(void)gosetting
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        //
+    }];
+}
 
+
+#pragma mark 設置自己位置
+-(void)showPokemonImage{
+    UIImage *mypoke = [UIImage imageNamed:[myDict objectForKey:@"image"]];
+    myPokeImage = [[UIImageView alloc]initWithImage:mypoke];
+    myPokeImage.frame = CGRectMake(self.view.frame.size.width-100, self.view.frame.size.height/2, 100, 100);
+    [self.view addSubview:myPokeImage];
+    
+    //timer
+    pokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changePokeImage) userInfo:nil repeats:YES];
+}
+
+#pragma mark 改變自己位置
+-(void)changePokeImage{
+    //    changeFrameTime -= 0.1;
+    myPokeFrameX += self.view.frame.size.width /15;
+    myPokeImage.frame = CGRectMake(self.view.frame.size.width-100-myPokeFrameX, self.view.frame.size.height/2, 100, 100);
+    [self.view addSubview:myPokeImage];
+    
+    if (myPokeFrameX >= self.view.frame.size.width-100) {
+        [pokeImgMove invalidate];
+        //固定在左右
+        myPokeImage.frame = CGRectMake(0, self.view.frame.size.height/2, 100, 100);
+        //歸零
+        myPokeFrameX = 0;
+    }
+}
+
+
+#pragma mark 設置對手位置
+-(void)showEnemyPokeImage{
+    
+    UIImage *enemypoke = [UIImage imageNamed:[enemyDict objectForKey:@"image"]];
+    enemyPoekImage = [[UIImageView alloc]initWithImage:enemypoke];
+    enemyPoekImage.frame = CGRectMake(0, 20, 100, 100);
+    [self.view addSubview:enemyPoekImage];
+    
+    //timer
+    EnemyPokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeEnemyPokeImage) userInfo:nil repeats:YES];
+}
+
+#pragma mark 改變對手位置
+-(void)changeEnemyPokeImage{
+    enemyPokeFrameX += self.view.frame.size.width /15;
+    enemyPoekImage.frame = CGRectMake(enemyPokeFrameX, 20, 100, 100);
+    [self.view addSubview:enemyPoekImage];
+    
+    if (enemyPokeFrameX >= self.view.frame.size.width-100) {
+        [EnemyPokeImgMove invalidate];
+        //固定在左右
+        enemyPoekImage.frame = CGRectMake(self.view.frame.size.width-100, 20, 100, 100);
+        //歸零
+        enemyPokeFrameX = 0;
+    }
+}
 
 /*
 #pragma mark - Navigation
