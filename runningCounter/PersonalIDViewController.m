@@ -164,8 +164,28 @@
     NSUserDefaults *usertmp = [NSUserDefaults standardUserDefaults];
     [usertmp setObject:user.username forKey:@"username"];
     [usertmp setObject:user[@"useradward"] forKey:@"useradward"];
+    
     NSLog(@"adward:%@",user[@"useradward"]);
-    NSLog(@"username:%@",[usertmp objectForKey:@"username"]);
+    NSLog(@"team:%@",user[@"TeamArray"]);
+    NSLog(@"LoginUsername:%@",[usertmp objectForKey:@"username"]);
+    
+
+    PFObject *fight = [[PFObject alloc]initWithClassName:@"FightUser"];
+    
+    fight[@"username"] = user.username;
+    fight[@"Team"] = user[@"TeamArray"];
+    [fight saveInBackground];
+    
+    PFQuery *getID = [[PFQuery alloc]initWithClassName:@"FightUser"];
+    [getID whereKey:@"username" equalTo:user.username];
+//    NSLog(@"getID:%@",[[getID findObjects][0]objectForKey:@"Team"]);
+    
+    [getID findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        int i = arc4random()%objects.count;
+        [objects[i]valueForKey:@"Team"];
+    }];
+    
+    
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
