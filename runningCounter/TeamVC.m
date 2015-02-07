@@ -67,43 +67,6 @@
         */
     }
 
-    
-    
-
-    
-    
-    
-
-
-//    for (NSDictionary *Dict in TeamArray) {
-//        int i = 0;
-////        allPokemons [i-1] = [Dict objectForKey:@"image"];
-////        myPokemonsName [i-1] = [dict objectForKey:@"name"];
-//    }
-    
-    
-//    if ([TeamArray objectAtIndex:0]){
-//        _TeamView1.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:0]valueForKey:@"image"]]];
-//    }
-//    if ([TeamArray objectAtIndex:1]) {
-//        _TeamView2.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:1]valueForKey:@"image"]]];
-//    }
-//    if ([TeamArray objectAtIndex:2]) {
-//        _TeamView3.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:2]valueForKey:@"image"]]];
-//    }
-//    if ([TeamArray objectAtIndex:3]) {
-//        _TeamView4.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:3]valueForKey:@"image"]]];
-//    }
-//    if ([TeamArray objectAtIndex:4]) {
-//        _TeamView5.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",[[TeamArray objectAtIndex:4]valueForKey:@"image"]]];
-//    }
-    //設定圖片位置
-//    int WideAddParameter = self.view.frame.size.width/5;
-//    TeamImageView1.frame = CGRectMake(0, self.view.frame.size.height/2, self.view.frame.size.width/5, self.view.frame.size.height/2);
-    //    TeamImageView2.frame = CGRectMake(0+WideAddParameter*1, self.view.frame.size.height/2, self.view.frame.size.width/5, self.view.frame.size.height/2);
-    //    TeamImageView3.frame = CGRectMake(0+WideAddParameter*2, self.view.frame.size.height/2, self.view.frame.size.width/5, self.view.frame.size.height/2);
-    //    TeamImageView4.frame = CGRectMake(0+WideAddParameter*3, self.view.frame.size.height/2, self.view.frame.size.width/5, self.view.frame.size.height/2);
-    //    TeamImageView5.frame = CGRectMake(0+WideAddParameter*4, self.view.frame.size.height/2, self.view.frame.size.width/5, self.view.frame.size.height/2);
 
 }
 
