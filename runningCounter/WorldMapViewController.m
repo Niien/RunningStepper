@@ -268,7 +268,7 @@
     
     CLLocation *location = [[CLLocation alloc]initWithLatitude:[view.annotation coordinate].latitude longitude:[view.annotation coordinate].longitude];
     
-    if ([userLocation distanceFromLocation:location] <= 1000 ) {
+    if ([userLocation distanceFromLocation:location] <= 200 ) {
         
        StoreViewController *svc = [self.storyboard instantiateViewControllerWithIdentifier:@"StoreViewController"];
         [self presentViewController:svc animated:YES completion:nil];
@@ -276,7 +276,7 @@
     }
     else {
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"太遠啦 廢物" message:nil delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"商店距離太遠嘍" message:nil delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
         
         [alert show];
         

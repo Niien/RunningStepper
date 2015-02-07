@@ -385,7 +385,6 @@
     }
 }
 
-
 #pragma mark 設置對手位置
 -(void)showEnemyPokeImage{
     

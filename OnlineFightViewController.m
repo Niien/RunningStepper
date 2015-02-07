@@ -19,6 +19,11 @@
     UILabel *WaitingForLinkingLabel;        //拖延下載時間(讓使用者認為正在搜尋)
     UIImageView *EnemyImageView;
     UIImageView *teamImageView;
+    // 進畫面移動
+    NSTimer *pokeImgMove;
+    NSTimer *EnemyPokeImgMove;
+    int myPokeFrameX,enemyPokeFrameX;
+    UIImageView *myPokeImage,*enemyPoekImage;
 }
 
 @end
@@ -47,10 +52,7 @@
         NSLog(@"%@",[PFUser currentUser].username);
         [self DidExistInFightUserOrNot];
         [self getEnemy];
-        
     }
-    
-    //延遲
     
 }
 #pragma mark 判斷是否已存在使用者
@@ -80,7 +82,7 @@
     }];
 }
 
-
+#pragma mark 抓取對手資料
 - (void)getEnemy{
     PFQuery *getID = [[PFQuery alloc]initWithClassName:@"FightUser"];
     //
@@ -100,8 +102,11 @@
     if ([EnemyArray count]==0) {
         NSLog(@"nill");
     }else{
+        //如果圖還沒抓下來 就要秀的話會當掉
         NSLog(@"GOT");
-        [self SetPokeImage];
+//        [self SetPokeImage];
+        [self showPokemonImage];
+        [self showEnemyPokeImage];
     }
 }
 
@@ -128,6 +133,66 @@
     //Cleaner
     EnemyArray = [NSMutableArray new];
 }
+
+
+
+
+
+#pragma mark 設置自己位置
+-(void)showPokemonImage{
+    UIImage *mypoke = [UIImage imageNamed:[[teamArray objectAtIndex:0] objectForKey:@"image"]];
+    myPokeImage = [[UIImageView alloc]initWithImage:mypoke];
+    myPokeImage.frame = CGRectMake(self.view.frame.size.width-100, self.view.frame.size.height/2, 100, 100);
+    [self.view addSubview:myPokeImage];
+    
+    //timer
+    pokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changePokeImage) userInfo:nil repeats:YES];
+}
+
+#pragma mark 改變自己位置
+-(void)changePokeImage{
+    //    changeFrameTime -= 0.1;
+    myPokeFrameX += self.view.frame.size.width /15;
+    myPokeImage.frame = CGRectMake(self.view.frame.size.width-100-myPokeFrameX, self.view.frame.size.height/2, 100, 100);
+    [self.view addSubview:myPokeImage];
+    
+    if (myPokeFrameX >= self.view.frame.size.width-100) {
+        [pokeImgMove invalidate];
+        //固定在左右
+        myPokeImage.frame = CGRectMake(0, self.view.frame.size.height/2, 100, 100);
+        //歸零
+        myPokeFrameX = 0;
+    }
+}
+
+#pragma mark 設置對手位置
+-(void)showEnemyPokeImage{
+    
+    UIImage *enemypoke = [UIImage imageNamed:[[EnemyArray objectAtIndex:0] objectForKey:@"image"]];
+    enemyPoekImage = [[UIImageView alloc]initWithImage:enemypoke];
+    enemyPoekImage.frame = CGRectMake(0, 20, 100, 100);
+    [self.view addSubview:enemyPoekImage];
+    
+    //timer
+    EnemyPokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeEnemyPokeImage) userInfo:nil repeats:YES];
+}
+
+#pragma mark 改變對手位置
+-(void)changeEnemyPokeImage{
+    enemyPokeFrameX += self.view.frame.size.width /15;
+    enemyPoekImage.frame = CGRectMake(enemyPokeFrameX, 20, 100, 100);
+    [self.view addSubview:enemyPoekImage];
+    
+    if (enemyPokeFrameX >= self.view.frame.size.width-100) {
+        [EnemyPokeImgMove invalidate];
+        //固定在左右
+        enemyPoekImage.frame = CGRectMake(self.view.frame.size.width-100, 20, 100, 100);
+        //歸零
+        enemyPokeFrameX = 0;
+    }
+}
+
+
 /*
 #pragma mark - Navigation
 
