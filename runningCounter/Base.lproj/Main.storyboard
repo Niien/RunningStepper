@@ -1592,6 +1592,58 @@
             </objects>
             <point key="canvasLocation" x="219" y="-1121"/>
         </scene>
+        <!--Room View Controller-->
+        <scene sceneID="te2-aO-WQk">
+            <objects>
+                <viewController storyboardIdentifier="Room" id="O5J-eh-LoC" customClass="RoomViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GjI-BG-e7V"/>
+                        <viewControllerLayoutGuide type="bottom" id="8ai-m0-Qbc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IXH-Ch-9eB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXu-Z1-KHU">
+                                <rect key="frame" x="228" y="192" width="145" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="145" id="QJ3-2W-DXC"/>
+                                    <constraint firstAttribute="height" constant="88" id="VrJ-35-iKT"/>
+                                </constraints>
+                                <state key="normal" title="Open Browser">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="openBrowser:" destination="O5J-eh-LoC" eventType="touchUpInside" id="ihI-K2-waM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcj-1x-io0">
+                                <rect key="frame" x="228" y="320" width="145" height="88"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="88" id="VhF-Kt-CZH"/>
+                                    <constraint firstAttribute="width" constant="145" id="Z8J-As-hqB"/>
+                                </constraints>
+                                <state key="normal" title="Advertiser">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="Advertiser:" destination="O5J-eh-LoC" eventType="touchUpInside" id="C1Z-fa-r9U"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="iXu-Z1-KHU" secondAttribute="centerX" id="1r7-f8-uNc"/>
+                            <constraint firstAttribute="centerY" secondItem="iXu-Z1-KHU" secondAttribute="centerY" constant="64" id="dPe-i1-JjR"/>
+                            <constraint firstAttribute="centerY" secondItem="bcj-1x-io0" secondAttribute="centerY" constant="-64" id="nje-H4-C5k"/>
+                            <constraint firstAttribute="centerX" secondItem="bcj-1x-io0" secondAttribute="centerX" id="psu-z4-Nz2"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Ry-0z-s6u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="813" y="-1793"/>
+        </scene>
         <!--Illustrated Hand Book-->
         <scene sceneID="FG5-60-jKU">
             <objects>

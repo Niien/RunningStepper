@@ -33,6 +33,8 @@
 
 - (instancetype)initWithDisplayName:(NSString *)displayName;
 
+-(void) advertiserAssistantShare;
+
 - (MCPeerID *)connectedPeerIDAtIndex:(NSUInteger)index;
 
 //- (void)sendImage:(UIImage *)image peerID:(MCPeerID *)peerID;

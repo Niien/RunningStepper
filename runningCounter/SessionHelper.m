@@ -43,12 +43,17 @@ static NSString * const ServiceType = @"Blue";
         _session = [[MCSession alloc] initWithPeer:_peerID];
         _session.delegate = self;
         
-        self.advertiserAssistant = [[MCAdvertiserAssistant alloc] initWithServiceType:self.serviceType
-                                                                        discoveryInfo:nil
-                                                                              session:self.session];
-        [self.advertiserAssistant start];
+        
     }
     return self;
+}
+
+-(void) advertiserAssistantShare
+{
+    self.advertiserAssistant = [[MCAdvertiserAssistant alloc] initWithServiceType:self.serviceType
+                                                                    discoveryInfo:nil
+                                                                          session:self.session];
+    [self.advertiserAssistant start];
 }
 
 - (void)dealloc
@@ -63,6 +68,7 @@ static NSString * const ServiceType = @"Blue";
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
     BOOL needToNotify = NO;
+    
     
     if (state == MCSessionStateConnected) {
         if (![self.connectedPeerIDs containsObject:peerID]) {

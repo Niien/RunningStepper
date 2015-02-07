@@ -14,6 +14,7 @@
 		84D302AA1A82B8210021ECCD /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302A91A82B8210021ECCD /* BlueViewController.m */; };
 		84D302AD1A82BAC30021ECCD /* SessionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302AC1A82BAC30021ECCD /* SessionHelper.m */; };
 		84D302B11A84615C0021ECCD /* pokemon.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84D302B01A84615C0021ECCD /* pokemon.sqlite */; };
+		84D302E61A85427A0021ECCD /* RoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302E51A85427A0021ECCD /* RoomViewController.m */; };
 		84D66B461A76648A00A98984 /* TimeMissionNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D66B451A76648A00A98984 /* TimeMissionNotify.m */; };
 		A91368891A75362500BBB0CA /* home_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A91368871A75362500BBB0CA /* home_30.png */; };
 		A913688A1A75362500BBB0CA /* setting_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A91368881A75362500BBB0CA /* setting_30.png */; };
@@ -225,6 +226,8 @@
 		84D302AB1A82BAC30021ECCD /* SessionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionHelper.h; sourceTree = "<group>"; };
 		84D302AC1A82BAC30021ECCD /* SessionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionHelper.m; sourceTree = "<group>"; };
 		84D302B01A84615C0021ECCD /* pokemon.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pokemon.sqlite; sourceTree = "<group>"; };
+		84D302E41A85427A0021ECCD /* RoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomViewController.h; sourceTree = "<group>"; };
+		84D302E51A85427A0021ECCD /* RoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomViewController.m; sourceTree = "<group>"; };
 		84D66B441A76648A00A98984 /* TimeMissionNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeMissionNotify.h; sourceTree = "<group>"; };
 		84D66B451A76648A00A98984 /* TimeMissionNotify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeMissionNotify.m; sourceTree = "<group>"; };
 		A91368871A75362500BBB0CA /* home_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_30.png; sourceTree = "<group>"; };
@@ -558,10 +561,10 @@
 				AEB786D81A7A0C7600181446 /* LoginVC.m */,
 				A9BFE8E21A7523EF00D2B2EA /* WorldMapViewController.h */,
 				A9BFE8E31A7523EF00D2B2EA /* WorldMapViewController.m */,
-				84D302A81A82B8210021ECCD /* BlueViewController.h */,
-				84D302A91A82B8210021ECCD /* BlueViewController.m */,
 				AEA521FD1A84B38B002283B3 /* OnlineFightViewController.h */,
 				AEA521FE1A84B38B002283B3 /* OnlineFightViewController.m */,
+				84D302A81A82B8210021ECCD /* BlueViewController.h */,
+				84D302A91A82B8210021ECCD /* BlueViewController.m */,
 				A91368BD1A76188700BBB0CA /* StoreViewController.h */,
 				A91368BE1A76188700BBB0CA /* StoreViewController.m */,
 				A974CAB91A7D12B300F08AA0 /* illustratedHandBook.h */,
@@ -706,6 +709,8 @@
 				84D66B471A76727700A98984 /* Mission */,
 				A91368C01A7619E000BBB0CA /* book */,
 				A91368C11A7619F000BBB0CA /* setting */,
+				84D302E41A85427A0021ECCD /* RoomViewController.h */,
+				84D302E51A85427A0021ECCD /* RoomViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1188,6 +1193,7 @@
 				A9B064EA1A6F7D7A004554B6 /* FMResultSet.m in Sources */,
 				A91368BF1A76188700BBB0CA /* StoreViewController.m in Sources */,
 				A9B064E81A6F7D7A004554B6 /* FMDatabasePool.m in Sources */,
+				84D302E61A85427A0021ECCD /* RoomViewController.m in Sources */,
 				AEC279F01A7812E500F3836D /* GetPokemonAndStore.m in Sources */,
 				A9BFE8E41A7523EF00D2B2EA /* WorldMapViewController.m in Sources */,
 				A91368C71A7629D300BBB0CA /* PersonalIDViewController.m in Sources */,

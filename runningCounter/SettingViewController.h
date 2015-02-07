@@ -12,6 +12,7 @@
 #import "illustratedHandBook.h"
 #import "BlueViewController.h"
 #import "OnlineFightViewController.h"
+#import "RoomViewController.h"
 
 @interface SettingViewController : UITableViewController
 

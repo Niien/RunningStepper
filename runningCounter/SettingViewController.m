@@ -141,8 +141,12 @@
 }
 
 - (void)openRoom {
-    BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueView"];
-    [self presentViewController:bvc animated:NO completion:nil];
+    RoomViewController * roomvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Room"];
+    [self presentViewController:roomvc animated:YES completion:^{
+        //
+    }];
+//    BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueView"];
+//    [self presentViewController:bvc animated:NO completion:nil];
     
 }
 

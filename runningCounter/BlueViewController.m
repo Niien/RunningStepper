@@ -245,7 +245,7 @@
         //
     }];
 }
-
+/*
 -(void) openBrowser
 {
     self.sessionHelper = [[SessionHelper alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
@@ -259,7 +259,8 @@
     
     [self presentViewController:bvc animated:YES completion:nil];
 }
-
+*/
+/*
 #pragma mark Browser
 // Notifies the delegate, when the user taps the done button  送出隊伍資料
 - (void)browserViewControllerDidFinish:(MCBrowserViewController *)browserViewController{
@@ -300,7 +301,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GoSetting" object:nil];
     }];
 }
-
+*/
 #pragma mark - SessionHelper delegate
 
 - (void)sessionHelperDidChangeConnectedPeers:(SessionHelper *)sessionHelper {
