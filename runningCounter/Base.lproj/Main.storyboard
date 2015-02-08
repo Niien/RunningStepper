@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nZ3-wE-YF3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nZ3-wE-YF3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -1086,19 +1086,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qa-Ex-xoG">
-                                <rect key="frame" x="16" y="120" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="QeL-jf-vgf"/>
-                                    <constraint firstAttribute="width" constant="50" id="qyn-X3-PMZ"/>
-                                </constraints>
-                                <state key="normal" title="Back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="Back:" destination="8ss-Hm-E1O" eventType="touchUpInside" id="Ftw-Rd-rho"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LR-1L-S7J">
                                 <rect key="frame" x="297" y="20" width="5" height="580"/>
                                 <constraints>
@@ -1137,12 +1124,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GgP-fx-2X5">
-                                <rect key="frame" x="302" y="345" width="282" height="2.5"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="GgP-fx-2X5">
+                                <rect key="frame" x="302" y="345" width="282" height="3"/>
                                 <color key="progressTintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AFO-6i-Cxr">
-                                <rect key="frame" x="16" y="70" width="281" height="2.5"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="AFO-6i-Cxr">
+                                <rect key="frame" x="16" y="70" width="281" height="3"/>
                                 <color key="progressTintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Poke Name  / LV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9h-ME-ZZz">
@@ -1165,19 +1152,25 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q40-IO-gGG">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q40-IO-gGG">
                                 <rect key="frame" x="16" y="402" width="281" height="84"/>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.72156862745098038" blue="0.89411764705882357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="First Powerfull Skill">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="AttackButton:" destination="8ss-Hm-E1O" eventType="touchUpInside" id="jUK-OX-Bb7"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cas-vx-gZd">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cas-vx-gZd">
                                 <rect key="frame" x="16" y="506" width="281" height="84"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Second Powerfull Skill">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="AttackButton:" destination="8ss-Hm-E1O" eventType="touchUpInside" id="SQd-Vj-vRo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtF-uw-ADf">
                                 <rect key="frame" x="396" y="402" width="188" height="188"/>
@@ -1197,6 +1190,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
+                                    <action selector="AttackButton:" destination="8ss-Hm-E1O" eventType="touchUpInside" id="jV7-rx-HkY"/>
                                     <action selector="attackAllBtn:" destination="0hj-VZ-gmd" eventType="touchUpInside" id="5yn-9m-l35"/>
                                 </connections>
                             </button>
@@ -1227,7 +1221,6 @@
                             <constraint firstItem="GgP-fx-2X5" firstAttribute="trailing" secondItem="aeh-lJ-E72" secondAttribute="trailing" id="Q3i-A0-rxv"/>
                             <constraint firstItem="5LR-1L-S7J" firstAttribute="leading" secondItem="DR1-2F-D3Q" secondAttribute="trailing" id="QIT-Ya-tDZ"/>
                             <constraint firstItem="DR1-2F-D3Q" firstAttribute="top" secondItem="hH4-Tz-CfZ" secondAttribute="bottom" constant="10" id="SOJ-Cf-eFX"/>
-                            <constraint firstItem="1qa-Ex-xoG" firstAttribute="leading" secondItem="OT8-Oh-b4l" secondAttribute="leadingMargin" id="T4P-0g-6QI"/>
                             <constraint firstItem="WtF-uw-ADf" firstAttribute="top" secondItem="r4H-4d-M3L" secondAttribute="bottom" id="TrU-7f-xcD"/>
                             <constraint firstItem="XC6-TQ-lV7" firstAttribute="top" secondItem="Cas-vx-gZd" secondAttribute="bottom" constant="10" id="VDD-mt-j2c"/>
                             <constraint firstItem="GgP-fx-2X5" firstAttribute="leading" secondItem="aeh-lJ-E72" secondAttribute="leading" id="VdX-LT-z8D"/>
@@ -1242,7 +1235,6 @@
                             <constraint firstItem="GgP-fx-2X5" firstAttribute="top" secondItem="h9h-ME-ZZz" secondAttribute="bottom" constant="10" id="sjS-3r-mYY"/>
                             <constraint firstItem="DR1-2F-D3Q" firstAttribute="leading" secondItem="OT8-Oh-b4l" secondAttribute="leadingMargin" id="tQV-rk-7cp"/>
                             <constraint firstItem="Cas-vx-gZd" firstAttribute="leading" secondItem="OT8-Oh-b4l" secondAttribute="leadingMargin" id="vXQ-ze-rVZ"/>
-                            <constraint firstItem="1qa-Ex-xoG" firstAttribute="top" secondItem="hH4-Tz-CfZ" secondAttribute="bottom" constant="100" id="xXx-7l-V95"/>
                             <constraint firstItem="Cas-vx-gZd" firstAttribute="width" secondItem="Q40-IO-gGG" secondAttribute="width" id="z0y-Pz-XXN"/>
                         </constraints>
                         <variation key="default">
@@ -1251,6 +1243,17 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="CommandATKButton" destination="WtF-uw-ADf" id="NQ3-KQ-Q9t"/>
+                        <outlet property="FirstSkillButton" destination="Q40-IO-gGG" id="hrX-y5-Rh3"/>
+                        <outlet property="SecondSkillButton" destination="Cas-vx-gZd" id="1m3-Qb-NlD"/>
+                        <outlet property="enemyHpLabel" destination="jb3-Oq-U2t" id="I1k-Nk-jUA"/>
+                        <outlet property="enemyHpProgress" destination="AFO-6i-Cxr" id="fZd-gR-axz"/>
+                        <outlet property="enemyPokeNameLabel" destination="DR1-2F-D3Q" id="NA2-vA-4Vj"/>
+                        <outlet property="myHpLabel" destination="aeh-lJ-E72" id="EE2-Ec-Efk"/>
+                        <outlet property="myHpProgress" destination="GgP-fx-2X5" id="tyK-9K-VgX"/>
+                        <outlet property="myPokeNameLabel" destination="h9h-ME-ZZz" id="m08-SY-A81"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZM-vh-IBt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1541,7 +1544,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enemy Hp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3X-ff-Bvy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enemy Hp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3X-ff-Bvy">
                                 <rect key="frame" x="16" y="81" width="281" height="30"/>
                                 <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.72156862749999995" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1570,10 +1573,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="A0q-LY-NWa">
-                                <rect key="frame" x="302" y="345" width="282" height="2.5"/>
+                                <rect key="frame" x="302" y="345" width="282" height="3"/>
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TX8-pp-q2f">
-                                <rect key="frame" x="16" y="70" width="281" height="2.5"/>
+                                <rect key="frame" x="16" y="70" width="281" height="3"/>
                             </progressView>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILk-hS-jQG">
                                 <rect key="frame" x="396" y="402" width="188" height="188"/>
@@ -1997,7 +2000,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxy-m0-Ls2">
-                                <rect key="frame" x="438" y="198" width="145.5" height="34.5"/>
+                                <rect key="frame" x="438" y="198" width="146" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Sale">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2010,7 +2013,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B53-3u-d4o">
-                                <rect key="frame" x="281" y="198" width="146.5" height="34.5"/>
+                                <rect key="frame" x="281" y="198" width="147" height="35"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" image="exp_30*60.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2042,7 +2045,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCx-MQ-zvC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCx-MQ-zvC">
                                 <rect key="frame" x="438" y="263" width="145.5" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="移出隊伍">
@@ -2057,7 +2060,7 @@
                                 </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Khx-HX-wRy">
-                                <rect key="frame" x="16" y="263" width="251.5" height="2"/>
+                                <rect key="frame" x="16" y="263" width="252" height="2"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="rnI-eB-YJe"/>
                                     <constraint firstAttribute="width" constant="100" id="y5H-f5-uNG"/>
@@ -2203,17 +2206,17 @@
                                 <exclude reference="Wzx-SE-rea"/>
                                 <exclude reference="qfb-1I-obj"/>
                                 <exclude reference="xm7-3R-3KC"/>
-                                <exclude reference="97C-uu-dbK"/>
-                                <exclude reference="Tax-bz-9uP"/>
-                                <exclude reference="h89-BD-kg1"/>
-                                <exclude reference="mUC-Yy-8G5"/>
-                                <exclude reference="rsz-c1-hML"/>
                                 <exclude reference="626-l6-pMg"/>
                                 <exclude reference="A9H-mu-Lwd"/>
                                 <exclude reference="BvL-9Z-ZLe"/>
                                 <exclude reference="C8Y-Bn-GDX"/>
                                 <exclude reference="EBU-cs-m6G"/>
                                 <exclude reference="VEz-Yo-fht"/>
+                                <exclude reference="97C-uu-dbK"/>
+                                <exclude reference="Tax-bz-9uP"/>
+                                <exclude reference="h89-BD-kg1"/>
+                                <exclude reference="mUC-Yy-8G5"/>
+                                <exclude reference="rsz-c1-hML"/>
                                 <exclude reference="5oV-o0-tcQ"/>
                                 <exclude reference="Cac-ZH-oHC"/>
                                 <exclude reference="EOI-R6-4fS"/>
@@ -2329,11 +2332,13 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="FightLabel" destination="xn9-ZY-oNH" id="tkk-Zk-37I"/>
                         <outlet property="LvLabel" destination="oRz-JZ-Qm4" id="XSd-ua-L4Y"/>
                         <outlet property="NameLabel" destination="tqY-wB-kN6" id="xUH-fI-vHL"/>
                         <outlet property="addTeamButton" destination="Lc3-KH-a4H" id="ZiY-w1-OIg"/>
                         <outlet property="expProgress" destination="Khx-HX-wRy" id="tf8-Bt-xp0"/>
                         <outlet property="pokemonImage" destination="Zoa-3o-XvY" id="Fpv-hc-Ioa"/>
+                        <outlet property="saleButton" destination="Mxy-m0-Ls2" id="PDS-jP-8AJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KIw-YH-qFL" userLabel="First Responder" sceneMemberID="firstResponder"/>

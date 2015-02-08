@@ -17,6 +17,8 @@
     UITextField *textfield;
     
     NSInteger exp;
+    NSInteger atk;
+    NSInteger hp;
     
     NSMutableArray *TeamArray;
     UIImageView *TeamImageView1;
@@ -30,10 +32,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *pokemonImage;
 
 @property (weak, nonatomic) IBOutlet UILabel *NameLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *LvLabel;
+@property (weak, nonatomic) IBOutlet UILabel *FightLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *addTeamButton;
+@property (weak, nonatomic) IBOutlet UIButton *saleButton;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *expProgress;
 
@@ -66,6 +69,7 @@
     if ([TeamArray containsObject:pokemonDict]) {
         
         self.addTeamButton.hidden = YES;
+        self.saleButton.hidden = YES;
         
     }
     
@@ -85,17 +89,23 @@
     
     self.LvLabel.text = [NSString stringWithFormat:@"LV:%@",[pokemonDict objectForKey:@"LV"]];
     
-    exp = [[pokemonDict objectForKey:@"exp"]integerValue];
+    hp = [[pokemonDict objectForKey:@"hp"]integerValue];
     
+    atk = [[pokemonDict objectForKey:@"attack"]integerValue];
+    self.FightLabel.text = [NSString stringWithFormat:@"戰力:%d",atk];
+    
+    exp = [[pokemonDict objectForKey:@"exp"]integerValue];
     [self.expProgress setProgress:(float)exp/2000];
     
     
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 // hide status bar
 - (BOOL)prefersStatusBarHidden {
@@ -109,7 +119,7 @@
     
     NSInteger Lv = [[pokemonDict objectForKey:@"LV"] integerValue];
     
-    if (alertView.tag == 1) {
+    if (alertView.tag == 1) { // Lv up
         if (buttonIndex == 1) {
         NSInteger inputNumber = [textfield.text integerValue];
         
@@ -121,8 +131,16 @@
                     if (exp > 2000) {
                         Lv += (exp /2000);
                         exp = exp % 2000;
+                        
+                        for (int i = 0; i < (exp /2000); i++) {
+                            
+                            atk += arc4random()%3+3;
+                            hp += arc4random()%6+5;
+                            
+                        }
                     }
-                } else {
+                }
+                else {
 
                     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"能量不足" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
                     [alert show];
@@ -137,10 +155,12 @@
 //        }
         
             NSString *EXP = [NSString stringWithFormat:@"%ld",(long)exp];
+            NSString *atkStr = [NSString stringWithFormat:@"%d",atk];
             NSString *LvStr = [NSString stringWithFormat:@"%ld",(long)Lv];
         
             [pokemonDict setObject:EXP forKey:@"exp"];
             [pokemonDict setObject:LvStr forKey:@"LV"];
+            [pokemonDict setObject:atkStr forKey:@"attack"];
             
             data[self.numberOfIndex] = pokemonDict;
             NSLog(@"data:%@",data);
@@ -151,11 +171,9 @@
 
             [self.expProgress setProgress:(float)exp/2000];
             
-            
-            
         }
     }
-    else if (alertView.tag == 2) {
+    else if (alertView.tag == 2) { //sale
         if (buttonIndex == 1) {
             
             [data removeObject:pokemonDict];
@@ -212,6 +230,7 @@
         [[myPlist shareInstanceWithplistName:@"team"]saveDataByOverRide:TeamArray];
         
         self.addTeamButton.hidden = YES;
+        self.saleButton.hidden = YES;
         
     } else if ([TeamArray count] >= 5) {
         
@@ -237,6 +256,7 @@
     [[myPlist shareInstanceWithplistName:@"team"]saveDataByOverRide:TeamArray];
     
     self.addTeamButton.hidden = NO;
+    self.saleButton.hidden = NO;
     
     NSMutableArray *arr = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
     NSLog(@"arr:%@",arr);

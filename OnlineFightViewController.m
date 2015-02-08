@@ -8,15 +8,20 @@
 
 #import "OnlineFightViewController.h"
 
-@interface OnlineFightViewController (){
+@interface OnlineFightViewController () <UIAlertViewDelegate,onlineFightModelDelegate>
+{
     LoginVC *LogIn;
+    onlineFightModel *onlineFight;
     //
     NSMutableArray *teamArray;
     NSMutableArray *teamImageArray;
     NSMutableArray *EnemyArray;
     NSMutableArray *EnemyImageArray;
+    NSMutableArray *skillArray;
     //
-    UILabel *WaitingForLinkingLabel;        //拖延下載時間(讓使用者認為正在搜尋)
+    UILabel *WaitingForLinkingLabel;    //拖延下載時間(讓使用者認為正在搜尋)
+    UILabel *attackLabel;
+    UIImageView *image;
     UIImageView *EnemyImageView;
     UIImageView *teamImageView;
     // 進畫面移動
@@ -24,7 +29,39 @@
     NSTimer *EnemyPokeImgMove;
     int myPokeFrameX,enemyPokeFrameX;
     UIImageView *myPokeImage,*enemyPoekImage;
+    
+    //
+    NSInteger enemyHP;
+    NSInteger enemyTotalHP;
+    NSString *enemyLV;
+    NSString *enemyName;
+    NSInteger enemyAttack;
+    int enemyIndex;
+    
+    //
+    NSInteger myHP;
+    NSInteger myTotalHP;
+    NSString *myLV;
+    NSString *myName;
+    NSInteger myAttack;
+    int myIndex;
+    
+    //
+    NSString *selectedSkill;
+    
 }
+
+@property (weak, nonatomic) IBOutlet UIProgressView *myHpProgress;
+@property (weak, nonatomic) IBOutlet UILabel *myPokeNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *myHpLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *FirstSkillButton;
+@property (weak, nonatomic) IBOutlet UIButton *SecondSkillButton;
+@property (weak, nonatomic) IBOutlet UIButton *CommandATKButton;
+
+@property (weak, nonatomic) IBOutlet UIProgressView *enemyHpProgress;
+@property (weak, nonatomic) IBOutlet UILabel *enemyPokeNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *enemyHpLabel;
 
 @end
 
@@ -33,18 +70,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    teamArray = [NSMutableArray new];
+    teamImageArray = [NSMutableArray new];
+    EnemyArray = [NSMutableArray new];
+    EnemyImageArray = [NSMutableArray new];
+    
+    onlineFight = [[onlineFightModel alloc]init];
+    onlineFight.delegate = self;
+    
+    enemyIndex = 0;
+    myIndex = 0;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
 - (void)viewWillAppear:(BOOL)animated{
-    teamArray = [NSMutableArray new];
-    teamImageArray = [NSMutableArray new];
-    EnemyArray = [NSMutableArray new];
-    EnemyImageArray = [NSMutableArray new];
+    
     //
     if ([PFUser currentUser]) {
         //
@@ -55,6 +102,37 @@
     }
     
 }
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    if ([teamArray count] == 0) {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"確認隊伍是否有角色" delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    WaitingForLinkingLabel = [[UILabel alloc]initWithFrame:CGRectMake(
+                                                            self.view.frame.size.width/3,
+                                                            self.view.frame.size.height/3,
+                                                            self.view.frame.size.width/4+30,
+                                                            self.view.frame.size.height/4-50)];
+    
+    [WaitingForLinkingLabel setText:@"搜尋對手..."];
+    [WaitingForLinkingLabel setBackgroundColor:[UIColor lightGrayColor]];
+    [self.view addSubview:WaitingForLinkingLabel];
+    [self.view bringSubviewToFront:WaitingForLinkingLabel];
+    
+    image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"magnifier_50.png"]];
+    [image setFrame:CGRectMake(self.view.frame.size.width/4, self.view.frame.size.height/3, self.view.frame.size.width/3-self.view.frame.size.width/4, self.view.frame.size.height/4-50)];
+    [self.view addSubview:image];
+    [self.view bringSubviewToFront:image];
+    
+}
+
+
 #pragma mark 判斷是否已存在使用者
 - (void)DidExistInFightUserOrNot{
     //從Plist抓資料下來
@@ -79,21 +157,33 @@
         [object setObject:user.username forKey:@"username"];
         [object saveInBackground];
         NSLog(@"DID update myTeam");
+        
     }];
 }
+
 
 #pragma mark 抓取對手資料
 - (void)getEnemy{
     PFQuery *getID = [[PFQuery alloc]initWithClassName:@"FightUser"];
     //
     [getID findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
         int i = arc4random()%objects.count;
         EnemyArray = [objects[i]valueForKey:@"Team"];
         NSLog(@"Enemy:%@",[objects[i]valueForKey:@"Team"]);
-//        [EnemyArray addObjectsFromArray:[objects[i]valueForKey:@"Team"]];
+        
         //把東西抓下來需要一段時間
+        if (EnemyArray != nil) {
+            
+            [image removeFromSuperview];
+            [WaitingForLinkingLabel removeFromSuperview];
+            
+            [self GameStart];
+        }
+        
     }];
 }
+
 
 - (IBAction)Back:(id)sender {
     //暫放
@@ -104,43 +194,234 @@
     }else{
         //如果圖還沒抓下來 就要秀的話會當掉
         NSLog(@"GOT");
-//        [self SetPokeImage];
-        [self showPokemonImage];
-        [self showEnemyPokeImage];
+        [self showMyData];
+        [self showEnemyData];
     }
 }
 
-
-- (void)SetPokeImage{
+- (void) GameStart {
     
-    //
-    for(int i=0;i<[EnemyArray count];i++){
-        [EnemyImageArray addObject:[[EnemyArray objectAtIndex:i]valueForKey:@"image"]];
-    }
-    NSLog(@"DID got:%@",EnemyImageArray);
-    EnemyImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[EnemyImageArray objectAtIndex:0]]];
-    EnemyImageView.frame = CGRectMake(self.view.frame.size.width-100, 20, 100, 100);
-    [self.view addSubview:EnemyImageView];
+    [self showMyData];
+    [self showEnemyData];
     
-    teamImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[[teamArray objectAtIndex:0]valueForKey:@"image"]]];
-    teamImageView.frame = CGRectMake(0, self.view.frame.size.height/2, 100, 100);
-    [self.view addSubview:teamImageView];
 }
-
 
 
 - (void) viewWillDisappear:(BOOL)animated{
     //Cleaner
-    EnemyArray = [NSMutableArray new];
+    EnemyArray = nil;
+}
+
+
+#pragma mark - get pokemon data
+- (void)showEnemyData {
+    NSLog(@"enemyIndex:%d",enemyIndex);
+    
+    if (enemyIndex < [EnemyArray count]) {
+        
+        enemyName = [EnemyArray[enemyIndex]objectForKey:@"name"];
+        enemyHP = [[EnemyArray[enemyIndex]objectForKey:@"hp"]integerValue];
+        enemyTotalHP = [[EnemyArray[enemyIndex]objectForKey:@"hp"]integerValue];
+        enemyLV = [EnemyArray[enemyIndex]objectForKey:@"LV"];
+        enemyAttack = [[EnemyArray[enemyIndex]objectForKey:@"attack"] integerValue];
+        
+        [self.enemyHpProgress setProgress:(float)enemyHP/enemyTotalHP ];
+        self.enemyHpLabel.text = [NSString stringWithFormat:@"%ld",(long)enemyHP];
+        self.enemyPokeNameLabel.text = enemyName;
+        
+        [self showEnemyPokeImage];
+        
+        skillArray = [NSMutableArray new];
+        [skillArray addObject:@"command"];
+        [skillArray addObject:[EnemyArray[enemyIndex] objectForKey:@"skill1"]];
+        [skillArray addObject:[EnemyArray[enemyIndex] objectForKey:@"skill2"]];
+        
+    }
+    else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"戰況" message:@"you win" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        
+    }
+    enemyIndex++;
+    
+}
+
+- (void)showMyData {
+    NSLog(@"myIndex:%d",myIndex);
+    
+    if (myIndex < [teamArray count]) {
+        
+        myName = [teamArray[myIndex]objectForKey:@"name"];
+        myHP = [[teamArray[myIndex]objectForKey:@"hp"]integerValue];
+        myTotalHP = [[teamArray[myIndex]objectForKey:@"hp"]integerValue];
+        myLV = [teamArray[myIndex]objectForKey:@"LV"];
+        myAttack = [[teamArray[myIndex]objectForKey:@"attack"]integerValue];
+        
+        [self.myHpProgress setProgress:(float)myHP/myTotalHP ];
+        self.myHpLabel.text = [NSString stringWithFormat:@"%ld",(long)myHP];
+        self.myPokeNameLabel.text = myName;
+        [self.FirstSkillButton setTitle:[teamArray[myIndex]objectForKey:@"skill1"] forState:UIControlStateNormal];
+        [self.SecondSkillButton setTitle:[teamArray[myIndex]objectForKey:@"skill2"] forState:UIControlStateNormal];
+        
+        [self showPokemonImage];
+        
+        
+    }
+    else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"戰況" message:@"you lose" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+        
+    }
+    myIndex++;
+    
+}
+
+
+#pragma mark - button method
+- (void)changeButtonStatus {
+    
+    self.FirstSkillButton.enabled = !self.FirstSkillButton.enabled;
+    self.SecondSkillButton.enabled = !self.SecondSkillButton.enabled;
+    self.CommandATKButton.enabled = !self.CommandATKButton.enabled;
+    
+}
+
+
+#pragma mark - enemy method
+- (void)enemyAttack {
+    
+    int i = arc4random()%3;
+    
+    if (i == 1) {
+        
+        enemyAttack += arc4random()%5+1;
+        selectedSkill = [skillArray objectAtIndex:i];
+        NSLog(@"selectedSkill:%@",selectedSkill);
+        
+    }
+    else if (i == 2) {
+        
+        enemyAttack += arc4random()%7+1;
+        selectedSkill = [skillArray objectAtIndex:i];
+        NSLog(@"selectedSkill:%@",selectedSkill);
+        
+    }
+    else {
+        
+        selectedSkill = [skillArray objectAtIndex:0];
+    }
+    
+    NSLog(@"enemyAttack:%d",enemyAttack);
+    NSLog(@"myHP:%d",myHP);
+    
+    [onlineFight AttackToEnemy:enemyAttack EnemyHP:myHP By:@"enemy"];
+    
+}
+
+
+#pragma mark - my attack
+
+- (IBAction)AttackButton:(UIButton *)sender {
+    
+    if (sender.tag == 1) {
+        
+        myAttack += arc4random()%5+1;
+        selectedSkill = self.FirstSkillButton.titleLabel.text;
+        
+    }
+    else if (sender.tag == 2) {
+        
+        myAttack += arc4random()%7+1;
+        selectedSkill = self.SecondSkillButton.titleLabel.text;
+        
+    }
+    else {
+        
+        selectedSkill = @"普通攻擊";
+        
+    }
+    
+    NSLog(@"myAttack:%d",myAttack);
+    NSLog(@"enemyHP:%d",enemyHP);
+    [self changeButtonStatus];
+    
+    [onlineFight AttackToEnemy:myAttack EnemyHP:enemyHP By:@"me"];
+    
 }
 
 
 
+#pragma mark - onlineFight delegate
+- (void)wasKilledBy:(NSString *)name {
+    
+    if ([name isEqualToString:@"me"]) {
+        
+        NSLog(@"killed enemy");
+        
+        [self attackSpecially:@"kill" withSkill:selectedSkill By:myName to:enemyName];
+        
+        [self showEnemyData];
+        
+        if (enemyIndex <= 5) {
+            
+            [self performSelector:@selector(enemyAttack) withObject:nil afterDelay:2.5];
+            
+        }
+        
+    }
+    else  {
+        
+        NSLog(@"was killed");
+        
+        [self attackSpecially:@"kill" withSkill:selectedSkill By:enemyName to:myName];
+        
+        [self showMyData];
+        
+        [self changeButtonStatus];
+    }
+    
+}
+
+- (void)wasAttacked:(NSInteger)resultHP By:(NSString *)name {
+    
+    if ([name isEqualToString:@"me"]) {
+        NSLog(@"attack enemy");
+        NSLog(@"enemyHP:%d",resultHP);
+        
+        enemyHP = resultHP;
+        
+        [self.enemyHpProgress setProgress:(float)enemyHP/enemyTotalHP ];
+        self.enemyHpLabel.text = [NSString stringWithFormat:@"%ld",(long)enemyHP];
+        
+        [self attackSpecially:@"attack" withSkill:selectedSkill By:myName to:enemyName];
+        
+        [self performSelector:@selector(enemyAttack) withObject:nil afterDelay:2.5];
+        
+    }
+    else {
+        
+        NSLog(@"was attacked");
+        NSLog(@"myHP:%d",resultHP);
+        
+        myHP = resultHP;
+        [self.myHpProgress setProgress:(float)myHP/myTotalHP ];
+        self.myHpLabel.text = [NSString stringWithFormat:@"%ld",(long)myHP];
+        
+        [self attackSpecially:@"attack" withSkill:selectedSkill By:enemyName to:myName];
+        
+        [self changeButtonStatus];
+    }
+    
+}
 
 
-#pragma mark 設置自己位置
+#pragma mark - 設置自己位置
 -(void)showPokemonImage{
-    UIImage *mypoke = [UIImage imageNamed:[[teamArray objectAtIndex:0] objectForKey:@"image"]];
+    
+    [myPokeImage removeFromSuperview];
+    UIImage *mypoke = [UIImage imageNamed:[[teamArray objectAtIndex:myIndex] objectForKey:@"image"]];
     myPokeImage = [[UIImageView alloc]initWithImage:mypoke];
     myPokeImage.frame = CGRectMake(self.view.frame.size.width-100, self.view.frame.size.height/2, 100, 100);
     [self.view addSubview:myPokeImage];
@@ -148,6 +429,7 @@
     //timer
     pokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changePokeImage) userInfo:nil repeats:YES];
 }
+
 
 #pragma mark 改變自己位置
 -(void)changePokeImage{
@@ -165,17 +447,21 @@
     }
 }
 
+
 #pragma mark 設置對手位置
 -(void)showEnemyPokeImage{
     
-    UIImage *enemypoke = [UIImage imageNamed:[[EnemyArray objectAtIndex:0] objectForKey:@"image"]];
+    [enemyPoekImage removeFromSuperview];
+    UIImage *enemypoke = [UIImage imageNamed:[[EnemyArray objectAtIndex:enemyIndex] objectForKey:@"image"]];
     enemyPoekImage = [[UIImageView alloc]initWithImage:enemypoke];
     enemyPoekImage.frame = CGRectMake(0, 20, 100, 100);
     [self.view addSubview:enemyPoekImage];
     
     //timer
     EnemyPokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changeEnemyPokeImage) userInfo:nil repeats:YES];
+    
 }
+
 
 #pragma mark 改變對手位置
 -(void)changeEnemyPokeImage{
@@ -190,6 +476,59 @@
         //歸零
         enemyPokeFrameX = 0;
     }
+    
+}
+
+
+#pragma mark 攻擊效果
+-(void)attackSpecially:(NSString *)status withSkill:(NSString *)skillName By:(NSString *)name to:(NSString *)targetName
+{
+    if ([status isEqualToString:@"attack"]) {
+        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
+                                                               self.view.frame.size.height/3*2+20,
+                                                               self.view.frame.size.width-20,
+                                                               self.view.frame.size.height/3-10)];
+        
+        attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",name,skillName];
+        attackLabel.font = [UIFont boldSystemFontOfSize:20];
+        attackLabel.textAlignment = NSTextAlignmentCenter;
+        attackLabel.backgroundColor = [UIColor whiteColor];
+        
+        [self.view addSubview:attackLabel];
+        [self.view bringSubviewToFront:attackLabel];
+        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1.0];
+    }
+    else if ([status isEqualToString:@"kill"]) {
+        
+        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
+                                                               self.view.frame.size.height/3*2+20,
+                                                               self.view.frame.size.width-20,
+                                                               self.view.frame.size.height/3-10)];
+        
+        attackLabel.text = [NSString stringWithFormat:@"%@ 擊殺 %@",name,targetName];
+        attackLabel.font = [UIFont boldSystemFontOfSize:20];
+        attackLabel.textAlignment = NSTextAlignmentCenter;
+        attackLabel.backgroundColor = [UIColor whiteColor];
+        
+        [self.view addSubview:attackLabel];
+        [self.view bringSubviewToFront:attackLabel];
+        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1.0];
+    }
+    
+}
+
+
+-(void)cancelAttackSpecially {
+    
+    [attackLabel removeFromSuperview];
+}
+    
+
+#pragma mark - alertView delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 

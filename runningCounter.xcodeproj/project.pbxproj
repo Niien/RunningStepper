@@ -14,7 +14,6 @@
 		84C7BA7C1A875DC000A269D0 /* illustratebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C7BA7B1A875DC000A269D0 /* illustratebg.png */; };
 		84D302AA1A82B8210021ECCD /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302A91A82B8210021ECCD /* BlueViewController.m */; };
 		84D302AD1A82BAC30021ECCD /* SessionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302AC1A82BAC30021ECCD /* SessionHelper.m */; };
-		84D302B11A84615C0021ECCD /* pokemon.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84D302B01A84615C0021ECCD /* pokemon.sqlite */; };
 		84D302E61A85427A0021ECCD /* RoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302E51A85427A0021ECCD /* RoomViewController.m */; };
 		84D66B461A76648A00A98984 /* TimeMissionNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D66B451A76648A00A98984 /* TimeMissionNotify.m */; };
 		A91368891A75362500BBB0CA /* home_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A91368871A75362500BBB0CA /* home_30.png */; };
@@ -48,6 +47,9 @@
 		A9BFE8ED1A75246D00D2B2EA /* Game3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BFE8EC1A75246D00D2B2EA /* Game3ViewController.m */; };
 		A9BFE8F21A75264B00D2B2EA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9BFE8F11A75264B00D2B2EA /* SettingViewController.m */; };
 		A9BFE8F81A752C7E00D2B2EA /* book_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A9BFE8F71A752C7E00D2B2EA /* book_30.png */; };
+		A9C14D0E1A8683D10034B603 /* onlineFightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A9C14D0D1A8683D10034B603 /* onlineFightModel.m */; };
+		A9C14D111A879FDE0034B603 /* pokemon.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A9C14D101A879FDE0034B603 /* pokemon.sqlite */; };
+		A9C14D131A87A8090034B603 /* magnifier_50.png in Resources */ = {isa = PBXBuildFile; fileRef = A9C14D121A87A8090034B603 /* magnifier_50.png */; };
 		A9CABC031A827F690040E229 /* location.m in Sources */ = {isa = PBXBuildFile; fileRef = A9CABC021A827F690040E229 /* location.m */; };
 		A9F677811A6E34F200E5F06E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F677801A6E34F200E5F06E /* MapKit.framework */; };
 		A9F677861A6E35B700E5F06E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9F677851A6E35B700E5F06E /* MapViewController.m */; };
@@ -227,7 +229,6 @@
 		84D302A91A82B8210021ECCD /* BlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
 		84D302AB1A82BAC30021ECCD /* SessionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionHelper.h; sourceTree = "<group>"; };
 		84D302AC1A82BAC30021ECCD /* SessionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionHelper.m; sourceTree = "<group>"; };
-		84D302B01A84615C0021ECCD /* pokemon.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pokemon.sqlite; sourceTree = "<group>"; };
 		84D302E41A85427A0021ECCD /* RoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomViewController.h; sourceTree = "<group>"; };
 		84D302E51A85427A0021ECCD /* RoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomViewController.m; sourceTree = "<group>"; };
 		84D66B441A76648A00A98984 /* TimeMissionNotify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeMissionNotify.h; sourceTree = "<group>"; };
@@ -282,6 +283,10 @@
 		A9BFE8F01A75264B00D2B2EA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		A9BFE8F11A75264B00D2B2EA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		A9BFE8F71A752C7E00D2B2EA /* book_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book_30.png; sourceTree = "<group>"; };
+		A9C14D0C1A8683D10034B603 /* onlineFightModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = onlineFightModel.h; sourceTree = "<group>"; };
+		A9C14D0D1A8683D10034B603 /* onlineFightModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = onlineFightModel.m; sourceTree = "<group>"; };
+		A9C14D101A879FDE0034B603 /* pokemon.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pokemon.sqlite; sourceTree = "<group>"; };
+		A9C14D121A87A8090034B603 /* magnifier_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifier_50.png; sourceTree = "<group>"; };
 		A9CABC011A827F690040E229 /* location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = location.h; sourceTree = "<group>"; };
 		A9CABC021A827F690040E229 /* location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = location.m; sourceTree = "<group>"; };
 		A9F677801A6E34F200E5F06E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -565,6 +570,8 @@
 				A9BFE8E31A7523EF00D2B2EA /* WorldMapViewController.m */,
 				AEA521FD1A84B38B002283B3 /* OnlineFightViewController.h */,
 				AEA521FE1A84B38B002283B3 /* OnlineFightViewController.m */,
+				84D302E41A85427A0021ECCD /* RoomViewController.h */,
+				84D302E51A85427A0021ECCD /* RoomViewController.m */,
 				84D302A81A82B8210021ECCD /* BlueViewController.h */,
 				84D302A91A82B8210021ECCD /* BlueViewController.m */,
 				A91368BD1A76188700BBB0CA /* StoreViewController.h */,
@@ -703,6 +710,15 @@
 			name = map;
 			sourceTree = "<group>";
 		};
+		A9C14D0F1A8787000034B603 /* FightDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A9C14D0C1A8683D10034B603 /* onlineFightModel.h */,
+				A9C14D0D1A8683D10034B603 /* onlineFightModel.m */,
+			);
+			name = FightDelegate;
+			sourceTree = "<group>";
+		};
 		A9F677871A6E35C300E5F06E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,8 +727,6 @@
 				84D66B471A76727700A98984 /* Mission */,
 				A91368C01A7619E000BBB0CA /* book */,
 				A91368C11A7619F000BBB0CA /* setting */,
-				84D302E41A85427A0021ECCD /* RoomViewController.h */,
-				84D302E51A85427A0021ECCD /* RoomViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -720,6 +734,7 @@
 		A9F677911A6E382800E5F06E /* module */ = {
 			isa = PBXGroup;
 			children = (
+				A9C14D0F1A8787000034B603 /* FightDelegate */,
 				84D13BB61A820F8A000FBAA5 /* Session */,
 				844143551A73DAE40002A079 /* TableViewCell */,
 				8441434E1A73CAD20002A079 /* StepCounter */,
@@ -752,7 +767,7 @@
 		AE15B1371A6E2A0400452FCB = {
 			isa = PBXGroup;
 			children = (
-				84D302B01A84615C0021ECCD /* pokemon.sqlite */,
+				A9C14D101A879FDE0034B603 /* pokemon.sqlite */,
 				A9B064D81A6F7D7A004554B6 /* fmdb */,
 				AE6BF3FD1A6E366F004280AF /* framework */,
 				AE15B1421A6E2A0400452FCB /* runningCounter */,
@@ -821,6 +836,7 @@
 		AE3B16861A829696007CBCF2 /* App Icon */ = {
 			isa = PBXGroup;
 			children = (
+				A9C14D121A87A8090034B603 /* magnifier_50.png */,
 				AE3B16721A82968B007CBCF2 /* Icon-29.png */,
 				AE3B16731A82968B007CBCF2 /* Icon-29@2x.png */,
 				AE3B16741A82968B007CBCF2 /* Icon-29@3x.png */,
@@ -1069,7 +1085,6 @@
 				AEA521E71A83FD99002283B3 /* 32s.png in Resources */,
 				AE90C57E1A77BBF700BE2700 /* 17.png in Resources */,
 				AEA521C31A83FD4E002283B3 /* 36.png in Resources */,
-				84D302B11A84615C0021ECCD /* pokemon.sqlite in Resources */,
 				AE90C5841A77BBF700BE2700 /* 23.png in Resources */,
 				AE90C54F1A77B89900BE2700 /* GG2.jpg in Resources */,
 				AEB786B61A790C8000181446 /* 4s.png in Resources */,
@@ -1149,7 +1164,9 @@
 				AEB786C11A790C8000181446 /* 15s.png in Resources */,
 				AEB786C61A790C8000181446 /* 20s.png in Resources */,
 				AEB786CC1A790C8000181446 /* 26s.png in Resources */,
+				A9C14D131A87A8090034B603 /* magnifier_50.png in Resources */,
 				AEA521C01A83FD4E002283B3 /* 33.png in Resources */,
+				A9C14D111A879FDE0034B603 /* pokemon.sqlite in Resources */,
 				A974CACB1A7D380900F08AA0 /* tabBar2.png in Resources */,
 				AE3B16591A82000B007CBCF2 /* Ball(500).png in Resources */,
 				AEA521F81A83FD99002283B3 /* 49s.png in Resources */,
@@ -1204,6 +1221,7 @@
 				AE15B1491A6E2A0500452FCB /* AppDelegate.m in Sources */,
 				AE15B1461A6E2A0500452FCB /* main.m in Sources */,
 				A9F677861A6E35B700E5F06E /* MapViewController.m in Sources */,
+				A9C14D0E1A8683D10034B603 /* onlineFightModel.m in Sources */,
 				84D66B461A76648A00A98984 /* TimeMissionNotify.m in Sources */,
 				844143511A73CAF60002A079 /* StepCounter.m in Sources */,
 				A9B064D71A6F5848004554B6 /* HousePlaceMark.m in Sources */,

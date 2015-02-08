@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "myPlist.h"
 #import "LoginVC.h"
+#import "onlineFightModel.h"
 @import Parse;
 
 @interface OnlineFightViewController : UIViewController
