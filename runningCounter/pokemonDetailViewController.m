@@ -34,9 +34,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *NameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *LvLabel;
 @property (weak, nonatomic) IBOutlet UILabel *FightLabel;
+@property (weak, nonatomic) IBOutlet UILabel *Skill1Label;
+@property (weak, nonatomic) IBOutlet UILabel *Skill2Label;
+@property (weak, nonatomic) IBOutlet UILabel *HPLabel;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *addTeamButton;
 @property (weak, nonatomic) IBOutlet UIButton *saleButton;
+@property (weak, nonatomic) IBOutlet UIButton *expButton;
 
 @property (weak, nonatomic) IBOutlet UIProgressView *expProgress;
 
@@ -70,6 +75,7 @@
         
         self.addTeamButton.hidden = YES;
         self.saleButton.hidden = YES;
+        self.expButton.hidden = YES;
         
     }
     
@@ -86,10 +92,12 @@
     self.pokemonImage.image = resultImage;
     
     self.NameLabel.text = [pokemonDict objectForKey:@"name"];
-    
     self.LvLabel.text = [NSString stringWithFormat:@"LV:%@",[pokemonDict objectForKey:@"LV"]];
+    self.Skill1Label.text = [pokemonDict objectForKey:@"skill1"];
+    self.Skill2Label.text = [pokemonDict objectForKey:@"skill2"];
     
     hp = [[pokemonDict objectForKey:@"hp"]integerValue];
+    self.HPLabel.text = [NSString stringWithFormat:@"HP:%d",hp];
     
     atk = [[pokemonDict objectForKey:@"attack"]integerValue];
     self.FightLabel.text = [NSString stringWithFormat:@"戰力:%d",atk];
@@ -123,41 +131,45 @@
         if (buttonIndex == 1) {
         NSInteger inputNumber = [textfield.text integerValue];
         
-                if (inputNumber <= [StepCounter shareStepCounter].power) {
-        
-                    [StepCounter shareStepCounter].power -= inputNumber;
-                    exp += inputNumber;
-        
-                    if (exp > 2000) {
-                        Lv += (exp /2000);
-                        exp = exp % 2000;
-                        
-                        for (int i = 0; i < (exp /2000); i++) {
-                            
-                            atk += arc4random()%3+3;
-                            hp += arc4random()%6+5;
-                            
-                        }
-                    }
-                }
-                else {
-
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"能量不足" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
-                    [alert show];
-        
-                }
-        
-//        exp += inputNumber;
+//                if (inputNumber <= [StepCounter shareStepCounter].power) {
 //        
-//        if (exp >= 2000) {
-//            Lv += (exp /2000);
-//            exp = exp % 2000;
-//        }
+//                    [StepCounter shareStepCounter].power -= inputNumber;
+//                    exp += inputNumber;
+//        
+//                    if (exp > 2000) {
+//                        Lv += (exp /2000);
+//                        exp = exp % 2000;
+//                        
+//                        for (int i = 0; i < (exp /2000); i++) {
+//                            
+//                            atk += arc4random()%3+3;
+//                            hp += arc4random()%6+5;
+//                            
+//                        }
+//                    }
+//                }
+//                else {
+//
+//                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"能量不足" message:nil delegate:self cancelButtonTitle:@"確定" otherButtonTitles: nil];
+//                    [alert show];
+//        
+//                }
+        
+        exp += inputNumber;
+    
+        if (exp >= 2000) {
+            Lv += (exp /2000);
+            exp = exp % 2000;
+            atk += arc4random()%3+3;
+            hp += arc4random()%6+5;
+        }
         
             NSString *EXP = [NSString stringWithFormat:@"%ld",(long)exp];
             NSString *atkStr = [NSString stringWithFormat:@"%d",atk];
             NSString *LvStr = [NSString stringWithFormat:@"%ld",(long)Lv];
-        
+            NSString *hpStr = [NSString stringWithFormat:@"%d",hp];
+            
+            [pokemonDict setObject:hpStr forKey:@"hp"];
             [pokemonDict setObject:EXP forKey:@"exp"];
             [pokemonDict setObject:LvStr forKey:@"LV"];
             [pokemonDict setObject:atkStr forKey:@"attack"];
@@ -168,7 +180,8 @@
             [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
         
             self.LvLabel.text = [NSString stringWithFormat:@"等級%@",LvStr];
-
+            self.HPLabel.text = [NSString stringWithFormat:@"HP:%d",hp];
+            self.FightLabel.text = [NSString stringWithFormat:@"戰力:%d",atk];
             [self.expProgress setProgress:(float)exp/2000];
             
         }
@@ -231,6 +244,7 @@
         
         self.addTeamButton.hidden = YES;
         self.saleButton.hidden = YES;
+        self.expButton.hidden = YES;
         
     } else if ([TeamArray count] >= 5) {
         
@@ -257,6 +271,7 @@
     
     self.addTeamButton.hidden = NO;
     self.saleButton.hidden = NO;
+    self.expButton.hidden = NO;
     
     NSMutableArray *arr = [[myPlist shareInstanceWithplistName:@"team"]getDataFromPlist];
     NSLog(@"arr:%@",arr);
