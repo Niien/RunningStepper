@@ -8,6 +8,7 @@
 
 #import "RoomViewController.h"
 #import "BlueViewController.h"
+#import "myPlist.h"
 
 @interface RoomViewController ()
 
@@ -19,8 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.sessionHelper = [[SessionHelper alloc] initWithDisplayName:
-                          [[UIDevice currentDevice]name]];
+    self.sessionHelper = [[SessionHelper shareInstance] initWithDisplayName:[[UIDevice currentDevice] name]];
+    self.sessionHelper.delegate = self;
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
+    button.backgroundColor = [UIColor blueColor];
+    [button setTitle:@"back" forState:UIControlStateNormal];
+    [self.view addSubview:button];
+    [button addTarget:self action:@selector(backsetting) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,6 +35,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)backsetting
+{
+    self.sessionHelper.deallocAdverAndSessionStop;
+    [self dismissViewControllerAnimated:YES completion:^{
+        //
+    }];
+}
 
 - (IBAction)openBrowser:(id)sender {
     
@@ -53,6 +67,12 @@
         BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueView"];
         [self presentViewController:bvc animated:YES completion:^{
             //
+            // 傳送資料給對方
+            bvc.enemyall = YES;
+            NSArray *teamarray = [[myPlist shareInstanceWithplistName:@"team"] getDataFromPlist];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:teamarray];
+            MCPeerID *enemyPeerID = [self.sessionHelper connectedPeerIDAtIndex:0];
+            [self.sessionHelper sendData:data peerID:enemyPeerID];
         }];
     }];
 }
@@ -63,11 +83,22 @@
         //
     }];
 }
-
-
-- (void)sessionHelperDidChangeConnectedPeers:(SessionHelper *)sessionHelper {
-    
+/*
+-(void)sessionHelperDIdChangeConnecting:(SessionHelper*)sessionHelper{
+    BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueView"];
+    [self presentViewController:bvc animated:YES completion:^{
+        //
+    }];
 }
+ */
+- (void)sessionHelperDidChangeConnectedPeers:(SessionHelper *)sessionHelper {
+    NSLog(@"do");
+    BlueViewController *bvc = [self.storyboard instantiateViewControllerWithIdentifier:@"BlueView"];
+    [self presentViewController:bvc animated:YES completion:^{
+        //
+    }];
+}
+
 
 
 /*

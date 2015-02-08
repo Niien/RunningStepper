@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "SessionHelper.h"
 
-@interface BlueViewController : UIViewController<MCBrowserViewControllerDelegate,SessionHelperDelegate,UIAlertViewDelegate>
+@interface BlueViewController : UIViewController<SessionHelperDelegate,UIAlertViewDelegate>
 
-
+@property BOOL enemyall;
 
 @end

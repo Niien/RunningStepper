@@ -11,6 +11,7 @@
 		844143511A73CAF60002A079 /* StepCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143501A73CAF60002A079 /* StepCounter.m */; };
 		844143541A73DAA80002A079 /* MissionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143531A73DAA80002A079 /* MissionTableViewController.m */; };
 		844143581A73DB040002A079 /* MissionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 844143571A73DB040002A079 /* MissionTableViewCell.m */; };
+		84C7BA7C1A875DC000A269D0 /* illustratebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 84C7BA7B1A875DC000A269D0 /* illustratebg.png */; };
 		84D302AA1A82B8210021ECCD /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302A91A82B8210021ECCD /* BlueViewController.m */; };
 		84D302AD1A82BAC30021ECCD /* SessionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D302AC1A82BAC30021ECCD /* SessionHelper.m */; };
 		84D302B11A84615C0021ECCD /* pokemon.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84D302B01A84615C0021ECCD /* pokemon.sqlite */; };
@@ -221,6 +222,7 @@
 		844143531A73DAA80002A079 /* MissionTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionTableViewController.m; sourceTree = "<group>"; };
 		844143561A73DB040002A079 /* MissionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionTableViewCell.h; sourceTree = "<group>"; };
 		844143571A73DB040002A079 /* MissionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionTableViewCell.m; sourceTree = "<group>"; };
+		84C7BA7B1A875DC000A269D0 /* illustratebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = illustratebg.png; sourceTree = "<group>"; };
 		84D302A81A82B8210021ECCD /* BlueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueViewController.h; sourceTree = "<group>"; };
 		84D302A91A82B8210021ECCD /* BlueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
 		84D302AB1A82BAC30021ECCD /* SessionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionHelper.h; sourceTree = "<group>"; };
@@ -731,6 +733,7 @@
 		A9F677961A6E3C1800E5F06E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				84C7BA7B1A875DC000A269D0 /* illustratebg.png */,
 				AE3B16581A82000B007CBCF2 /* Ball(500).png */,
 				AE6C70F71A7FDA9500D4F141 /* LoginTitle.png */,
 				AE6C70F91A7FF4B700D4F141 /* poke_framegold.png */,
@@ -1039,6 +1042,7 @@
 				A913688A1A75362500BBB0CA /* setting_30.png in Resources */,
 				AEA521C91A83FD4E002283B3 /* 42.png in Resources */,
 				AEA521CE1A83FD4E002283B3 /* 47.png in Resources */,
+				84C7BA7C1A875DC000A269D0 /* illustratebg.png in Resources */,
 				AE3B167D1A82968B007CBCF2 /* Icon-29@2x.png in Resources */,
 				A99C70151A7A933000558EB2 /* power_100.png in Resources */,
 				AE3B16831A82968B007CBCF2 /* Icon-60@3x.png in Resources */,

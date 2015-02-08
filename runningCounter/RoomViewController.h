@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SessionHelper.h"
 
-@interface RoomViewController : UIViewController<MCBrowserViewControllerDelegate,MCAdvertiserAssistantDelegate>
+@interface RoomViewController : UIViewController<MCBrowserViewControllerDelegate,MCAdvertiserAssistantDelegate,SessionHelperDelegate>
 
 @property SessionHelper *sessionHelper;
 

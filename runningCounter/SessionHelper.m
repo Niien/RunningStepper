@@ -1,9 +1,9 @@
 //
-//  SessionHelper.m
-//  P2PTest
+//  BlueViewController.m
+//  runningCounter
 //
-//  Created by KAKEGAWA Atsushi on 2013/10/05.
-//  Copyright (c) 2013年 KAKEGAWA Atsushi. All rights reserved.
+//  Created by ChingHua on 2015/2/4.
+//  Copyright (c) 2015年 Longfatown. All rights reserved.
 //
 
 #import "SessionHelper.h"
@@ -18,6 +18,17 @@ static NSString * const ServiceType = @"Blue";
 @end
 
 @implementation SessionHelper
+
+static SessionHelper *instance;
+
++(SessionHelper*)shareInstance
+{
+    if (instance == nil) {
+        instance = [SessionHelper new];
+    }
+    return instance;
+}
+
 
 #pragma mark - Accessor methods
 
@@ -56,7 +67,7 @@ static NSString * const ServiceType = @"Blue";
     [self.advertiserAssistant start];
 }
 
-- (void)dealloc
+- (void)deallocAdverAndSessionStop
 {
     [self.advertiserAssistant stop];
     [self.session disconnect];
@@ -68,16 +79,19 @@ static NSString * const ServiceType = @"Blue";
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state
 {
     BOOL needToNotify = NO;
-    
-    
+    /*if (state == MCSessionStateNotConnected) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate sessionHelperDIdChangeNoConnected:self];
+        });
+    }*/
+    if (state == MCSessionStateConnecting) {
+    }
     if (state == MCSessionStateConnected) {
         if (![self.connectedPeerIDs containsObject:peerID]) {
             [self.connectedPeerIDs addObject:peerID];
             needToNotify = YES;
             
             NSLog(@"connected");
-            
-            
         }
     } else {
         if ([self.connectedPeerIDs containsObject:peerID]) {
