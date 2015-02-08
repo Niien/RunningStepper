@@ -28,6 +28,8 @@
     // 進畫面移動
     NSTimer *pokeImgMove;
     NSTimer *EnemyPokeImgMove;
+    NSTimer *shake;
+    int frameShake; // 攻擊動畫
     int myPokeFrameX,enemyPokeFrameX;
     UIImageView *myPokeImage,*enemyPoekImage;
     // 自己隊伍資料
@@ -60,6 +62,7 @@
     skillTwo = 2;
     enemyPokeFrameX = 0;
     myPokeFrameX = 0;
+    frameShake = 0;
     
     // 設定peerID名字
     myPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
@@ -261,7 +264,8 @@
         
         [self.view addSubview:attackLabel];
         [self.view bringSubviewToFront:attackLabel];
-        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:3];
+        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myShakeimage) userInfo:nil repeats:YES];
+        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1];
     }
     else
     {
@@ -277,7 +281,8 @@
         
         [self.view addSubview:attackLabel];
         [self.view bringSubviewToFront:attackLabel];
-        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:3];
+        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(enemyShakeimage) userInfo:nil repeats:YES];
+        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1];
     }
 /*
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
@@ -297,6 +302,49 @@
     //time
     pokeImgMove = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(changePokeImage) userInfo:nil repeats:YES];
   */
+}
+
+-(void) myShakeimage
+{
+    if (0 <= frameShake && frameShake < 15) {
+        CGRect frame = CGRectMake(myPokeImage.frame.origin.x+15,myPokeImage.frame.origin.y-15,myPokeImage.frame.size.width,myPokeImage.frame.size.height);
+        myPokeImage.frame = frame;
+        frameShake += 15;
+        NSLog(@"aa %d",frameShake);
+    }
+    else if (15 <= frameShake && frameShake< 30)
+    {
+        CGRect frame = CGRectMake(myPokeImage.frame.origin.x-15,myPokeImage.frame.origin.y+15,myPokeImage.frame.size.width,myPokeImage.frame.size.height);
+        myPokeImage.frame = frame;
+        frameShake += 15;
+        NSLog(@"a %d",frameShake);
+    }
+    else if (frameShake >= 30)
+    {
+        [shake invalidate];
+        frameShake = 0;
+    }
+}
+
+-(void) enemyShakeimage
+{
+    if (0 <= frameShake && frameShake < 15) {
+        CGRect frame = CGRectMake(enemyPoekImage.frame.origin.x-15,enemyPoekImage.frame.origin.y+15, enemyPoekImage.frame.size.width, enemyPoekImage.frame.size.height);
+        enemyPoekImage.frame = frame;
+        frameShake += 15;
+    }
+    else if (15 <= frameShake && frameShake < 30)
+    {
+        CGRect frame = CGRectMake(enemyPoekImage.frame.origin.x+15,enemyPoekImage.frame.origin.y-15, enemyPoekImage.frame.size.width, enemyPoekImage.frame.size.height);
+        enemyPoekImage.frame = frame;
+        frameShake += 15;
+        NSLog(@"b %d",frameShake);
+    }
+    else if (frameShake >= 30)
+    {
+        [shake invalidate];
+        frameShake = 0;
+    }
 }
 
 -(void)cancelAttackSpecially
@@ -438,7 +486,7 @@
     //    changeFrameTime -= 0.1;
     myPokeFrameX += self.view.frame.size.width /15;
     myPokeImage.frame = CGRectMake(self.view.frame.size.width-100-myPokeFrameX, self.view.frame.size.height/2, 100, 100);
-    [self.view addSubview:myPokeImage];
+//    [self.view addSubview:myPokeImage];
     
     if (myPokeFrameX >= self.view.frame.size.width-100) {
         [pokeImgMove invalidate];
@@ -465,7 +513,7 @@
 -(void)changeEnemyPokeImage{
     enemyPokeFrameX += self.view.frame.size.width /15;
     enemyPoekImage.frame = CGRectMake(enemyPokeFrameX, 20, 100, 100);
-    [self.view addSubview:enemyPoekImage];
+//    [self.view addSubview:enemyPoekImage];
     
     if (enemyPokeFrameX >= self.view.frame.size.width-100) {
         [EnemyPokeImgMove invalidate];

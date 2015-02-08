@@ -49,6 +49,9 @@
     //
     NSString *selectedSkill;
     
+    //
+    NSTimer *shake;
+    int frameShake;
 }
 
 @property (weak, nonatomic) IBOutlet UIProgressView *myHpProgress;
@@ -81,6 +84,11 @@
     
     enemyIndex = 0;
     myIndex = 0;
+    frameShake = 0;
+    
+    self.FirstSkillButton.enabled = NO;
+    self.SecondSkillButton.enabled = NO;
+    self.CommandATKButton.enabled = NO;
 }
 
 
@@ -100,7 +108,11 @@
         [self DidExistInFightUserOrNot];
         [self getEnemy];
     }
-    
+    else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:@"請確認是否登入" delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 
@@ -175,31 +187,17 @@
         //把東西抓下來需要一段時間
         if (EnemyArray != nil) {
             
-            [image removeFromSuperview];
-            [WaitingForLinkingLabel removeFromSuperview];
-            
-            [self GameStart];
+            [self performSelector:@selector(GameStart) withObject:nil afterDelay:1.0];
         }
         
     }];
 }
 
 
-- (IBAction)Back:(id)sender {
-    //暫放
-    NSLog(@"EnemyArray:%@",EnemyArray);
-//    [self dismissViewControllerAnimated:YES completion:nil];
-    if ([EnemyArray count]==0) {
-        NSLog(@"nill");
-    }else{
-        //如果圖還沒抓下來 就要秀的話會當掉
-        NSLog(@"GOT");
-        [self showMyData];
-        [self showEnemyData];
-    }
-}
-
 - (void) GameStart {
+    
+    image.alpha = 0;
+    WaitingForLinkingLabel.alpha = 0;;
     
     [self showMyData];
     [self showEnemyData];
@@ -266,7 +264,6 @@
         
         [self showPokemonImage];
         
-        
     }
     else {
         
@@ -276,15 +273,9 @@
     }
     myIndex++;
     
-}
-
-
-#pragma mark - button method
-- (void)changeButtonStatus {
-    
-    self.FirstSkillButton.enabled = !self.FirstSkillButton.enabled;
-    self.SecondSkillButton.enabled = !self.SecondSkillButton.enabled;
-    self.CommandATKButton.enabled = !self.CommandATKButton.enabled;
+    self.FirstSkillButton.enabled = YES;
+    self.SecondSkillButton.enabled = YES;
+    self.CommandATKButton.enabled = YES;
     
 }
 
@@ -345,7 +336,10 @@
     
     NSLog(@"myAttack:%d",myAttack);
     NSLog(@"enemyHP:%d",enemyHP);
-    [self changeButtonStatus];
+    
+    self.FirstSkillButton.enabled = NO;
+    self.SecondSkillButton.enabled = NO;
+    self.CommandATKButton.enabled = NO;
     
     [onlineFight AttackToEnemy:myAttack EnemyHP:enemyHP By:@"me"];
     
@@ -359,27 +353,37 @@
     if ([name isEqualToString:@"me"]) {
         
         NSLog(@"killed enemy");
+        [self.enemyHpProgress setProgress:0.0];
+        self.enemyHpLabel.text = @"0";
+        
+        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myShakeimage) userInfo:nil repeats:YES];
         
         [self attackSpecially:@"kill" withSkill:selectedSkill By:myName to:enemyName];
         
-        [self showEnemyData];
+        [self performSelector:@selector(showEnemyData) withObject:nil afterDelay:1.0];
+        //[self showEnemyData];
         
         if (enemyIndex <= 5) {
             
-            [self performSelector:@selector(enemyAttack) withObject:nil afterDelay:2.5];
+            [self performSelector:@selector(enemyAttack) withObject:nil afterDelay:3.0];
             
         }
         
     }
     else  {
         
+        [self.myHpProgress setProgress:0.0];
+        self.myHpLabel.text = @"0";
         NSLog(@"was killed");
+        
+        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(enemyShakeimage) userInfo:nil repeats:YES];
         
         [self attackSpecially:@"kill" withSkill:selectedSkill By:enemyName to:myName];
         
-        [self showMyData];
+        [self performSelector:@selector(showMyData) withObject:nil afterDelay:1.0];
+        //[self showMyData];
         
-        [self changeButtonStatus];
+        
     }
     
 }
@@ -397,8 +401,9 @@
         
         [self attackSpecially:@"attack" withSkill:selectedSkill By:myName to:enemyName];
         
-        [self performSelector:@selector(enemyAttack) withObject:nil afterDelay:2.5];
+        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myShakeimage) userInfo:nil repeats:YES];
         
+        [self performSelector:@selector(enemyAttack) withObject:nil afterDelay:2.0];
     }
     else {
         
@@ -411,10 +416,104 @@
         
         [self attackSpecially:@"attack" withSkill:selectedSkill By:enemyName to:myName];
         
-        [self changeButtonStatus];
+        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(enemyShakeimage) userInfo:nil repeats:YES];
+        
+        self.FirstSkillButton.enabled = YES;
+        self.SecondSkillButton.enabled = YES;
+        self.CommandATKButton.enabled = YES;
+        
     }
     
 }
+
+
+#pragma mark 攻擊效果
+-(void) myShakeimage
+{
+    if (0 <= frameShake && frameShake < 15) {
+        CGRect frame = CGRectMake(myPokeImage.frame.origin.x+15,myPokeImage.frame.origin.y-15,myPokeImage.frame.size.width,myPokeImage.frame.size.height);
+        myPokeImage.frame = frame;
+        frameShake += 15;
+        NSLog(@"aa %d",frameShake);
+    }
+    else if (15 <= frameShake && frameShake< 30)
+    {
+        CGRect frame = CGRectMake(myPokeImage.frame.origin.x-15,myPokeImage.frame.origin.y+15,myPokeImage.frame.size.width,myPokeImage.frame.size.height);
+        myPokeImage.frame = frame;
+        frameShake += 15;
+        NSLog(@"a %d",frameShake);
+    }
+    else if (frameShake >= 30)
+    {
+        [shake invalidate];
+        frameShake = 0;
+    }
+}
+
+-(void) enemyShakeimage
+{
+    if (0 <= frameShake && frameShake < 15) {
+        CGRect frame = CGRectMake(enemyPoekImage.frame.origin.x-15,enemyPoekImage.frame.origin.y+15, enemyPoekImage.frame.size.width, enemyPoekImage.frame.size.height);
+        enemyPoekImage.frame = frame;
+        frameShake += 15;
+    }
+    else if (15 <= frameShake && frameShake < 30)
+    {
+        CGRect frame = CGRectMake(enemyPoekImage.frame.origin.x+15,enemyPoekImage.frame.origin.y-15, enemyPoekImage.frame.size.width, enemyPoekImage.frame.size.height);
+        enemyPoekImage.frame = frame;
+        frameShake += 15;
+        NSLog(@"b %d",frameShake);
+    }
+    else if (frameShake >= 30)
+    {
+        [shake invalidate];
+        frameShake = 0;
+    }
+}
+
+-(void)attackSpecially:(NSString *)status withSkill:(NSString *)skillName By:(NSString *)name to:(NSString *)targetName
+{
+    if ([status isEqualToString:@"attack"]) {
+        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
+                                                               self.view.frame.size.height/3*2+20,
+                                                               self.view.frame.size.width-20,
+                                                               self.view.frame.size.height/3-10)];
+        
+        attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",name,skillName];
+        attackLabel.font = [UIFont boldSystemFontOfSize:20];
+        attackLabel.textAlignment = NSTextAlignmentCenter;
+        attackLabel.backgroundColor = [UIColor whiteColor];
+        
+        [self.view addSubview:attackLabel];
+        [self.view bringSubviewToFront:attackLabel];
+        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1.0];
+    }
+    else if ([status isEqualToString:@"kill"]) {
+        
+        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
+                                                               self.view.frame.size.height/3*2+20,
+                                                               self.view.frame.size.width-20,
+                                                               self.view.frame.size.height/3-10)];
+        
+        attackLabel.text = [NSString stringWithFormat:@"%@ 擊殺 %@",name,targetName];
+        attackLabel.font = [UIFont boldSystemFontOfSize:20];
+        attackLabel.textAlignment = NSTextAlignmentCenter;
+        attackLabel.backgroundColor = [UIColor whiteColor];
+        
+        [self.view addSubview:attackLabel];
+        [self.view bringSubviewToFront:attackLabel];
+        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1.0];
+    }
+    
+}
+
+
+-(void)cancelAttackSpecially {
+    
+    [attackLabel removeFromSuperview];
+    
+}
+
 
 
 #pragma mark - 設置自己位置
@@ -479,50 +578,6 @@
     
 }
 
-
-#pragma mark 攻擊效果
--(void)attackSpecially:(NSString *)status withSkill:(NSString *)skillName By:(NSString *)name to:(NSString *)targetName
-{
-    if ([status isEqualToString:@"attack"]) {
-        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
-                                                               self.view.frame.size.height/3*2+20,
-                                                               self.view.frame.size.width-20,
-                                                               self.view.frame.size.height/3-10)];
-        
-        attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",name,skillName];
-        attackLabel.font = [UIFont boldSystemFontOfSize:20];
-        attackLabel.textAlignment = NSTextAlignmentCenter;
-        attackLabel.backgroundColor = [UIColor whiteColor];
-        
-        [self.view addSubview:attackLabel];
-        [self.view bringSubviewToFront:attackLabel];
-        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1.0];
-    }
-    else if ([status isEqualToString:@"kill"]) {
-        
-        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
-                                                               self.view.frame.size.height/3*2+20,
-                                                               self.view.frame.size.width-20,
-                                                               self.view.frame.size.height/3-10)];
-        
-        attackLabel.text = [NSString stringWithFormat:@"%@ 擊殺 %@",name,targetName];
-        attackLabel.font = [UIFont boldSystemFontOfSize:20];
-        attackLabel.textAlignment = NSTextAlignmentCenter;
-        attackLabel.backgroundColor = [UIColor whiteColor];
-        
-        [self.view addSubview:attackLabel];
-        [self.view bringSubviewToFront:attackLabel];
-        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1.0];
-    }
-    
-}
-
-
--(void)cancelAttackSpecially {
-    
-    [attackLabel removeFromSuperview];
-}
-    
 
 #pragma mark - alertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
