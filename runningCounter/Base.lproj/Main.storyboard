@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Home-->
@@ -1753,71 +1754,115 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PokingLOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="czw-SH-4cd">
-                                <rect key="frame" x="91" y="20" width="418" height="195"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="muban2.png" translatesAutoresizingMaskIntoConstraints="NO" id="tDi-Fa-gGZ">
-                                <rect key="frame" x="52" y="174" width="216" height="379"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="muban.png" translatesAutoresizingMaskIntoConstraints="NO" id="fiY-wW-EU9">
-                                <rect key="frame" x="336" y="174" width="250" height="379"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluetoothBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="fiY-wW-EU9">
+                                <rect key="frame" x="0.0" y="240" width="600" height="360"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RoadSign.png" translatesAutoresizingMaskIntoConstraints="NO" id="KNk-Pw-dZM">
-                                <rect key="frame" x="16" y="443" width="139" height="110"/>
+                                <rect key="frame" x="16" y="443" width="140" height="110"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TTTBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="EPd-Rz-Mcp">
-                                <rect key="frame" x="32" y="280" width="541" height="300"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXu-Z1-KHU">
-                                <rect key="frame" x="113" y="309" width="145" height="88"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="145" id="QJ3-2W-DXC"/>
-                                    <constraint firstAttribute="height" constant="88" id="VrJ-35-iKT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="40"/>
-                                <state key="normal" title="進房">
-                                    <color key="titleColor" red="1" green="0.91140573879999998" blue="0.26307064949999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="openBrowser:" destination="O5J-eh-LoC" eventType="touchUpInside" id="ihI-K2-waM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcj-1x-io0">
-                                <rect key="frame" x="362" y="311" width="137" height="84"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="84" id="VhF-Kt-CZH"/>
-                                    <constraint firstAttribute="width" constant="137" id="Z8J-As-hqB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="40"/>
-                                <state key="normal" title="開房">
-                                    <color key="titleColor" red="1" green="0.91140573879999998" blue="0.26307064949999998" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="Advertiser:" destination="O5J-eh-LoC" eventType="touchUpInside" id="C1Z-fa-r9U"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2V-Nt-Szd">
-                                <rect key="frame" x="37" y="459" width="109" height="30"/>
+                                <rect key="frame" x="36" y="459" width="110" height="30"/>
                                 <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="25"/>
                                 <state key="normal" title="返回">
                                     <color key="titleColor" red="1" green="0.91140573879999998" blue="0.26307064949999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PokingLOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="czw-SH-4cd">
+                                <rect key="frame" x="0.0" y="28" width="600" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="420" id="waA-M4-PxI"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="waA-M4-PxI"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JeJ-VV-WoB">
+                                <rect key="frame" x="0.0" y="293" width="600" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcj-1x-io0">
+                                        <rect key="frame" x="434" y="0.0" width="80" height="120"/>
+                                        <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="40"/>
+                                        <state key="normal" title="開房">
+                                            <color key="titleColor" red="1" green="0.91140573879999998" blue="0.26307064949999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="Advertiser:" destination="O5J-eh-LoC" eventType="touchUpInside" id="C1Z-fa-r9U"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fFY-XE-wWL">
+                                        <rect key="frame" x="0.0" y="0.0" width="86" height="120"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXu-Z1-KHU">
+                                        <rect key="frame" x="86" y="0.0" width="80" height="120"/>
+                                        <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="40"/>
+                                        <state key="normal" title="進房">
+                                            <color key="titleColor" red="1" green="0.91140573879999998" blue="0.26307064949999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openBrowser:" destination="O5J-eh-LoC" eventType="touchUpInside" id="ihI-K2-waM"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccm-ut-fy1">
+                                        <rect key="frame" x="514" y="0.0" width="86" height="120"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="iXu-Z1-KHU" firstAttribute="top" secondItem="JeJ-VV-WoB" secondAttribute="top" id="2LZ-NE-U5d"/>
+                                    <constraint firstItem="fFY-XE-wWL" firstAttribute="width" secondItem="Ccm-ut-fy1" secondAttribute="width" id="39l-3L-pr9"/>
+                                    <constraint firstAttribute="bottom" secondItem="iXu-Z1-KHU" secondAttribute="bottom" id="4qT-xs-ZK7"/>
+                                    <constraint firstAttribute="centerY" secondItem="iXu-Z1-KHU" secondAttribute="centerY" id="DPk-ZI-BkV"/>
+                                    <constraint firstItem="Ccm-ut-fy1" firstAttribute="top" secondItem="JeJ-VV-WoB" secondAttribute="top" id="HvY-ht-jYL"/>
+                                    <constraint firstItem="Ccm-ut-fy1" firstAttribute="leading" secondItem="bcj-1x-io0" secondAttribute="trailing" id="IMh-12-GRX"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ccm-ut-fy1" secondAttribute="bottom" id="NCK-bt-s64"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ccm-ut-fy1" secondAttribute="trailing" id="Rav-Mu-kVj"/>
+                                    <constraint firstItem="fFY-XE-wWL" firstAttribute="leading" secondItem="JeJ-VV-WoB" secondAttribute="leading" id="TV2-5d-s9N"/>
+                                    <constraint firstAttribute="height" secondItem="iXu-Z1-KHU" secondAttribute="height" id="VpN-Fv-yYG"/>
+                                    <constraint firstItem="bcj-1x-io0" firstAttribute="width" secondItem="iXu-Z1-KHU" secondAttribute="width" id="YZ7-PV-YAF"/>
+                                    <constraint firstItem="bcj-1x-io0" firstAttribute="height" secondItem="iXu-Z1-KHU" secondAttribute="height" id="aOT-HD-4W3"/>
+                                    <constraint firstAttribute="centerX" secondItem="iXu-Z1-KHU" secondAttribute="centerX" constant="147" id="b9i-Au-bGx"/>
+                                    <constraint firstItem="fFY-XE-wWL" firstAttribute="height" secondItem="JeJ-VV-WoB" secondAttribute="height" id="gUT-HC-PCe"/>
+                                    <constraint firstItem="iXu-Z1-KHU" firstAttribute="leading" secondItem="fFY-XE-wWL" secondAttribute="trailing" id="htR-ks-497"/>
+                                    <constraint firstItem="fFY-XE-wWL" firstAttribute="height" secondItem="Ccm-ut-fy1" secondAttribute="height" id="kLa-1J-qou"/>
+                                    <constraint firstAttribute="bottom" secondItem="fFY-XE-wWL" secondAttribute="bottom" id="niq-PZ-fDq"/>
+                                    <constraint firstItem="bcj-1x-io0" firstAttribute="top" secondItem="JeJ-VV-WoB" secondAttribute="top" id="ojh-yW-XyQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="bcj-1x-io0" secondAttribute="bottom" id="pGr-qr-xFx"/>
+                                    <constraint firstItem="fFY-XE-wWL" firstAttribute="top" secondItem="JeJ-VV-WoB" secondAttribute="top" id="qgW-mI-c7o"/>
+                                    <constraint firstItem="fFY-XE-wWL" firstAttribute="width" secondItem="JeJ-VV-WoB" secondAttribute="width" multiplier="1/7" id="sY0-04-wD5"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="b9i-Au-bGx"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.78617073074114474" green="0.98709870879296657" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="iXu-Z1-KHU" secondAttribute="centerX" constant="114.5" id="1r7-f8-uNc"/>
-                            <constraint firstAttribute="centerY" secondItem="iXu-Z1-KHU" secondAttribute="centerY" constant="-53" id="dPe-i1-JjR"/>
-                            <constraint firstAttribute="centerY" secondItem="bcj-1x-io0" secondAttribute="centerY" constant="-53" id="nje-H4-C5k"/>
-                            <constraint firstAttribute="centerX" secondItem="bcj-1x-io0" secondAttribute="centerX" constant="-130.5" id="psu-z4-Nz2"/>
+                            <constraint firstItem="fiY-wW-EU9" firstAttribute="height" secondItem="IXH-Ch-9eB" secondAttribute="height" multiplier="0.6" id="73o-Y5-8i0"/>
+                            <constraint firstAttribute="trailing" secondItem="JeJ-VV-WoB" secondAttribute="trailing" id="7F2-3f-sBC"/>
+                            <constraint firstAttribute="centerX" secondItem="JeJ-VV-WoB" secondAttribute="centerX" id="7er-ei-rZp"/>
+                            <constraint firstItem="czw-SH-4cd" firstAttribute="height" secondItem="IXH-Ch-9eB" secondAttribute="height" multiplier="0.3" id="7lQ-tg-AVl"/>
+                            <constraint firstItem="8ai-m0-Qbc" firstAttribute="top" secondItem="fiY-wW-EU9" secondAttribute="bottom" id="IkO-7K-jdC"/>
+                            <constraint firstAttribute="centerY" secondItem="JeJ-VV-WoB" secondAttribute="centerY" constant="-53" id="MVQ-VU-cMx"/>
+                            <constraint firstAttribute="width" secondItem="czw-SH-4cd" secondAttribute="width" id="N3a-o5-Xfw"/>
+                            <constraint firstAttribute="trailing" secondItem="czw-SH-4cd" secondAttribute="trailing" id="OPP-Rp-f72"/>
+                            <constraint firstItem="fiY-wW-EU9" firstAttribute="leading" secondItem="IXH-Ch-9eB" secondAttribute="leading" id="TAb-tK-ldD"/>
+                            <constraint firstItem="czw-SH-4cd" firstAttribute="leading" secondItem="IXH-Ch-9eB" secondAttribute="leading" id="Ubs-de-4e7"/>
+                            <constraint firstAttribute="width" secondItem="JeJ-VV-WoB" secondAttribute="width" id="VYI-L0-AAP"/>
+                            <constraint firstAttribute="trailing" secondItem="fiY-wW-EU9" secondAttribute="trailing" id="f6O-xh-kX3"/>
+                            <constraint firstItem="JeJ-VV-WoB" firstAttribute="height" secondItem="IXH-Ch-9eB" secondAttribute="height" multiplier="0.2" id="rnD-RE-Snd"/>
+                            <constraint firstItem="JeJ-VV-WoB" firstAttribute="leading" secondItem="IXH-Ch-9eB" secondAttribute="leading" id="u9d-p4-VLk"/>
+                            <constraint firstItem="czw-SH-4cd" firstAttribute="top" secondItem="GjI-BG-e7V" secondAttribute="bottom" constant="8" id="wze-bb-RSx"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ry-0z-s6u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110" y="610"/>
+            <point key="canvasLocation" x="-76" y="648"/>
         </scene>
         <!--Illustrated Hand Book-->
         <scene sceneID="FG5-60-jKU">
@@ -2580,16 +2625,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PokingLOGO.png" width="1492" height="816"/>
+        <image name="PokingLOGO.png" width="1440" height="601"/>
         <image name="RedBtn1.png" width="614" height="614"/>
         <image name="RedBtn2.png" width="614" height="614"/>
         <image name="RoadSign.png" width="163" height="119"/>
-        <image name="TTTBackground.png" width="600" height="600"/>
         <image name="backIcon.png" width="25" height="25"/>
+        <image name="bluetoothBG.png" width="434" height="278"/>
         <image name="cart_25.png" width="25" height="25"/>
         <image name="exp_30*60.png" width="60" height="30"/>
-        <image name="muban.png" width="600" height="600"/>
-        <image name="muban2.png" width="600" height="600"/>
         <image name="position_30.png" width="30" height="30"/>
     </resources>
 </document>
