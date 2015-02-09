@@ -97,10 +97,10 @@
     self.Skill2Label.text = [pokemonDict objectForKey:@"skill2"];
     
     hp = [[pokemonDict objectForKey:@"hp"]integerValue];
-    self.HPLabel.text = [NSString stringWithFormat:@"HP:%d",hp];
+    self.HPLabel.text = [NSString stringWithFormat:@"HP:%ld",(long)hp];
     
     atk = [[pokemonDict objectForKey:@"attack"]integerValue];
-    self.FightLabel.text = [NSString stringWithFormat:@"戰力:%d",atk];
+    self.FightLabel.text = [NSString stringWithFormat:@"戰力:%ld",(long)atk];
     
     exp = [[pokemonDict objectForKey:@"exp"]integerValue];
     [self.expProgress setProgress:(float)exp/2000];
@@ -165,9 +165,9 @@
         }
         
             NSString *EXP = [NSString stringWithFormat:@"%ld",(long)exp];
-            NSString *atkStr = [NSString stringWithFormat:@"%d",atk];
+            NSString *atkStr = [NSString stringWithFormat:@"%ld",(long)atk];
             NSString *LvStr = [NSString stringWithFormat:@"%ld",(long)Lv];
-            NSString *hpStr = [NSString stringWithFormat:@"%d",hp];
+            NSString *hpStr = [NSString stringWithFormat:@"%ld",(long)hp];
             
             [pokemonDict setObject:hpStr forKey:@"hp"];
             [pokemonDict setObject:EXP forKey:@"exp"];
@@ -180,8 +180,8 @@
             [[myPlist shareInstanceWithplistName:@"MyPokemon"]saveDataByOverRide:data];
         
             self.LvLabel.text = [NSString stringWithFormat:@"等級%@",LvStr];
-            self.HPLabel.text = [NSString stringWithFormat:@"HP:%d",hp];
-            self.FightLabel.text = [NSString stringWithFormat:@"戰力:%d",atk];
+            self.HPLabel.text = [NSString stringWithFormat:@"HP:%ld",(long)hp];
+            self.FightLabel.text = [NSString stringWithFormat:@"戰力:%ld",(long)atk];
             [self.expProgress setProgress:(float)exp/2000];
             
         }
@@ -209,7 +209,7 @@
 #pragma mark 增加經驗值
 - (IBAction)expButton:(id)sender {
     
-    NSString *remainingSTEP = [NSString stringWithFormat:@"還可以使用的能量：%d",[StepCounter shareStepCounter].power];
+    NSString *remainingSTEP = [NSString stringWithFormat:@"還可以使用的能量：%ld",(long)[StepCounter shareStepCounter].power];
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"輸入想轉移的能量" message:remainingSTEP delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定",nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     alert.tag = 1;
@@ -222,7 +222,7 @@
 - (IBAction)SaleButton:(id)sender {
     
     NSInteger Lv = [[pokemonDict objectForKey:@"LV"] integerValue];
-    NSString *message = [NSString stringWithFormat:@"可回收%d能量",Lv*500];
+    NSString *message = [NSString stringWithFormat:@"可回收%ld能量",Lv*500];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"確定要賣掉" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
     alert.tag = 2;

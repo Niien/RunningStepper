@@ -163,7 +163,7 @@
     [self.view addSubview:leftview];
     [self.view addSubview:downview];
     [self.view addSubview:rightview];
-
+    
     if (ChangeFakeImgParameterX >= self.view.frame.size.width/2-15) {
         //STOP TIMER2
         [fakePokeImgMoveTimer2 invalidate];
@@ -186,7 +186,7 @@
     [self.view addSubview:leftview];
     [self.view addSubview:downview];
     [self.view addSubview:rightview];
-
+    
     if (ChangeFakeImgParameterX >= self.view.frame.size.width/2-15) {
         //STOP TIMER1
         [fakePokeImgMoveTimer3 invalidate];
@@ -209,7 +209,7 @@
     [self.view addSubview:leftview];
     [self.view addSubview:downview];
     [self.view addSubview:rightview];
-
+    
     if (ChangeFakeImgParameterX >= self.view.frame.size.width/2+50) {
         //STOP TIMER1
         [fakePokeImgMoveTimer4 invalidate];
@@ -249,47 +249,39 @@
 
 #pragma mark 手勢後動作
 -(void)handleGesture:(UISwipeGestureRecognizer*)recognizer{
+    //remove
+    [self.view removeGestureRecognizer:swipeUp];
+    [self.view removeGestureRecognizer:swipeLeft];
+    [self.view removeGestureRecognizer:swipeDown];
+    [self.view removeGestureRecognizer:swipeRight];
+    //
     switch (recognizer.direction) {
         case UISwipeGestureRecognizerDirectionUp:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveUp) userInfo:nil repeats:YES];
-            if ([targetArray objectAtIndex:0] == [fakeMonArray objectAtIndex:0]) {
-                NSLog(@"good");
-                WinTimes ++;
-            }else{
-                NSLog(@"wrong");
-                LoseTimes ++;
-            }
+            [self ConfirmTarget:0];
             break;
         case UISwipeGestureRecognizerDirectionLeft:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveLeft) userInfo:nil repeats:YES];
-            if ([targetArray objectAtIndex:1] == [fakeMonArray objectAtIndex:0]) {
-                NSLog(@"good");
-                WinTimes ++;
-            }else{
-                NSLog(@"wrong");
-                LoseTimes ++;
-            }
+            [self ConfirmTarget:1];
             break;
         case UISwipeGestureRecognizerDirectionDown:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveDown) userInfo:nil repeats:YES];
-            if ([targetArray objectAtIndex:2] == [fakeMonArray objectAtIndex:0]) {
-                NSLog(@"good");
-                WinTimes ++;
-            }else{
-                NSLog(@"wrong");
-                LoseTimes ++;
-            }
+            [self ConfirmTarget:2];
             break;
         case UISwipeGestureRecognizerDirectionRight:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveRight) userInfo:nil repeats:YES];
-            if ([targetArray objectAtIndex:3] == [fakeMonArray objectAtIndex:0]) {
-                NSLog(@"good");
-                WinTimes ++;
-            }else{
-                NSLog(@"wrong");
-                LoseTimes ++;
-            }
+            [self ConfirmTarget:3];
             break;
+    }
+}
+
+-(void)ConfirmTarget:(int)index{
+    if ([targetArray objectAtIndex:index] == [fakeMonArray objectAtIndex:0]) {
+        NSLog(@"good");
+        WinTimes ++;
+    }else{
+        NSLog(@"wrong");
+        LoseTimes ++;
     }
 }
 
@@ -301,10 +293,6 @@
     if (ballmoveXY>=self.view.frame.size.height/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
-        [self.view removeGestureRecognizer:swipeUp];
-        [self.view removeGestureRecognizer:swipeLeft];
-        [self.view removeGestureRecognizer:swipeDown];
-        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
@@ -316,10 +304,6 @@
     if (ballmoveXY>=self.view.frame.size.width/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
-        [self.view removeGestureRecognizer:swipeUp];
-        [self.view removeGestureRecognizer:swipeLeft];
-        [self.view removeGestureRecognizer:swipeDown];
-        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
@@ -331,14 +315,11 @@
     if (ballmoveXY>=self.view.frame.size.height/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
-        [self.view removeGestureRecognizer:swipeUp];
-        [self.view removeGestureRecognizer:swipeLeft];
-        [self.view removeGestureRecognizer:swipeDown];
-        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
 }
+
 -(void)BallImageMoveRight{
     ballmoveXY += self.view.frame.size.width/10;
     BallView.frame = CGRectMake(self.view.frame.size.width/2-30+ballmoveXY, self.view.frame.size.height/2-30, 60, 60);
@@ -346,10 +327,6 @@
     if (ballmoveXY>=self.view.frame.size.width/2-30) {
         [BallMove invalidate];
         [BallView removeFromSuperview];
-        [self.view removeGestureRecognizer:swipeUp];
-        [self.view removeGestureRecognizer:swipeLeft];
-        [self.view removeGestureRecognizer:swipeDown];
-        [self.view removeGestureRecognizer:swipeRight];
         [self WinOrNot];
         ballmoveXY = 0;     //重置球增加參數位置
     }
@@ -545,7 +522,7 @@
     [self.view removeGestureRecognizer:swipeLeft];
     [self.view removeGestureRecognizer:swipeDown];
     [self.view removeGestureRecognizer:swipeRight];
-
+    
 }
 
 - (BOOL)prefersStatusBarHidden {
