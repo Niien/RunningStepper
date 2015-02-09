@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.sessionHelper = [[SessionHelper shareInstance] initWithDisplayName:[[UIDevice currentDevice] name]];
+    self.sessionHelper = [[SessionHelper shareInstance] initWithDisplayName:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
     self.sessionHelper.delegate = self;
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];

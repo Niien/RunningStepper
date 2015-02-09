@@ -36,6 +36,7 @@
     NSArray *teamarray;
     
     UILabel *attackLabel;
+    int LabelTime;
 }
 @property (weak, nonatomic) IBOutlet UILabel *enemyName;
 @property (weak, nonatomic) IBOutlet UIProgressView *enemyHPProgress;
@@ -63,9 +64,10 @@
     enemyPokeFrameX = 0;
     myPokeFrameX = 0;
     frameShake = 0;
+    LabelTime = 1;
     
     // 設定peerID名字
-    myPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
+    myPeerID = [[MCPeerID alloc] initWithDisplayName:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
     // 自己戰隊顯示
     teamarray = [[myPlist shareInstanceWithplistName:@"team"] getDataFromPlist];
     myDict = [teamarray objectAtIndex:0];
@@ -247,44 +249,63 @@
     [self alertWhoHPisZero];
 }
 
+-(void) showLabel:(MCPeerID*)peerID
+{
+    attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
+                                                           self.view.frame.size.height/3*2+20,
+                                                           self.view.frame.size.width-20,
+                                                           self.view.frame.size.height/3-10)];
+    attackLabel.font = [UIFont boldSystemFontOfSize:20];
+    attackLabel.textAlignment = NSTextAlignmentCenter;
+    attackLabel.backgroundColor = [UIColor whiteColor];
+    if (peerID == myPeerID) {
+        attackLabel.text = [NSString stringWithFormat:@"%@ 準備進行攻擊",enemyPokeName];
+    }
+    else
+    {
+        attackLabel.text = [NSString stringWithFormat:@"%@ 準備進行攻擊",myPokeName];
+    }
+    
+    [self.view addSubview:attackLabel];
+    [self.view bringSubviewToFront:attackLabel];
+}
 
 #pragma mark 攻擊效果
 -(void) attackSpecially:(NSArray *)array whoPeerID:(MCPeerID *)peerID
 {
-    if (peerID == myPeerID) {
-        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
-                                                                  self.view.frame.size.height/3*2+20,
-                                                                  self.view.frame.size.width-20,
-                                                                  self.view.frame.size.height/3-10)];
-        NSString *skill = [array objectAtIndex:1];
-        attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",myPokeName,skill];
-        attackLabel.font = [UIFont boldSystemFontOfSize:20];
-        attackLabel.textAlignment = NSTextAlignmentCenter;
-        attackLabel.backgroundColor = [UIColor whiteColor];
-        
-        [self.view addSubview:attackLabel];
-        [self.view bringSubviewToFront:attackLabel];
-        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myShakeimage) userInfo:nil repeats:YES];
-        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1];
+    if (LabelTime == 1) {
+        [self showLabel:peerID];
+        if (peerID == myPeerID) {
+            NSString *skill = [array objectAtIndex:1];
+            attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",myPokeName,skill];
+            shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myShakeimage) userInfo:nil repeats:YES];
+        }
+        else
+        {
+            NSString *skill = [array objectAtIndex:1];
+            attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",enemyPokeName,skill];
+            shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(enemyShakeimage) userInfo:nil repeats:YES];
+        }
+        [self showLabel:peerID];
+        LabelTime ++;
     }
     else
     {
-        attackLabel = [[UILabel alloc]initWithFrame:CGRectMake(10,
-                                                               self.view.frame.size.height/3*2+20,
-                                                               self.view.frame.size.width-20,
-                                                               self.view.frame.size.height/3-10)];
-        NSString *skill = [array objectAtIndex:1];
-        attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",enemyPokeName,skill];
-        attackLabel.font = [UIFont boldSystemFontOfSize:20];
-        attackLabel.textAlignment = NSTextAlignmentCenter;
-        attackLabel.backgroundColor = [UIColor whiteColor];
-        
-        [self.view addSubview:attackLabel];
-        [self.view bringSubviewToFront:attackLabel];
-        shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(enemyShakeimage) userInfo:nil repeats:YES];
-        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:1];
+        if (peerID == myPeerID) {
+            NSString *skill = [array objectAtIndex:1];
+            attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",myPokeName,skill];
+            shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(myShakeimage) userInfo:nil repeats:YES];
+        }
+        else
+        {
+            NSString *skill = [array objectAtIndex:1];
+            attackLabel.text = [NSString stringWithFormat:@"%@ 使出 %@",enemyPokeName,skill];
+            shake = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(enemyShakeimage) userInfo:nil repeats:YES];
+        }
+        [self performSelector:@selector(cancelAttackSpecially) withObject:nil afterDelay:2];
+        LabelTime = 0;
     }
-/*
+    /*
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height)];
     view.backgroundColor = [UIColor redColor];
     view.alpha = 0.1;
