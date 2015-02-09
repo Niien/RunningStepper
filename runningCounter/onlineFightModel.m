@@ -22,9 +22,9 @@
 - (void)AttackToEnemy:(NSInteger)attack EnemyHP:(NSInteger)HP By:(NSString *)name
 {
     
-    NSLog(@"HP:%d",HP);
+    NSLog(@"HP:%ld",(long)HP);
     HP -= attack;
-    NSLog(@"HP:%d",HP);
+    NSLog(@"HP:%ld",(long)HP);
     
     if (HP <= 0) {
         

@@ -104,7 +104,7 @@
     cost = (indexPath.row+1)*600;
     gain = (indexPath.row+1)*200;
 
-    if ([StepCounter shareStepCounter].stepNB > cost ) {
+    if ([StepCounter shareStepCounter].stepNB >= cost ) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"購買" message:@"確定購買嗎？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"確定", nil];
         

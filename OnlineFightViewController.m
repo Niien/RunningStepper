@@ -185,7 +185,7 @@
         NSLog(@"Enemy:%@",[objects[i]valueForKey:@"Team"]);
         
         //把東西抓下來需要一段時間
-        if (EnemyArray != nil) {
+        if ([EnemyArray count] != 0) {
             
             [self performSelector:@selector(GameStart) withObject:nil afterDelay:1.0];
         }
@@ -197,7 +197,7 @@
 - (void) GameStart {
     
     image.alpha = 0;
-    WaitingForLinkingLabel.alpha = 0;;
+    WaitingForLinkingLabel.alpha = 0;
     
     [self showMyData];
     [self showEnemyData];
@@ -304,8 +304,8 @@
         selectedSkill = [skillArray objectAtIndex:0];
     }
     
-    NSLog(@"enemyAttack:%d",enemyAttack);
-    NSLog(@"myHP:%d",myHP);
+    NSLog(@"enemyAttack:%ld",(long)enemyAttack);
+    NSLog(@"myHP:%ld",(long)myHP);
     
     [onlineFight AttackToEnemy:enemyAttack EnemyHP:myHP By:@"enemy"];
     
@@ -334,8 +334,8 @@
         
     }
     
-    NSLog(@"myAttack:%d",myAttack);
-    NSLog(@"enemyHP:%d",enemyHP);
+    NSLog(@"myAttack:%ld",(long)myAttack);
+    NSLog(@"enemyHP:%ld",(long)enemyHP);
     
     self.FirstSkillButton.enabled = NO;
     self.SecondSkillButton.enabled = NO;
@@ -392,7 +392,7 @@
     
     if ([name isEqualToString:@"me"]) {
         NSLog(@"attack enemy");
-        NSLog(@"enemyHP:%d",resultHP);
+        NSLog(@"enemyHP:%ld",(long)resultHP);
         
         enemyHP = resultHP;
         
@@ -408,7 +408,7 @@
     else {
         
         NSLog(@"was attacked");
-        NSLog(@"myHP:%d",resultHP);
+        NSLog(@"myHP:%ld",(long)resultHP);
         
         myHP = resultHP;
         [self.myHpProgress setProgress:(float)myHP/myTotalHP ];
