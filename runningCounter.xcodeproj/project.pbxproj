@@ -21,8 +21,8 @@
 		A91368BF1A76188700BBB0CA /* StoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A91368BE1A76188700BBB0CA /* StoreViewController.m */; };
 		A91368C71A7629D300BBB0CA /* PersonalIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A91368C61A7629D300BBB0CA /* PersonalIDViewController.m */; };
 		A9197A581A893A4A0043B91D /* RoadSign.png in Resources */ = {isa = PBXBuildFile; fileRef = A9197A571A893A4A0043B91D /* RoadSign.png */; };
-		A9197A5A1A894DA50043B91D /* bluetoothBG.png in Resources */ = {isa = PBXBuildFile; fileRef = A9197A591A894DA50043B91D /* bluetoothBG.png */; };
 		A9197A5C1A894EFD0043B91D /* PokingLOGO.png in Resources */ = {isa = PBXBuildFile; fileRef = A9197A5B1A894EFD0043B91D /* PokingLOGO.png */; };
+		A9197A5E1A8A0FBE0043B91D /* bluetoothBG.png in Resources */ = {isa = PBXBuildFile; fileRef = A9197A5D1A8A0FBE0043B91D /* bluetoothBG.png */; };
 		A93E91FF1A7D67D3009440E3 /* pokemonDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A93E91FE1A7D67D3009440E3 /* pokemonDetailViewController.m */; };
 		A974CA721A7BD8AA00F08AA0 /* position_30.png in Resources */ = {isa = PBXBuildFile; fileRef = A974CA711A7BD8AA00F08AA0 /* position_30.png */; };
 		A974CAB81A7CC0F600F08AA0 /* exp_30*60.png in Resources */ = {isa = PBXBuildFile; fileRef = A974CAB71A7CC0F600F08AA0 /* exp_30*60.png */; };
@@ -243,8 +243,8 @@
 		A91368C51A7629D300BBB0CA /* PersonalIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalIDViewController.h; sourceTree = "<group>"; };
 		A91368C61A7629D300BBB0CA /* PersonalIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalIDViewController.m; sourceTree = "<group>"; };
 		A9197A571A893A4A0043B91D /* RoadSign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RoadSign.png; sourceTree = "<group>"; };
-		A9197A591A894DA50043B91D /* bluetoothBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluetoothBG.png; sourceTree = "<group>"; };
 		A9197A5B1A894EFD0043B91D /* PokingLOGO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PokingLOGO.png; sourceTree = "<group>"; };
+		A9197A5D1A8A0FBE0043B91D /* bluetoothBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluetoothBG.png; sourceTree = "<group>"; };
 		A93E91FD1A7D67D3009440E3 /* pokemonDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pokemonDetailViewController.h; sourceTree = "<group>"; };
 		A93E91FE1A7D67D3009440E3 /* pokemonDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pokemonDetailViewController.m; sourceTree = "<group>"; };
 		A974CA711A7BD8AA00F08AA0 /* position_30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = position_30.png; sourceTree = "<group>"; };
@@ -755,8 +755,8 @@
 			isa = PBXGroup;
 			children = (
 				A9197A5B1A894EFD0043B91D /* PokingLOGO.png */,
-				A9197A591A894DA50043B91D /* bluetoothBG.png */,
 				A9197A571A893A4A0043B91D /* RoadSign.png */,
+				A9197A5D1A8A0FBE0043B91D /* bluetoothBG.png */,
 				84C7BA7B1A875DC000A269D0 /* illustratebg.png */,
 				AE3B16581A82000B007CBCF2 /* Ball(500).png */,
 				AE6C70F71A7FDA9500D4F141 /* LoginTitle.png */,
@@ -1140,8 +1140,8 @@
 				AEA521F51A83FD99002283B3 /* 46s.png in Resources */,
 				AEA521F91A83FD99002283B3 /* 50s.png in Resources */,
 				AEA521C61A83FD4E002283B3 /* 39.png in Resources */,
-				A9197A5A1A894DA50043B91D /* bluetoothBG.png in Resources */,
 				AEB786C31A790C8000181446 /* 17s.png in Resources */,
+				A9197A5E1A8A0FBE0043B91D /* bluetoothBG.png in Resources */,
 				A99C70131A7A925500558EB2 /* woodBackground.jpeg in Resources */,
 				AE90C57C1A77BBF700BE2700 /* 15.png in Resources */,
 				AE90C5831A77BBF700BE2700 /* 22.png in Resources */,

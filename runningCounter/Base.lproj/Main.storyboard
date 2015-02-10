@@ -1757,17 +1757,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluetoothBG.png" translatesAutoresizingMaskIntoConstraints="NO" id="fiY-wW-EU9">
                                 <rect key="frame" x="0.0" y="240" width="600" height="360"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RoadSign.png" translatesAutoresizingMaskIntoConstraints="NO" id="KNk-Pw-dZM">
-                                <rect key="frame" x="16" y="443" width="140" height="110"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2V-Nt-Szd">
-                                <rect key="frame" x="36" y="459" width="110" height="30"/>
-                                <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="25"/>
-                                <state key="normal" title="返回">
-                                    <color key="titleColor" red="1" green="0.91140573879999998" blue="0.26307064949999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PokingLOGO.png" translatesAutoresizingMaskIntoConstraints="NO" id="czw-SH-4cd">
                                 <rect key="frame" x="0.0" y="28" width="600" height="180"/>
                                 <constraints>
@@ -1839,6 +1828,14 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2V-Nt-Szd">
+                                <rect key="frame" x="34" y="485" width="95" height="37"/>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Medium" family="Heiti TC" pointSize="25"/>
+                                <state key="normal" title="返回">
+                                    <color key="titleColor" red="1" green="0.91140573879999998" blue="0.26307064949999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.78617073074114474" green="0.98709870879296657" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -2628,9 +2625,8 @@
         <image name="PokingLOGO.png" width="1440" height="601"/>
         <image name="RedBtn1.png" width="614" height="614"/>
         <image name="RedBtn2.png" width="614" height="614"/>
-        <image name="RoadSign.png" width="163" height="119"/>
         <image name="backIcon.png" width="25" height="25"/>
-        <image name="bluetoothBG.png" width="434" height="278"/>
+        <image name="bluetoothBG.png" width="1024" height="653"/>
         <image name="cart_25.png" width="25" height="25"/>
         <image name="exp_30*60.png" width="60" height="30"/>
         <image name="position_30.png" width="30" height="30"/>
