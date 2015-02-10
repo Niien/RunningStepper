@@ -23,25 +23,21 @@
     self.sessionHelper = [[SessionHelper shareInstance] initWithDisplayName:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
     self.sessionHelper.delegate = self;
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 100)];
-    button.backgroundColor = [UIColor blueColor];
-    [button setTitle:@"back" forState:UIControlStateNormal];
-    [self.view addSubview:button];
-    [button addTarget:self action:@selector(backsetting) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
--(void)backsetting
-{
-    self.sessionHelper.deallocAdverAndSessionStop;
+- (IBAction)backButton:(id)sender {
+    
+    [self.sessionHelper deallocAdverAndSessionStop];
     [self dismissViewControllerAnimated:YES completion:^{
         //
     }];
+    
 }
+
 
 - (IBAction)openBrowser:(id)sender {
     
