@@ -57,6 +57,8 @@
     BOOL GameFinal;             // 判斷遊戲成敗
     int WinTimes;
     int LoseTimes;
+    //
+    int GameMode;               //遊戲模式(1~4)
 }
 
 @end
@@ -147,7 +149,22 @@
         ChangeFakeImgParameterX  = 0;
         ChangeFakeImgParameterY  = 0;
         //
-        fakePokeImgMoveTimer2 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage2) userInfo:nil repeats:YES];
+        if (GameMode == 1) {
+            //全部結束要做的事
+            [upview removeFromSuperview];
+            [leftview removeFromSuperview];
+            [downview removeFromSuperview];
+            [rightview removeFromSuperview];
+            //Ball
+            UIImage *Ball = [UIImage imageNamed:@"Ball(500).png"];
+            BallView = [[UIImageView alloc]initWithImage:Ball];
+            BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30, 60 , 60);
+            [self.view addSubview:BallView];
+            [self setSwipe:self.view];
+        }else{
+            fakePokeImgMoveTimer2 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage2) userInfo:nil repeats:YES];
+        }
+        
     }
 }
 -(void)ChangeFakePokeImage2{
@@ -170,7 +187,21 @@
         ChangeFakeImgParameterX  = 0;
         ChangeFakeImgParameterY  = 0;
         //
-        fakePokeImgMoveTimer3 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage3) userInfo:nil repeats:YES];
+        if (GameMode == 2) {
+            //全部結束要做的事
+            [upview removeFromSuperview];
+            [leftview removeFromSuperview];
+            [downview removeFromSuperview];
+            [rightview removeFromSuperview];
+            //Ball
+            UIImage *Ball = [UIImage imageNamed:@"Ball(500).png"];
+            BallView = [[UIImageView alloc]initWithImage:Ball];
+            BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30, 60 , 60);
+            [self.view addSubview:BallView];
+            [self setSwipe:self.view];
+        }else{
+            fakePokeImgMoveTimer3 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage3) userInfo:nil repeats:YES];
+        }
     }
 }
 -(void)ChangeFakePokeImage3{
@@ -193,7 +224,21 @@
         ChangeFakeImgParameterX  = 0;
         ChangeFakeImgParameterY  = 0;
         //
+        if (GameMode == 3) {
+            //全部結束要做的事
+            [upview removeFromSuperview];
+            [leftview removeFromSuperview];
+            [downview removeFromSuperview];
+            [rightview removeFromSuperview];
+            //Ball
+            UIImage *Ball = [UIImage imageNamed:@"Ball(500).png"];
+            BallView = [[UIImageView alloc]initWithImage:Ball];
+            BallView.frame = CGRectMake(self.view.frame.size.width/2-30, self.view.frame.size.height/2-30, 60 , 60);
+            [self.view addSubview:BallView];
+            [self setSwipe:self.view];
+        }else{
         fakePokeImgMoveTimer4 = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(ChangeFakePokeImage4) userInfo:nil repeats:YES];
+        }
     }
 }
 -(void)ChangeFakePokeImage4{
@@ -215,6 +260,7 @@
         [fakePokeImgMoveTimer4 invalidate];
         ChangeFakeImgParameterX  = 0;
         ChangeFakeImgParameterY  = 0;
+        //全部結束要做的事
         [upview removeFromSuperview];
         [leftview removeFromSuperview];
         [downview removeFromSuperview];
@@ -227,6 +273,7 @@
         [self setSwipe:self.view];
     }
 }
+
 #pragma mark 新增手勢
 -(void)setSwipe:(UIView*)view{
     swipeRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleGesture:)];
@@ -256,21 +303,49 @@
     [self.view removeGestureRecognizer:swipeRight];
     //
     switch (recognizer.direction) {
+
+        //想法是 從何處出發 進行第幾個GameMode後 要運算回原來的出發地數字
         case UISwipeGestureRecognizerDirectionUp:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveUp) userInfo:nil repeats:YES];
-            [self ConfirmTarget:0];
+            //
+            int targetNOUp = 0+GameMode-4;
+            if (targetNOUp<0) {
+                targetNOUp += 4;
+            }
+            [self ConfirmTarget:targetNOUp];
+//            targetNOUp = 0;
+            //
             break;
         case UISwipeGestureRecognizerDirectionLeft:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveLeft) userInfo:nil repeats:YES];
-            [self ConfirmTarget:1];
+            //
+            int targetNOLeft = 1+GameMode-4;
+            if (targetNOLeft<0) {
+                targetNOLeft += 4;
+            }
+            [self ConfirmTarget:targetNOLeft];
+//            targetNOLeft = 1;
+            //
             break;
         case UISwipeGestureRecognizerDirectionDown:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveDown) userInfo:nil repeats:YES];
-            [self ConfirmTarget:2];
+            //
+            int targetNODown = 2+GameMode-4;
+            if (targetNODown<0) {
+                targetNODown += 4;
+            }
+            [self ConfirmTarget:targetNODown];
+//            targetNODown = 2;
+            //
             break;
         case UISwipeGestureRecognizerDirectionRight:
             BallMove = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(BallImageMoveRight) userInfo:nil repeats:YES];
-            [self ConfirmTarget:3];
+            int targetNORight = 3+GameMode-4;
+            if (targetNORight<0) {
+                targetNORight += 4;
+            }
+            [self ConfirmTarget:targetNORight];
+//            targetNORight = 3;
             break;
     }
 }
@@ -319,7 +394,6 @@
         ballmoveXY = 0;     //重置球增加參數位置
     }
 }
-
 -(void)BallImageMoveRight{
     ballmoveXY += self.view.frame.size.width/10;
     BallView.frame = CGRectMake(self.view.frame.size.width/2-30+ballmoveXY, self.view.frame.size.height/2-30, 60, 60);
@@ -337,10 +411,6 @@
     if (WinTimes>=3) {
         //勝利震動
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        [upview removeFromSuperview];
-        [leftview removeFromSuperview];
-        [rightview removeFromSuperview];
-        [downview removeFromSuperview];
         [BallView removeFromSuperview];
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"好耶, 抓到了" message:nil delegate:self cancelButtonTitle:@"Keep poking" otherButtonTitles:nil];
         alert.tag = 1;  //要分辨多個 Alert 且加動作 就需設tag
@@ -348,10 +418,6 @@
     }else if (LoseTimes>=2){
         //失敗震動
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        [upview removeFromSuperview];
-        [leftview removeFromSuperview];
-        [rightview removeFromSuperview];
-        [downview removeFromSuperview];
         [BallView removeFromSuperview];
         UIAlertView *failalert = [[UIAlertView alloc]initWithTitle:@"糟糕, Poke跑掉了" message:nil delegate:self cancelButtonTitle:@"Keep Poking" otherButtonTitles:nil];
         failalert.tag = 2;  //要分辨多個 Alert 且加動作 就需設tag
@@ -364,7 +430,6 @@
         [rightview removeFromSuperview];
         [downview removeFromSuperview];
         [BallView removeFromSuperview];
-        //也要移除手勢!?
         //還沒結束 再取亂數抓怪
         [self getmorefake];
         //在生怪進畫面
@@ -401,6 +466,8 @@
         [fakeMonArray addObject:fakeimageName];
     }
     NSLog(@"fakeMonArray:%@",fakeMonArray);
+    //
+    GameMode = arc4random()%4+1;        //1~4
 }
 
 #pragma mark 存入Plist

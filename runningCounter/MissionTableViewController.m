@@ -106,12 +106,12 @@
             }];
             break;
         case 1:
-            [self presentViewController:vc1 animated:YES completion:^{
+            [self presentViewController:vc2 animated:YES completion:^{
                 //
             }];
             break;
         case 2:
-            [self presentViewController:vc1 animated:YES completion:^{
+            [self presentViewController:vc3 animated:YES completion:^{
                 //
             }];
             break;

@@ -71,8 +71,8 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     //隨機目標數
-    time = 10.0;
-    goal = 5;//arc4random()%50+30;
+    time = 7.0;
+    goal = arc4random()%50+30;
     myPressPoint = 0;
     changeFrameTime = 1.5;
     [self getPokemonNo];

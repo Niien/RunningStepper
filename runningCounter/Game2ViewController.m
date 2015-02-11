@@ -90,7 +90,7 @@
     //↓←→↑AB
     BaseElementArray = @[@"↑",@"→",@"↓",@"←",@"A",@"B"];
     
-    randomNO = 2;//arc4random()%4+8;
+    randomNO = arc4random()%4+8;
     _RandomLabel.text = @"";
     //生成 箭頭陣列 與 數字陣列
     for (int i=0; i<randomNO; i++) {

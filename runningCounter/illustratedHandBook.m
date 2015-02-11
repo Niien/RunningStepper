@@ -56,6 +56,7 @@ static NSString * const reuseIdentifier = @"Cell";
     UINavigationItem * leftItem = [[UINavigationItem alloc]init];
     leftItem.leftBarButtonItem = backButton;
     bar.items = @[leftItem];
+    //
     self.collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"illustratebg.png"]];
 }
 
